@@ -1,0 +1,544 @@
+/* The two-column live section needs ~1200px to fit its module grid */
+@media (max-width: 1200px) {
+  .live-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .live-title {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .live-title h2 {
+    margin: 0;
+  }
+}
+
+/* Tablet and below */
+@media (max-width: 1050px) {
+  .nav-links,
+  .nav-actions {
+    display: none;
+  }
+
+  .navbar {
+    grid-template-columns: 1fr auto;
+  }
+
+  .menu-trigger {
+    display: grid;
+  }
+
+  .core-stage {
+    width: 43vw;
+    right: 0;
+  }
+
+  .hero-lower {
+    display: block;
+    width: min(100%, 34rem);
+  }
+
+  .hero-lower > div {
+    margin-top: 1.4rem;
+  }
+
+  .archive-layout {
+    grid-template-columns: 42% 1fr;
+    gap: 4vw;
+  }
+
+  .archive-list button {
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto 1.5rem;
+  }
+
+  .archive-list button > span {
+    font-size: clamp(1.5rem, 3.4vw, 2.6rem);
+  }
+
+  .constellation {
+    height: 48rem;
+  }
+
+  .tech-node {
+    width: 8rem;
+  }
+
+  .node-7 {
+    bottom: 31%;
+  }
+
+  .people-layout {
+    gap: 4vw;
+  }
+}
+
+/* Phone */
+@media (max-width: 720px) {
+  .section {
+    padding: 7rem 1.25rem;
+  }
+
+  .navbar {
+    height: var(--nav-height-scrolled);
+    padding-inline: 1.25rem;
+  }
+
+  .hero {
+    align-items: center;
+    min-height: 52rem;
+    padding: 6.5rem 1.25rem 2rem;
+  }
+
+  .hero-grid {
+    background-size: 5rem 5rem;
+  }
+
+  .hero-eyebrow {
+    width: 100%;
+  }
+
+  .hero-eyebrow span:last-child {
+    display: none;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.3rem, 16vw, 5.4rem);
+    line-height: 0.82;
+  }
+
+  .hero h1 span:nth-child(2),
+  .hero h1 span:nth-child(4) {
+    margin-left: 0;
+  }
+
+  .hero h1 span:nth-child(3) {
+    margin-left: 7vw;
+  }
+
+  .core-stage {
+    top: 19%;
+    right: -29vw;
+    width: 78vw;
+    opacity: 0.7;
+  }
+
+  .core-label-1,
+  .core-label-3,
+  .core-label-6,
+  .core-coordinate {
+    display: none;
+  }
+
+  .hero-lower {
+    width: 100%;
+    margin-top: 3rem;
+  }
+
+  .hero-lower p {
+    width: 82%;
+  }
+
+  .hero-lower .button {
+    min-height: 3rem;
+    gap: 0.8rem;
+    padding-inline: 0.85rem;
+  }
+
+  .scroll-cue {
+    display: none;
+  }
+
+  .section-header {
+    display: block;
+  }
+
+  .section-meta {
+    margin-bottom: 2rem;
+  }
+
+  .section-header h2 {
+    font-size: 15.5vw;
+  }
+
+  /* "CONSTELLATION." is wider than every other headline line */
+  .technology .section-header h2 {
+    font-size: 12.4vw;
+  }
+
+  .section-header > p {
+    margin: 2rem 0 0;
+  }
+
+  .about {
+    min-height: auto;
+  }
+
+  .about-copy {
+    display: block;
+    width: 100%;
+    margin: 4rem 0;
+  }
+
+  .about-copy p + p {
+    margin-top: 2rem;
+  }
+
+  .about-frame {
+    width: calc(100% + 1.25rem);
+    height: 29rem;
+    margin: 0;
+  }
+
+  .about-side,
+  .system-top span:nth-child(2) {
+    display: none;
+  }
+
+  .system-word {
+    font-size: 38vw;
+  }
+
+  .system-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .system-grid div {
+    min-height: 10rem;
+    border-bottom: 1px solid var(--line-on-light);
+  }
+
+  .system-grid div:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .system-grid small {
+    margin-bottom: 1rem;
+  }
+
+  .impact-intro {
+    display: block;
+  }
+
+  .impact-intro p {
+    margin-top: 2rem;
+    text-align: left;
+  }
+
+  .impact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .impact-stat {
+    min-height: 17rem;
+    padding: 1rem;
+  }
+
+  .impact-stat strong {
+    font-size: 3.7rem;
+  }
+
+  .impact-stat:nth-child(3) {
+    border-left: 1px solid var(--line);
+  }
+
+  .featured {
+    min-height: 52rem;
+  }
+
+  .feature-top span:nth-child(2) {
+    display: none;
+  }
+
+  .featured h2 {
+    margin-top: 7rem;
+    font-size: 21vw;
+    line-height: 0.72;
+  }
+
+  .featured h2 span:nth-child(2) {
+    margin-left: 0;
+  }
+
+  .featured h2 span:nth-child(3) {
+    margin-left: 10%;
+  }
+
+  .feature-object {
+    top: 23%;
+    right: -7rem;
+    width: 22rem;
+  }
+
+  .feature-thesis {
+    bottom: 8rem;
+    left: 1.25rem;
+  }
+
+  .feature-facts {
+    bottom: 2rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .feature-facts strong {
+    font-size: 1.3rem;
+  }
+
+  .featured > .button {
+    bottom: 7.6rem;
+    right: 1.25rem;
+  }
+
+  .archive-layout {
+    display: block;
+    margin-top: 4rem;
+  }
+
+  .event-preview {
+    position: relative;
+    top: 0;
+    height: 26rem;
+    min-height: 0;
+    margin-bottom: 2rem;
+  }
+
+  .archive-list button {
+    min-height: 6rem;
+    grid-template-columns: 2rem minmax(0, 1fr) auto 1.5rem;
+  }
+
+  .archive-list button > span {
+    font-size: 1.7rem;
+  }
+
+  .archive-list button i {
+    display: none;
+  }
+
+  .live-section {
+    padding: 7rem 1.25rem;
+  }
+
+  .live-title {
+    display: block;
+  }
+
+  .live-title h2 {
+    margin: 3rem 0 5rem;
+    font-size: 14vw;
+  }
+
+  .live-modules {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .live-modules strong {
+    font-size: clamp(1.3rem, 6.4vw, 1.8rem);
+  }
+
+  .live-modules .live-main {
+    grid-column: auto;
+  }
+
+  .live-main strong {
+    font-size: clamp(2rem, 11vw, 2.8rem);
+  }
+
+  .live-modules article,
+  .live-modules .live-main {
+    min-height: 15rem;
+  }
+
+  .constellation {
+    height: 49rem;
+    margin: 4rem -1.25rem 0;
+    border-inline: 0;
+  }
+
+  .constellation-core {
+    width: 8rem;
+  }
+
+  .tech-node {
+    width: auto;
+    min-height: 2.8rem;
+  }
+
+  .tech-node small {
+    display: none;
+  }
+
+  .tech-node span {
+    font-size: var(--fs-nano);
+  }
+
+  /* Bottom nodes use rem so they always clear the detail panel, even with a two-row tag list */
+  .node-1 { top: 12%; left: 4%; }
+  .node-2 { top: 2%; left: 36%; }
+  .node-3 { top: 12%; right: 3%; }
+  .node-4 { top: 33%; right: 2%; }
+  .node-5 { bottom: 14rem; right: 4%; }
+  .node-6 { bottom: 11.5rem; left: 35%; }
+  .node-7 { bottom: 14.5rem; left: 3%; }
+  .node-8 { top: 33%; left: 2%; }
+
+  .tech-detail {
+    bottom: 1.25rem;
+    left: 1.25rem;
+    right: 1.25rem;
+    max-width: none;
+  }
+
+  .tech-detail h3 {
+    font-size: 1.5rem;
+  }
+
+  .people-layout {
+    grid-template-columns: 1fr;
+    margin-top: 4rem;
+  }
+
+  .people-portrait {
+    height: 32rem;
+  }
+
+  .people-list button {
+    min-height: 5.5rem;
+    grid-template-columns: 2rem minmax(0, 1fr) 1.5rem;
+  }
+
+  .people-list button > span {
+    font-size: clamp(1.4rem, 7.6vw, 2rem);
+  }
+
+  .people-list i {
+    display: none;
+  }
+
+  .bodies {
+    padding: 7rem 1.25rem;
+  }
+
+  .bodies > div:first-child {
+    display: block;
+  }
+
+  .bodies > div:first-child > span {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .bodies > div:first-child h2 {
+    font-size: 14vw;
+  }
+
+  .body-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .body-row div {
+    min-height: 13rem;
+    border-bottom: 1px solid var(--line-on-light);
+  }
+
+  .body-row strong {
+    font-size: 3rem;
+  }
+
+  .gallery-grid {
+    display: flex;
+    margin-top: 4rem;
+    margin-right: -1.25rem;
+    padding-right: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .gallery-item,
+  .gallery-item-1,
+  .gallery-item-2,
+  .gallery-item-3,
+  .gallery-item-4,
+  .gallery-item-5 {
+    flex: 0 0 84vw;
+    height: 31rem;
+  }
+
+  .vision {
+    min-height: auto;
+  }
+
+  .vision h2 {
+    margin: 5rem 0;
+    font-size: 20vw;
+  }
+
+  .vision h2 span:nth-child(2n) {
+    margin-left: 12%;
+  }
+
+  .vision-copy {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    width: 100%;
+  }
+
+  .identity-meta span:last-child {
+    display: none;
+  }
+
+  .identity-word {
+    font-size: 39vw;
+  }
+
+  .identity-bottom {
+    align-items: flex-start;
+  }
+
+  .identity-bottom p:nth-child(2) {
+    display: none;
+  }
+
+  .connect {
+    min-height: 48rem;
+  }
+
+  .connect h2 {
+    margin-top: 5rem;
+    font-size: 18.5vw;
+  }
+
+  .connect-aside {
+    margin: 4rem 0 0;
+  }
+
+  .connect-links {
+    bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    font-size: 30vw;
+  }
+
+  .footer-info {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+
+  .footer-end span:nth-child(2) {
+    display: none;
+  }
+}
+
+/* Touch devices never get the custom cursor */
+@media (hover: none), (pointer: coarse) {
+  .cursor {
+    display: none;
+  }
+}

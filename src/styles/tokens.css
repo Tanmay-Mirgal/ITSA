@@ -1,0 +1,52 @@
+/* ITSA design tokens — single source of truth. See DESIGN-SYSTEM.md. */
+:root {
+  /* Color — surfaces */
+  --ink: #06070d;
+  --surface: #0b0d18;
+  --surface-2: #101426;
+  --navy: #111936;
+  --event-void: #090711;
+  --footer-void: #030407;
+
+  /* Color — brand + accents */
+  --purple: #7144e8;
+  --violet: #9b6cff;
+  --blue: #4f7cff;
+  --cyan: #4cd8f8;
+
+  /* Color — text + lines */
+  --white: #f4f3f7;
+  --muted: #9b9dac;
+  --muted-on-light: #5c5a66;
+  --nav-link: #c5c5ce;
+  --line: #ffffff24;
+  --line-strong: #ffffff47;
+  --line-on-light: #06070d33;
+
+  /* Type families: --font-display and --font-sans are set by next/font in src/app/layout.jsx */
+  --display: var(--font-display), "Space Grotesk", sans-serif;
+  --sans: var(--font-sans), "Manrope", sans-serif;
+
+  /* Type scale for small caps labels and body (rem) */
+  --fs-nano: 0.625rem;
+  --fs-micro: 0.66rem;
+  --fs-label: 0.7rem;
+  --fs-small: 0.82rem;
+  --fs-body: 0.95rem;
+
+  /* Layout */
+  --gutter: clamp(1.25rem, 5.5vw, 6.5rem);
+  --nav-gutter: clamp(1.25rem, 4vw, 4.5rem);
+  --nav-height: 6.2rem;
+  --nav-height-scrolled: 4.6rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Stacking */
+  --z-noise: 95;
+  --z-nav: 80;
+  --z-menu: 110;
+  --z-palette: 150;
+  --z-cursor: 200;
+}

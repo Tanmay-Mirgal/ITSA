@@ -1,0 +1,124 @@
+/* Command palette */
+.command-palette {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-palette);
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: #06070dc7;
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+.command-palette.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.command-window {
+  width: min(48rem, 100%);
+  padding: 1.5rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 2rem 8rem #0009;
+  transform: translateY(1.2rem);
+  transition: transform 0.4s var(--ease);
+}
+
+.command-palette.is-open .command-window {
+  transform: none;
+}
+
+.command-head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.15em;
+}
+
+.command-head button {
+  min-height: 2.75rem;
+  padding: 0 0.9rem;
+  margin: -0.75rem -0.75rem 0 0;
+  border: 1px solid var(--line);
+  font-size: var(--fs-nano);
+}
+
+.command-window > p {
+  margin: 4rem 0 2rem;
+  font: 500 2rem var(--display);
+}
+
+.command-window > div:last-child {
+  border-top: 1px solid var(--line);
+}
+
+.command-window a {
+  min-height: 4rem;
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  transition:
+    padding 0.3s var(--ease),
+    color 0.3s;
+}
+
+.command-window a:hover {
+  padding-left: 1rem;
+  color: var(--violet);
+}
+
+.command-window a small {
+  color: var(--muted);
+  font-size: var(--fs-nano);
+}
+
+.command-window a span {
+  font: 500 1.2rem var(--display);
+  text-transform: uppercase;
+}
+
+/* Custom cursor (fine pointers only; mounted by Cursor.jsx) */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-cursor);
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: -0.25rem 0 0 -0.25rem;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: #fff;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition:
+    width 0.22s var(--ease),
+    height 0.22s var(--ease),
+    margin 0.22s var(--ease);
+}
+
+.cursor span {
+  opacity: 0;
+  font-size: var(--fs-nano);
+  letter-spacing: 0.1em;
+}
+
+.cursor.active {
+  width: 4rem;
+  height: 4rem;
+  margin: -2rem 0 0 -2rem;
+  mix-blend-mode: normal;
+}
+
+.cursor.active span {
+  opacity: 1;
+}
