@@ -42,7 +42,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="hero-globe-wrap" aria-hidden="true">
+      <div className="hero-globe-wrap">
         <Globe
           primaryColor="#9b6cff"
           accentColor="#4cd8f8"
@@ -50,17 +50,11 @@ export default function Hero() {
           atmosphereColor="#7144e8"
           autoRotateSpeed={0.85}
         />
-        <div className="globe-coordinate">
-          ITSA / GLOBAL NODE
-          <br />
-          {LOCATION.coordinates.join(' · ')}
-        </div>
       </div>
 
       <div className="hero-content">
         <div className="hero-eyebrow">
           <span>{LOCATION.place}</span>
-          <span>ITSA DIGITAL UNIVERSE / 2026</span>
         </div>
 
         <h1 aria-label="ITSA — Information Technology Student Association">
@@ -74,15 +68,19 @@ export default function Hero() {
             <span className="hero-spacer" aria-hidden="true">S</span>Association
           </span>
         </h1>
+      </div>
 
-        <div className="hero-lower">
-          <p>Where technology students collaborate, experiment, compete and create what&rsquo;s next.</p>
-          <div>
-            <Button href="#about" variant="primary">
-              EXPLORE ITSA
-            </Button>
-            <Button href="#events">VIEW EVENTS</Button>
-          </div>
+      <div className="hero-globe-panel">
+        <div className="globe-coordinate">
+          ITSA / GLOBAL NODE
+          <br />
+          {LOCATION.coordinates.join(' · ')}
+        </div>
+        <div className="hero-btn-group">
+          <Button href="#about" variant="primary">
+            EXPLORE ITSA
+          </Button>
+          <Button href="#events">VIEW EVENTS</Button>
         </div>
       </div>
 

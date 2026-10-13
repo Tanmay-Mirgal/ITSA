@@ -111,7 +111,6 @@
   .hero-content {
     width: 100%;
     max-width: 100%;
-    margin-top: 0;
   }
 
   .hero-eyebrow {
@@ -151,6 +150,35 @@
 
   .globe-coordinate {
     display: none;
+  }
+
+  .hero-globe-panel {
+    position: static;
+    width: 100%;
+    margin-top: 2rem;
+    align-items: stretch;
+  }
+
+  .hero-globe-panel .globe-coordinate {
+    display: none;
+  }
+
+  .hero-btn-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.65rem;
+  }
+
+  .hero-btn-group .button {
+    width: 100%;
+    min-height: 3.25rem;
+    justify-content: space-between;
+    padding-inline: 1.15rem;
+  }
+
+  .hero-btn-group .button-line {
+    border-left: 1px solid var(--line);
   }
 
   .hero-lower {

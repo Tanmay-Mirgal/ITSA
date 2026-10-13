@@ -62,9 +62,9 @@ export default function Globe({
 
     // Style the base globe sphere
     const globeMat = globe.globeMaterial();
-    globeMat.color = new THREE.Color(0x06070d);
-    globeMat.emissive = new THREE.Color(0x0c0b1a);
-    globeMat.emissiveIntensity = 0.45;
+    globeMat.color = new THREE.Color(0x000000);
+    globeMat.emissive = new THREE.Color(0x000000);
+    globeMat.emissiveIntensity = 0;
     globeMat.transparent = true;
     globeMat.opacity = 0.95;
 
