@@ -1,6 +1,9 @@
 const photo = (id, width) =>
   `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=82`;
 
+// Same photo at another width, for places that render it small.
+const withWidth = (url, width) => url.replace(/w=\d+/, `w=${width}`);
+
 export const IMAGES = {
   collab: photo('1522071820081-009f0129c71c', 1600),
   workshop: photo('1565688256340-249dbb31f25d', 1600),
@@ -26,6 +29,7 @@ export const NAV_LINKS = [
   { id: 'technology', label: 'Technology' },
   { id: 'events', label: 'Events' },
   { id: 'people', label: 'People' },
+  { id: 'team', label: 'Team' },
   { id: 'gallery', label: 'Gallery' },
 ];
 
@@ -35,6 +39,7 @@ export const COMMAND_LINKS = [
   { id: 'about', label: 'About' },
   { id: 'events', label: 'Events' },
   { id: 'people', label: 'People' },
+  { id: 'team', label: 'Team' },
   { id: 'technology', label: 'Technology' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'connect', label: 'Connect' },
@@ -42,19 +47,21 @@ export const COMMAND_LINKS = [
 
 export const CORE_LABELS = ['AI', 'WEB', 'DATA', 'CLOUD', 'CYBER', 'DESIGN'];
 
-// Replace the XX+ placeholders with the real figures when they are ready.
+// Placeholders from the design. To publish real figures, replace `value: 'XX+'`
+// with `to: 40, suffix: '+'` and the number will count up when it scrolls into view.
+// `image` is the card photo (stand-ins until real ITSA photos are in) and `accent` its glow colour.
 export const IMPACT_STATS = [
-  { value: 'XX+', label: 'EVENTS' },
-  { value: 'XX+', label: 'STUDENTS' },
-  { value: 'XX+', label: 'WORKSHOPS' },
-  { value: 'XX+', label: 'PROJECTS' },
+  { value: 'XX+', label: 'EVENTS', image: withWidth(IMAGES.event, 900), accent: '#9b6cff' },
+  { value: 'XX+', label: 'STUDENTS', image: withWidth(IMAGES.collab, 900), accent: '#4cd8f8' },
+  { value: 'XX+', label: 'WORKSHOPS', image: withWidth(IMAGES.workshop, 900), accent: '#4f7cff' },
+  { value: 'XX+', label: 'PROJECTS', image: withWidth(IMAGES.code, 900), accent: '#b394ff' },
 ];
 
 export const FEATURED_FACTS = [
-  { value: '₹60K', label: 'PRIZE POOL' },
-  { value: '5+', label: 'EVENTS' },
-  { value: '2', label: 'WORKSHOPS' },
-  { value: '3', label: 'DAYS' },
+  { prefix: '₹', to: 60, suffix: 'K', label: 'PRIZE POOL' },
+  { to: 5, suffix: '+', label: 'EVENTS' },
+  { to: 2, label: 'WORKSHOPS' },
+  { to: 3, label: 'DAYS' },
 ];
 
 export const EVENTS = [
@@ -117,6 +124,37 @@ export const TEAMS = [
   { name: 'Creativity', focus: 'Design / Visuals / Experience', image: IMAGES.community },
   { name: 'Publicity', focus: 'Community / Media / Outreach', image: IMAGES.collab },
   { name: 'Infrastructure', focus: 'Operations / Stage / Support', image: IMAGES.workshop },
+];
+
+// Cards for the ITSA Team ring. The real committee photos and names are not available yet, so each card
+// stands for a team (same copy as the People section). To show people instead, replace an entry with
+// { title: 'Full Name', subtitle: 'Role', src: '<portrait url>', alt: 'Full Name' }.
+export const TEAM_CARDS = [
+  { title: 'Technical', subtitle: 'Code / Systems / Web', src: withWidth(IMAGES.code, 800), alt: 'ITSA Technical team' },
+  {
+    title: 'Documentation',
+    subtitle: 'Stories / Records / Editorial',
+    src: withWidth(IMAGES.collab, 800),
+    alt: 'ITSA Documentation team',
+  },
+  {
+    title: 'Creativity',
+    subtitle: 'Design / Visuals / Experience',
+    src: withWidth(IMAGES.workshop, 800),
+    alt: 'ITSA Creativity team',
+  },
+  {
+    title: 'Publicity',
+    subtitle: 'Community / Media / Outreach',
+    src: withWidth(IMAGES.event, 800),
+    alt: 'ITSA Publicity team',
+  },
+  {
+    title: 'Infrastructure',
+    subtitle: 'Operations / Stage / Support',
+    src: withWidth(IMAGES.team, 800),
+    alt: 'ITSA Infrastructure team',
+  },
 ];
 
 export const BODIES = ['ITSA', 'CSI', 'ISTE', 'IACC'];

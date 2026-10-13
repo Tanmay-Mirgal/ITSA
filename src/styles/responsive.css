@@ -34,6 +34,19 @@
     right: 0;
   }
 
+  /* About stacks: copy first, then the photo */
+  .about-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about-copy {
+    order: -1;
+  }
+
+  .about-frame {
+    aspect-ratio: 16 / 11;
+  }
+
   .hero-lower {
     display: block;
     width: min(100%, 34rem);
@@ -54,18 +67,6 @@
 
   .archive-list button > span {
     font-size: clamp(1.5rem, 3.4vw, 2.6rem);
-  }
-
-  .constellation {
-    height: 48rem;
-  }
-
-  .tech-node {
-    width: 8rem;
-  }
-
-  .node-7 {
-    bottom: 31%;
   }
 
   .people-layout {
@@ -170,27 +171,28 @@
     margin: 2rem 0 0;
   }
 
-  .about {
-    min-height: auto;
+  .about-body {
+    margin-top: 3.5rem;
   }
 
   .about-copy {
-    display: block;
-    width: 100%;
-    margin: 4rem 0;
+    gap: 2.5rem;
   }
 
-  .about-copy p + p {
-    margin-top: 2rem;
+  .about-lead {
+    font-size: clamp(1.5rem, 6.4vw, 2.2rem);
+  }
+
+  .about-support {
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .about-frame {
-    width: calc(100% + 1.25rem);
-    height: 29rem;
-    margin: 0;
+    aspect-ratio: 4 / 4.4;
+    margin-inline: -1.25rem;
   }
 
-  .about-side,
   .system-top span:nth-child(2) {
     display: none;
   }
@@ -225,10 +227,6 @@
     text-align: left;
   }
 
-  .impact-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .impact-stat {
     min-height: 17rem;
     padding: 1rem;
@@ -238,15 +236,11 @@
     font-size: 3.7rem;
   }
 
-  .impact-stat:nth-child(3) {
-    border-left: 1px solid var(--line);
-  }
-
   .featured {
     min-height: 52rem;
   }
 
-  .feature-top span:nth-child(2) {
+  .feature-top > span:nth-child(2) {
     display: none;
   }
 
@@ -350,50 +344,6 @@
   .live-modules article,
   .live-modules .live-main {
     min-height: 15rem;
-  }
-
-  .constellation {
-    height: 49rem;
-    margin: 4rem -1.25rem 0;
-    border-inline: 0;
-  }
-
-  .constellation-core {
-    width: 8rem;
-  }
-
-  .tech-node {
-    width: auto;
-    min-height: 2.8rem;
-  }
-
-  .tech-node small {
-    display: none;
-  }
-
-  .tech-node span {
-    font-size: var(--fs-nano);
-  }
-
-  /* Bottom nodes use rem so they always clear the detail panel, even with a two-row tag list */
-  .node-1 { top: 12%; left: 4%; }
-  .node-2 { top: 2%; left: 36%; }
-  .node-3 { top: 12%; right: 3%; }
-  .node-4 { top: 33%; right: 2%; }
-  .node-5 { bottom: 14rem; right: 4%; }
-  .node-6 { bottom: 11.5rem; left: 35%; }
-  .node-7 { bottom: 14.5rem; left: 3%; }
-  .node-8 { top: 33%; left: 2%; }
-
-  .tech-detail {
-    bottom: 1.25rem;
-    left: 1.25rem;
-    right: 1.25rem;
-    max-width: none;
-  }
-
-  .tech-detail h3 {
-    font-size: 1.5rem;
   }
 
   .people-layout {

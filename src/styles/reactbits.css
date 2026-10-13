@@ -1,0 +1,169 @@
+/* Layer that adapts React Bits components (src/components/reactbits) to the ITSA design system. */
+
+/* Hero: particle network behind the orb and headline */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* TechText overlay (TechHost): the DOM text stays for search, selection and screen readers, but turns
+   transparent behind the canvas that redraws it */
+.tech-host {
+  position: relative;
+}
+
+.tech-box {
+  position: absolute;
+}
+
+[data-tech] [data-tech-line] {
+  color: transparent !important;
+  -webkit-text-stroke-color: transparent !important;
+}
+
+/* Decrypting labels: characters that are not resolved yet read as violet */
+.decrypt-scramble {
+  color: var(--violet);
+}
+
+/* Impact: ChromaGrid photo cards flattened into the site's hairline grid, with the figure over the photo */
+.impact-chroma .chroma-grid-inner {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.impact-chroma .chroma-card {
+  padding: 0;
+  gap: 0;
+  border-radius: 0;
+  background: var(--ink);
+  box-shadow: none;
+  /* hairlines between cards: right and bottom edge of each */
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 0 -1px -1px 0;
+}
+
+.impact-chroma .chroma-card-rim {
+  box-shadow: none;
+}
+
+.impact-chroma .chroma-media {
+  flex: 1;
+  border-radius: 0;
+  aspect-ratio: auto;
+  min-height: 28rem;
+  background: var(--surface-2);
+}
+
+.impact-chroma .chroma-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+.impact-grid {
+  overflow: hidden;
+}
+
+/* Spotlight cards live inside hairline grids that draw their own borders */
+.live-modules .spotlight-card {
+  padding: 1.5rem;
+  border-radius: 0;
+}
+
+/* ITSA Team ring (CircularCarousel) */
+.team {
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.team-stage {
+  position: relative;
+  height: clamp(30rem, 70vh, 40rem);
+  margin: 4rem -1rem 0;
+}
+
+.team-stage .circular-carousel:focus-visible,
+.gallery-stage .flex-carousel:focus-visible {
+  box-shadow: none;
+  outline: 2px solid var(--cyan);
+  outline-offset: -2px;
+}
+
+/* Carousel captions use the site's type instead of the component's 15px sans */
+.circular-carousel__title,
+.flex-carousel__title {
+  font: 500 clamp(1.1rem, 2vw, 1.5rem) / 1.2 var(--display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.circular-carousel__subtitle,
+.flex-carousel__subtitle {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font: 500 var(--fs-micro) var(--sans);
+  letter-spacing: 0.14em;
+  opacity: 1;
+}
+
+.circular-carousel__count,
+.flex-carousel__count {
+  color: var(--muted);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.14em;
+  opacity: 1;
+}
+
+/* Gallery carousel (FlexCarousel) */
+.gallery-stage {
+  position: relative;
+  height: clamp(28rem, 72vh, 44rem);
+  margin-top: 6rem;
+}
+
+/* Connect: aurora glow rising from the bottom edge, text stays above it */
+.connect-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* Keep the glow on the bottom third so the headline and copy stay on a dark ground */
+  -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.6) 22%, transparent 48%);
+  mask-image: linear-gradient(to top, #000 0%, rgba(0, 0, 0, 0.6) 22%, transparent 48%);
+}
+
+/* The aside used to overlap the second headline line; give the copy a clear lane instead */
+.connect-aside {
+  margin-top: 3.5rem;
+}
+
+.connect > span,
+.connect h2 {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .impact-chroma .chroma-grid-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .impact-chroma .chroma-media {
+    min-height: 17rem;
+  }
+
+  .gallery-stage {
+    height: 30rem;
+    margin: 4rem -1.25rem 0;
+  }
+
+  .team-stage {
+    height: 28rem;
+    margin: 3rem -1.25rem 0;
+  }
+}

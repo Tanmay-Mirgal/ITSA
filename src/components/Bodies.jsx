@@ -4,7 +4,7 @@ export default function Bodies() {
   return (
     <section className="bodies" aria-labelledby="bodies-heading">
       <div>
-        <span>07 / PROFESSIONAL BODIES</span>
+        <span>08 / PROFESSIONAL BODIES</span>
         <h2 id="bodies-heading">
           CONNECTED
           <br />

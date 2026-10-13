@@ -1,11 +1,15 @@
+import TechHost from './TechHost.jsx';
 import { LOCATION, MENU_LINKS } from '../data.js';
 
 export default function Footer() {
   return (
     <footer>
-      <div className="footer-brand" aria-hidden="true">
-        ITSA<span>●</span>
-      </div>
+      <TechHost className="footer-brand" accent="#9b6cff" aria-hidden="true">
+        <span data-tech-line data-tech-color="#f4f3f7">
+          ITSA
+        </span>
+        <span className="footer-dot">●</span>
+      </TechHost>
 
       <div className="footer-info">
         <p>

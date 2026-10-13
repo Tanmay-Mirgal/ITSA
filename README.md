@@ -2,7 +2,7 @@
 
 Website for the ITSA committee at VPPCOEVA, Sion, Mumbai. Built from the Figma Make design *Redesign ITSA Website*.
 
-Stack: **Next.js 16 (App Router)**, React 19 and hand-written CSS. No shadcn/ui, no React Bits, no UI library.
+Stack: **Next.js 16 (App Router)**, React 19, hand-written CSS and selected **React Bits** components. No shadcn/ui.
 
 ## Run it
 
@@ -16,26 +16,44 @@ Open http://localhost:3000. Other scripts: `npm run build` (production build; th
 ## Where things live
 
 ```
-src/app/layout.jsx      fonts (next/font), metadata, global CSS
-src/app/page.jsx        the page: sections in order
-src/app/globals.css     imports every stylesheet in src/styles (responsive.css last)
-src/app/icon.svg        favicon
-src/data.js             all copy, links, events, teams, tech topics, images
-src/hooks.js            scroll state, reveal-on-scroll, list selection, overlay focus
-src/components/         one file per section or widget
-src/styles/             tokens, base, then one stylesheet per area
-DESIGN-SYSTEM.md        tokens, components and what differs from Figma
+src/app/layout.jsx           fonts (next/font), metadata, global CSS
+src/app/page.jsx             the page: sections in order
+src/app/globals.css          imports every stylesheet in src/styles (responsive.css last)
+src/data.js                  all copy, links, events, teams, tech topics, images
+src/hooks.js                 scroll state, reveal-on-scroll, list selection, overlay focus
+src/components/              one file per section or widget
+src/components/reactbits/    React Bits components (see NOTICE.md there for licence and local changes)
+src/styles/                  tokens, base, one stylesheet per area, reactbits.css for the glue
+DESIGN-SYSTEM.md             tokens, components and what differs from Figma
 ```
 
-Server vs client: sections that only render content (About, Impact, Featured, Gallery, Footer, ...) are Server Components. Anything with state or events (`SiteChrome`, `Hero`, `EventsArchive`, `Technology`, `People`, the overlays and cursor) starts with `'use client'`.
+Server vs client: sections that only render content (About, Impact, Featured, Footer, ...) are Server Components. Anything with state, events or canvas (`SiteChrome`, `Hero`, `TechHost`, `TeamStage`, `GalleryStage`, the lists and overlays) starts with `'use client'`.
+
+## React Bits in the site
+
+| Where | Component |
+|-------|-----------|
+| Hero headline, the big ITSA wordmarks (system strip, identity, footer) | `TechText` via `TechHost` |
+| Hero background | `Particles` |
+| About lead paragraph | `ScrollReveal` |
+| Impact and live cards | `SpotlightCard` |
+| Techgyanathon facts, numeric impact stats | `CountUp` |
+| Section labels, featured thesis | `DecryptedText` |
+| ITSA Team | `CircularCarousel` |
+| Gallery | `FlexCarousel` (static collage when WebGL2 is missing) |
+| Connect | `Aurora` |
+| Whole page | `ClickSpark` |
+
+All of them respect `prefers-reduced-motion`. The WebGL ones load in their own chunks. `TechHost` keeps the real text in the DOM and draws a canvas copy on top.
 
 ## Updating content
 
 Edit `src/data.js`:
 
-- **Impact numbers** are still the `XX+` placeholders from the design. Replace them in `IMPACT_STATS`.
+- **Impact numbers** are still the `XX+` placeholders from the design. Replace `value: 'XX+'` in `IMPACT_STATS` with `to: 40, suffix: '+'` and it counts up.
+- **ITSA Team ring**: `TEAM_CARDS`. The cards are the five teams for now because no member photos were available. For people, use `{ title: 'Full Name', subtitle: 'Role', src: '<portrait url>', alt: 'Full Name' }`; 8 to 12 cards fill the ring best.
 - **Contact links** are in `CONTACT` (email, Instagram, LinkedIn).
-- **Photos** are Unsplash stand-ins from the design (`IMAGES`). They are served through `next/image`; the allowed host is set in `next.config.mjs`. When you switch to real ITSA photos, put them in `public/` (or add their host to `next.config.mjs`) and update the credit line in `src/components/Gallery.jsx`.
+- **Photos** are Unsplash stand-ins from the design (`IMAGES`, `GALLERY`). The People, Events and About photos go through `next/image` (allowed host in `next.config.mjs`); the carousels load their images directly. Swap in real ITSA photos and update the credit line in `src/components/Gallery.jsx`.
 - **Events, teams and technology topics** are `EVENTS`, `TEAMS` and `TECH_NODES`.
 
 New pages (for example a dedicated `/events` page) go in `src/app/<name>/page.jsx`.

@@ -1,3 +1,4 @@
+import TechHost from './TechHost.jsx';
 import { LOCATION } from '../data.js';
 
 export default function SystemStrip() {
@@ -9,9 +10,11 @@ export default function SystemStrip() {
         <span className="active-dot">SYSTEM STATUS / ACTIVE</span>
       </div>
 
-      <div className="system-word" aria-hidden="true">
-        ITSA
-      </div>
+      <TechHost accent="#7144e8" aria-hidden="true">
+        <div className="system-word" data-tech-line data-tech-color="#06070d">
+          ITSA
+        </div>
+      </TechHost>
 
       <div className="system-grid">
         <div>

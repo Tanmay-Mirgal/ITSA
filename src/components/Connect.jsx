@@ -1,10 +1,30 @@
 import Button from './Button.jsx';
+import MetaLabel from './MetaLabel.jsx';
+import AuroraBackdrop from './AuroraBackdrop.jsx';
 import { CONTACT } from '../data.js';
+
+const AURORA_COLORS = ['#7144e8', '#4cd8f8', '#9b6cff'];
 
 export default function Connect() {
   return (
     <section className="connect section" id="connect">
-      <span>10 / OPEN CHANNEL</span>
+      <div className="connect-aurora" aria-hidden="true">
+        <AuroraBackdrop
+          colorStops={AURORA_COLORS}
+          direction="bottom"
+          height={0.35}
+          amplitude={0.8}
+          blend={0.6}
+          speed={0.6}
+          glow={0.5}
+          mouseInteraction={false}
+          opacity={0.55}
+        />
+      </div>
+
+      <span>
+        <MetaLabel>11 / OPEN CHANNEL</MetaLabel>
+      </span>
 
       <h2>
         LET&rsquo;S BUILD

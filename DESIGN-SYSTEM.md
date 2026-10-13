@@ -1,6 +1,6 @@
 # ITSA Design System
 
-Source: the Figma Make file *Redesign ITSA Website*. The build is Next.js (App Router) with hand-written CSS in `src/styles/`. There is no UI library: no shadcn/ui and no React Bits.
+Source: the Figma Make file *Redesign ITSA Website*. The build is Next.js (App Router) with hand-written CSS in `src/styles/` plus selected React Bits components (`src/components/reactbits/`). There is no component library on top: no shadcn/ui.
 
 ## Tokens (`src/styles/tokens.css`)
 
@@ -55,6 +55,20 @@ Labels use a four-step floor so nothing is smaller than 10px: `--fs-nano` .625re
 | Mobile menu | `MobileMenu.jsx` | closed / open | Full-screen purple sheet, staggered links |
 | Command palette | `CommandPalette.jsx` | closed / open | Ctrl/⌘ + K, Esc to close |
 | Cursor | `Cursor.jsx` | dot / labelled disc | Only on fine pointers; label from `data-cursor` |
+| Tech wordmark | `TechHost.jsx` + `reactbits/TechText` | resting / hovered letter | Real text stays in the DOM; a canvas copy sits on top. Hover turns a letter into a dashed outline with a measurement frame; letters can be dragged |
+| Team ring | `TeamStage.jsx` + `reactbits/CircularCarousel` | drift / paused / focused card | Drag, arrow keys or click; drifts slowly and pauses on hover |
+| Gallery row | `GalleryStage.jsx` + `reactbits/FlexCarousel` | resting / dragging / focused | Vertical wheel scrolls the page (`captureWheel` off); collage fallback without WebGL2 |
+| Spotlight card | `reactbits/SpotlightCard` via `spotlight.js` | idle / cursor near | Flat variant: no surface, radius or border of its own, because the hairline grid draws them |
+| Decrypting label | `MetaLabel.jsx` + `reactbits/DecryptedText` | on first view | Scrambled characters read violet until resolved |
+
+### Motion layer (React Bits)
+
+Where each component is used is listed in `README.md`. Rules every use follows:
+
+- `prefers-reduced-motion`: no animation, final state shown (Particles, Aurora and the carousels freeze or skip their intro).
+- Decorative WebGL (Particles, Aurora, FlexCarousel) loads in its own chunk and only renders while visible.
+- Text that matters stays real text in the DOM (headline, lead paragraph, numbers); canvases and counters are layered on or computed from it.
+- Overlays on dark/light grounds keep contrast: the Aurora is masked to the bottom third of Connect so headline and copy stay on a dark ground.
 
 ### Accessibility behaviour
 
@@ -78,3 +92,5 @@ Labels use a four-step floor so nothing is smaller than 10px: `--fs-nano` .625re
 | Archive and people rows use `minmax(0, 1fr)` | Long words no longer widen the page at 320px |
 | LinkedIn link points at the public company page | The export linked to an `/admin/` URL that visitors cannot open |
 | Mouse parallax on the hero orb is a little stronger | Original was barely visible |
+| Connect copy moved below the headline | In the export it overlapped the second headline line and was unreadable over the violet letters |
+| New "ITSA Team" section (07); later sections renumbered 08–11 | Requested after the Figma export |

@@ -1,11 +1,16 @@
 import Button from './Button.jsx';
+import MetaLabel from './MetaLabel.jsx';
+import CountUp from './reactbits/CountUp.jsx';
+import DecryptedText from './reactbits/DecryptedText.jsx';
 import { CONTACT, FEATURED_FACTS } from '../data.js';
 
 export default function Featured() {
   return (
     <section className="featured section" id="events">
       <div className="feature-top">
-        <span>03 / FEATURED EVENT</span>
+        <span>
+          <MetaLabel>03 / FEATURED EVENT</MetaLabel>
+        </span>
         <span>16—18 MARCH 2026</span>
         <span>VPPCOE · MUMBAI</span>
       </div>
@@ -24,15 +29,23 @@ export default function Featured() {
       </h2>
 
       <p className="feature-thesis">
-        A technical autopsy
-        <br />
-        in three acts.
+        <DecryptedText
+          text={'A technical autopsy\nin three acts.'}
+          animateOn="view"
+          sequential
+          speed={32}
+          encryptedClassName="decrypt-scramble"
+        />
       </p>
 
       <div className="feature-facts">
-        {FEATURED_FACTS.map(({ value, label }) => (
+        {FEATURED_FACTS.map(({ prefix, to, suffix, label }) => (
           <div key={label}>
-            <strong>{value}</strong>
+            <strong>
+              {prefix}
+              <CountUp to={to} duration={1.6} />
+              {suffix}
+            </strong>
             <span>{label}</span>
           </div>
         ))}

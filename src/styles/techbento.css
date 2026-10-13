@@ -1,0 +1,143 @@
+/* 05 — Technology bento: tiles drawn inside React Bits MagicBento cards */
+.tech-bento {
+  margin-top: 6rem;
+}
+
+.tb-tile {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tb-index {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.16em;
+}
+
+/* tiny node marker that echoes the constellation */
+.tb-index i {
+  width: 0.4rem;
+  aspect-ratio: 1;
+  background: var(--violet);
+  border-radius: 50%;
+  box-shadow: 0 0 0.8rem var(--violet);
+}
+
+.tb-title {
+  margin: 0 0 0.9rem;
+  font: 500 clamp(1.15rem, 1.7vw, 1.65rem) / 1.1 var(--display);
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.tb-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tb-tags li {
+  padding: 0.38rem 0.6rem;
+  border: 1px solid var(--line);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
+.magic-bento__card:hover .tb-tags li {
+  border-color: #9b6cff80;
+  background: #7144e81f;
+}
+
+/* ITSA core: the orb of the hero, sitting in the middle of the topics */
+.tb-core {
+  position: relative;
+  flex: 1;
+  display: grid;
+  place-items: center;
+}
+
+.tb-orb {
+  position: relative;
+  z-index: 2;
+  width: min(15rem, 66%);
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  background: radial-gradient(circle at 35% 30%, #bb9cff, #6241aa 14%, #171122 68%);
+  border: 1px solid #ffffff52;
+  border-radius: 50%;
+  box-shadow: 0 0 6rem #7144e880;
+}
+
+.tb-orb span {
+  font: 600 clamp(2.4rem, 4.2vw, 3.6rem) var(--display);
+  letter-spacing: -0.04em;
+}
+
+.tb-orb small {
+  margin-top: 0.3rem;
+  font-size: var(--fs-nano);
+  letter-spacing: 0.16em;
+}
+
+/* two orbits, each carrying one cyan satellite */
+.tb-ring {
+  position: absolute;
+  z-index: 1;
+  border: 1px solid #9b6cff59;
+  border-radius: 50%;
+  animation: tb-orbit 26s linear infinite;
+}
+
+.tb-ring::after {
+  content: "";
+  position: absolute;
+  top: -0.2rem;
+  left: 50%;
+  width: 0.4rem;
+  aspect-ratio: 1;
+  background: var(--cyan);
+  border-radius: 50%;
+  box-shadow: 0 0 1rem var(--cyan);
+}
+
+.tb-ring-a {
+  inset: 6% 12%;
+}
+
+.tb-ring-b {
+  inset: 18% 22%;
+  animation-duration: 38s;
+  animation-direction: reverse;
+}
+
+.tb-ring-b::after {
+  background: var(--violet);
+  box-shadow: 0 0 1rem var(--violet);
+}
+
+.tb-core-count {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  color: var(--muted);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.16em;
+}
+
+@keyframes tb-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}

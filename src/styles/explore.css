@@ -147,10 +147,11 @@
   transform: translateX(0.35rem);
 }
 
-/* 05 — Technology constellation */
+/* 05 — Technology (bento of topics around the ITSA core; see reactbits.css for the tiles) */
 .technology {
-  min-height: 130vh;
-  background: var(--ink);
+  background:
+    radial-gradient(55% 38% at 50% 62%, rgba(113, 68, 232, 0.16), transparent 72%),
+    var(--ink);
   overflow: hidden;
 }
 
@@ -161,146 +162,6 @@
 
 .technology .section-header h2 em {
   color: var(--cyan);
-}
-
-.constellation {
-  position: relative;
-  height: 57rem;
-  margin-top: 7rem;
-  background: radial-gradient(circle, #7144e829, #0000 28%);
-  border: 1px solid var(--line);
-  overflow: hidden;
-}
-
-.constellation-grid {
-  opacity: 0.16;
-  -webkit-mask-image: radial-gradient(circle, #000, #0000 76%);
-  mask-image: radial-gradient(circle, #000, #0000 76%);
-}
-
-.constellation svg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.constellation path {
-  fill: none;
-  stroke: #9b6cff47;
-  stroke-width: 0.5px;
-  stroke-dasharray: 3 4;
-}
-
-.constellation-core {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 3;
-  width: 11rem;
-  aspect-ratio: 1;
-  display: grid;
-  place-content: center;
-  text-align: center;
-  background: radial-gradient(circle at 35% 30%, #bb9cff, #6241aa 14%, #171122 68%);
-  border: 1px solid #ffffff52;
-  border-radius: 50%;
-  box-shadow: 0 0 5rem #7144e880;
-  transform: translate(-50%, -50%);
-}
-
-.constellation-core span {
-  font: 600 2.3rem var(--display);
-}
-
-.constellation-core small {
-  margin-top: 0.3rem;
-  font-size: var(--fs-nano);
-  letter-spacing: 0.14em;
-}
-
-.tech-node {
-  position: absolute;
-  z-index: 4;
-  width: 9.5rem;
-  min-height: 3.3rem;
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  padding: 0.65rem;
-  background: #06070dd6;
-  border: 1px solid var(--line);
-  text-align: left;
-  transition:
-    transform 0.35s var(--ease),
-    border-color 0.3s,
-    background 0.3s;
-}
-
-.tech-node:hover,
-.tech-node.active {
-  background: var(--purple);
-  border-color: var(--violet);
-  transform: translateY(-0.3rem);
-}
-
-.tech-node small {
-  color: var(--muted);
-  font-size: var(--fs-nano);
-}
-
-.tech-node:hover small,
-.tech-node.active small {
-  color: var(--white);
-}
-
-.tech-node span {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.node-1 { top: 13%; left: 9%; }
-.node-2 { top: 5%; left: 38%; }
-.node-3 { top: 12%; right: 11%; }
-.node-4 { top: 45%; right: 3%; }
-.node-5 { bottom: 8%; right: 13%; }
-.node-6 { bottom: 4%; left: 38%; }
-.node-7 { bottom: 25%; left: 8%; }
-.node-8 { top: 45%; left: 2%; }
-
-.tech-detail {
-  position: absolute;
-  bottom: 2rem;
-  left: 2rem;
-  z-index: 3;
-  max-width: 30%;
-}
-
-.tech-detail > span {
-  color: var(--muted);
-  font-size: var(--fs-nano);
-  letter-spacing: 0.15em;
-}
-
-.tech-detail h3 {
-  margin: 0.5rem 0 1rem;
-  font: 500 2rem var(--display);
-  text-transform: uppercase;
-}
-
-.tech-detail div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tech-detail b {
-  padding: 0.5rem 0.65rem;
-  border: 1px solid var(--line);
-  font-size: var(--fs-micro);
-  font-weight: 500;
-  letter-spacing: 0.09em;
 }
 
 /* 06 — People */

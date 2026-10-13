@@ -1,3 +1,4 @@
+import TechHost from './TechHost.jsx';
 import { LOCATION } from '../data.js';
 
 export default function Identity() {
@@ -8,9 +9,11 @@ export default function Identity() {
         <span>{LOCATION.place}</span>
       </div>
 
-      <div className="identity-word" aria-hidden="true">
-        ITSA
-      </div>
+      <TechHost accent="#f4f3f7" aria-hidden="true">
+        <div className="identity-word" data-tech-line data-tech-color="#f4f3f7">
+          ITSA
+        </div>
+      </TechHost>
 
       <div className="identity-bottom">
         <p>

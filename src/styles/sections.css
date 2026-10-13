@@ -35,37 +35,68 @@
 
 /* 01 — About */
 .about {
-  min-height: 130vh;
   background: var(--surface);
   overflow: hidden;
 }
 
-.about-copy {
-  position: relative;
-  z-index: 2;
-  width: 50%;
+/* Photo left, copy right: the lead gets a wide measure (4–5 lines) instead of a narrow tower of text */
+.about-body {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 4rem;
-  margin: 7rem 0 0 43%;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: start;
+  gap: clamp(2rem, 6vw, 7rem);
+  margin-top: 7rem;
 }
 
-.about-copy p {
+.about-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.about-lead {
+  color: var(--white);
+  font: 400 clamp(1.75rem, 3.1vw, 3.4rem) / 1.22 var(--display);
+  letter-spacing: -0.035em;
+}
+
+.about-support {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: start;
+  gap: 3rem;
+}
+
+.about-support p {
+  max-width: 30rem;
   color: var(--muted);
   line-height: 1.75;
 }
 
-.about-copy p:first-child {
-  color: var(--white);
-  font: 400 clamp(1.5rem, 2.5vw, 2.6rem) / 1.28 var(--display);
-  letter-spacing: -0.035em;
+.about-principles {
+  border-top: 1px solid var(--line);
+}
+
+.about-principles li {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.about-principles small {
+  color: var(--violet);
+  font-size: var(--fs-nano);
 }
 
 .about-frame {
   position: relative;
-  width: 35vw;
-  height: 42rem;
-  margin: -4rem 0 0;
+  margin: 0;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
 }
 
@@ -88,17 +119,6 @@
 .about-frame:hover img {
   filter: grayscale(0);
   transform: scale(1.03);
-}
-
-.about-side {
-  position: absolute;
-  bottom: 8rem;
-  right: 5vw;
-  color: var(--muted);
-  font-size: var(--fs-nano);
-  letter-spacing: 0.15em;
-  line-height: 1.8;
-  writing-mode: vertical-rl;
 }
 
 /* Institutional system strip */
@@ -174,47 +194,28 @@
 }
 
 .impact-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-block: 1px solid var(--line);
+  border: 1px solid var(--line);
 }
 
+/* The figure laid over each impact photo (see ChromaGrid in reactbits.css) */
 .impact-stat {
   position: relative;
+  height: 100%;
   min-height: 28rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.3rem;
-  border-right: 1px solid var(--line);
-  overflow: hidden;
-}
-
-.impact-stat:first-child {
-  border-left: 1px solid var(--line);
-}
-
-.impact-stat::after {
-  content: "";
-  position: absolute;
-  bottom: -7rem;
-  right: -7rem;
-  width: 13rem;
-  aspect-ratio: 1;
-  background: var(--purple);
-  border-radius: 50%;
-  filter: blur(5rem);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.impact-stat:hover::after {
-  opacity: 0.45;
+  /* Keeps the figure readable over both the grey photo and its colour reveal */
+  background:
+    linear-gradient(to bottom, rgba(6, 7, 13, 0.7), transparent 38%),
+    linear-gradient(to top, rgba(6, 7, 13, 0.85), transparent 52%);
 }
 
 .impact-stat small {
-  color: var(--muted);
+  color: var(--white);
   font-size: var(--fs-nano);
+  letter-spacing: 0.14em;
 }
 
 .impact-stat strong {
@@ -222,7 +223,7 @@
   letter-spacing: -0.08em;
 }
 
-.impact-stat span {
+.impact-stat .impact-label {
   font-size: 0.7rem;
   letter-spacing: 0.17em;
 }
@@ -325,7 +326,7 @@
 }
 
 .feature-facts strong,
-.feature-facts span {
+.feature-facts > div > span {
   display: block;
 }
 
@@ -333,7 +334,7 @@
   font: 600 1.8rem var(--display);
 }
 
-.feature-facts span {
+.feature-facts > div > span {
   margin-top: 0.35rem;
   color: var(--muted);
   font-size: var(--fs-nano);
@@ -388,10 +389,6 @@
   border-right: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   transition: background 0.35s;
-}
-
-.live-modules article:hover {
-  background: #ffffff0a;
 }
 
 .live-modules .live-main {

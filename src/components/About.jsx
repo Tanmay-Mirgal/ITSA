@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import SectionHeader from './SectionHeader.jsx';
+import ScrollReveal from './reactbits/ScrollReveal.jsx';
 import { IMAGES } from '../data.js';
+
+const PRINCIPLES = ['Student-led', 'Technology-driven', 'Built in Mumbai'];
 
 export default function About() {
   return (
@@ -20,32 +23,38 @@ export default function About() {
         }
       />
 
-      <div className="about-copy reveal">
-        <p>
-          ITSA is a student initiative of the Information Technology Department at VPPCOEVA&mdash;an active
-          community for collaboration, learning, innovation and professional growth.
-        </p>
-        <p>
-          Through workshops, competitions, industry exposure and shared experimentation, students turn academic
-          curiosity into real-world capability.
-        </p>
-      </div>
+      <div className="about-body">
+        <figure className="about-frame reveal-image">
+          <Image
+            src={IMAGES.collab}
+            alt="Students collaborating around a laptop"
+            fill
+            sizes="(max-width: 1050px) 100vw, 42vw"
+          />
+        </figure>
 
-      <div className="about-frame reveal-image">
-        <Image
-          src={IMAGES.collab}
-          alt="Students collaborating around a laptop"
-          fill
-          sizes="(max-width: 720px) 100vw, 35vw"
-        />
-      </div>
+        <div className="about-copy reveal">
+          <ScrollReveal className="about-lead">
+            ITSA is a student initiative of the Information Technology Department at VPPCOEVA—an active community
+            for collaboration, learning, innovation and professional growth.
+          </ScrollReveal>
 
-      <div className="about-side" aria-hidden="true">
-        STUDENT-LED
-        <br />
-        TECHNOLOGY-DRIVEN
-        <br />
-        BUILT IN MUMBAI
+          <div className="about-support">
+            <p>
+              Through workshops, competitions, industry exposure and shared experimentation, students turn academic
+              curiosity into real-world capability.
+            </p>
+
+            <ul className="about-principles">
+              {PRINCIPLES.map((principle, index) => (
+                <li key={principle}>
+                  <small>{String(index + 1).padStart(2, '0')}</small>
+                  {principle}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
