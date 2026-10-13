@@ -23,7 +23,7 @@
   --line-strong: #ffffff47;
   --line-on-light: #06070d33;
 
-  /* Type families: --font-display and --font-sans are set by next/font in src/app/layout.jsx */
+  /* Type families: --font-display and --font-sans are set by next/font in app/layout.jsx */
   --display: var(--font-display), "Space Grotesk", sans-serif;
   --sans: var(--font-sans), "Manrope", sans-serif;
 

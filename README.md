@@ -16,15 +16,15 @@ Open http://localhost:3000. Other scripts: `npm run build` (production build; th
 ## Where things live
 
 ```
-src/app/layout.jsx           fonts (next/font), metadata, global CSS
-src/app/page.jsx             the page: sections in order
-src/app/globals.css          imports every stylesheet in src/styles (responsive.css last)
-src/data.js                  all copy, links, events, teams, tech topics, images
-src/hooks.js                 scroll state, reveal-on-scroll, list selection, overlay focus
-src/components/              one file per section or widget
-src/components/reactbits/    React Bits components (see NOTICE.md there for licence and local changes)
-src/styles/                  tokens, base, one stylesheet per area, reactbits.css for the glue
-DESIGN-SYSTEM.md             tokens, components and what differs from Figma
+app/layout.jsx             fonts (next/font), metadata, global CSS
+app/page.jsx               the page: sections in order
+app/globals.css            imports every stylesheet in styles/ (responsive.css last)
+data.js                    all copy, links, events, teams, tech topics, images
+hooks.js                   scroll state, reveal-on-scroll, list selection, overlay focus
+components/                one file per section or widget
+components/reactbits/      React Bits components (see NOTICE.md there for licence and local changes)
+styles/                    tokens, base, one stylesheet per area, reactbits.css for the glue
+DESIGN-SYSTEM.md           tokens, components and what differs from Figma
 ```
 
 Server vs client: sections that only render content (About, Impact, Featured, Footer, ...) are Server Components. Anything with state, events or canvas (`SiteChrome`, `Hero`, `TechHost`, `TeamStage`, `GalleryStage`, the lists and overlays) starts with `'use client'`.
@@ -50,13 +50,13 @@ All of them respect `prefers-reduced-motion`. The WebGL ones load in their own c
 
 ## Updating content
 
-Edit `src/data.js`:
+Edit `data.js`:
 
 - **Impact numbers** are still the `XX+` placeholders from the design. Replace `value: 'XX+'` in `IMPACT_STATS` with `to: 40, suffix: '+'` and it counts up. Each entry also holds the card photo (`image`) and glow colour (`accent`).
-- **Technology topics** are `TECH_NODES` (name plus tags). The bento layout (core tile in the middle) is set in `src/components/TechBento.jsx`.
+- **Technology topics** are `TECH_NODES` (name plus tags). The bento layout (core tile in the middle) is set in `components/TechBento.jsx`.
 - **ITSA Team ring**: `TEAM_CARDS`. The cards are the five teams for now because no member photos were available. For people, use `{ title: 'Full Name', subtitle: 'Role', src: '<portrait url>', alt: 'Full Name' }`; 8 to 12 cards fill the ring best.
 - **Contact links** are in `CONTACT` (email, Instagram, LinkedIn).
-- **Photos** are Unsplash stand-ins from the design (`IMAGES`, `GALLERY`). The People, Events and About photos go through `next/image` (allowed host in `next.config.mjs`); the carousels load their images directly. Swap in real ITSA photos and update the credit line in `src/components/Gallery.jsx`.
+- **Photos** are Unsplash stand-ins from the design (`IMAGES`, `GALLERY`). The People, Events and About photos go through `next/image` (allowed host in `next.config.mjs`); the carousels load their images directly. Swap in real ITSA photos and update the credit line in `components/Gallery.jsx`.
 - **Events, teams and technology topics** are `EVENTS`, `TEAMS` and `TECH_NODES`.
 
-New pages (for example a dedicated `/events` page) go in `src/app/<name>/page.jsx`.
+New pages (for example a dedicated `/events` page) go in `app/<name>/page.jsx`.

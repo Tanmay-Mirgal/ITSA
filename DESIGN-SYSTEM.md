@@ -1,8 +1,8 @@
 # ITSA Design System
 
-Source: the Figma Make file *Redesign ITSA Website*. The build is Next.js (App Router) with hand-written CSS in `src/styles/` plus selected React Bits components (`src/components/reactbits/`). There is no component library on top: no shadcn/ui.
+Source: the Figma Make file *Redesign ITSA Website*. The build is Next.js (App Router) with hand-written CSS in `styles/` plus selected React Bits components (`components/reactbits/`). There is no component library on top: no shadcn/ui.
 
-## Tokens (`src/styles/tokens.css`)
+## Tokens (`styles/tokens.css`)
 
 ### Color
 
@@ -33,7 +33,7 @@ Contrast, measured (WCAG ratio): white on ink 18.2, muted on ink 7.5, muted on n
 | Display | Space Grotesk 400–700 | Headlines, numbers, list rows. Tight tracking (`-0.03em` to `-0.11em`), uppercase |
 | Body | Manrope 400–700 | Copy and small caps labels |
 
-Both are loaded with `next/font/google` in `src/app/layout.jsx` (self-hosted at build time, `latin` + `latin-ext` for the ₹ sign) and exposed as `--font-display` and `--font-sans`, which `--display` and `--sans` wrap.
+Both are loaded with `next/font/google` in `app/layout.jsx` (self-hosted at build time, `latin` + `latin-ext` for the ₹ sign) and exposed as `--font-display` and `--font-sans`, which `--display` and `--sans` wrap.
 
 Labels use a four-step floor so nothing is smaller than 10px: `--fs-nano` .625rem, `--fs-micro` .66rem, `--fs-label` .7rem, `--fs-small` .82rem, `--fs-body` .95rem. (The Figma export used sizes down to 8px.)
 

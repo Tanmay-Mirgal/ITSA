@@ -29,10 +29,7 @@ export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }
       </div>
 
       <div className="nav-actions">
-        <button className="command-trigger" type="button" onClick={onOpenCommand} aria-haspopup="dialog">
-          <span>COMMAND</span>
-          <kbd>{shortcut}</kbd>
-        </button>
+     
         <a className="button button-line" href="#connect" data-cursor="GO">
           <span>CONNECT</span>
           <span aria-hidden="true">→</span>
