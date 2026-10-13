@@ -211,6 +211,10 @@ const CircularCarousel = ({
   const incoming = items && items.length ? items : DEFAULT_ITEMS;
   const [list, setList] = useState(incoming);
   const [leaving, setLeaving] = useState(null);
+
+  useEffect(() => {
+    if (items && items.length) setList(items);
+  }, [items]);
   const count = list.length;
   const shape = PRESETS[preset] ? preset : 'cylinder';
   const layout = PRESETS[shape];

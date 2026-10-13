@@ -28,30 +28,32 @@ export default function Featured() {
         <span aria-hidden="true">THON</span>
       </h2>
 
-      <p className="feature-thesis">
-        <DecryptedText
-          text={'A technical autopsy\nin three acts.'}
-          animateOn="view"
-          sequential
-          speed={32}
-          encryptedClassName="decrypt-scramble"
-        />
-      </p>
+      <div className="feature-footer">
+        <p className="feature-thesis">
+          <DecryptedText
+            text={'A technical autopsy\nin three acts.'}
+            animateOn="view"
+            sequential
+            speed={32}
+            encryptedClassName="decrypt-scramble"
+          />
+        </p>
 
-      <div className="feature-facts">
-        {FEATURED_FACTS.map(({ prefix, to, suffix, label }) => (
-          <div key={label}>
-            <strong>
-              {prefix}
-              <CountUp to={to} duration={1.6} />
-              {suffix}
-            </strong>
-            <span>{label}</span>
-          </div>
-        ))}
+        <div className="feature-facts">
+          {FEATURED_FACTS.map(({ prefix, to, suffix, label }) => (
+            <div key={label}>
+              <strong>
+                {prefix}
+                <CountUp to={to} duration={1.6} />
+                {suffix}
+              </strong>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+
+        <Button href={`mailto:${CONTACT.email}`}>EXPLORE EVENT</Button>
       </div>
-
-      <Button href={`mailto:${CONTACT.email}`}>EXPLORE EVENT</Button>
     </section>
   );
 }

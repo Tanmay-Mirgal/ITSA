@@ -63,6 +63,8 @@ const TechText = ({
   labels = true,
   draggable = true,
   sweep = true,
+  autoLoop = false,
+  loopDuration = 0.9,
   speed = 1,
   className = '',
   style
@@ -94,6 +96,8 @@ const TechText = ({
       labels,
       draggable,
       sweep,
+      autoLoop,
+      loopDuration,
       speed
     };
     wakeRef.current();
@@ -369,10 +373,15 @@ const TechText = ({
         const life = t - cycle;
         if (life > 0.7) continue;
         const [px, py, nx, ny] = perimeterPoint(noise(seed, k, cycle) * perimeter, w, h);
+        const isCompact = s.fontSize < 30;
         const pick = noise(seed, k, cycle, 2);
-        const size = pick < 0.46 ? 2 : pick < 0.7 ? 3 : pick < 0.84 ? 5 : pick < 0.94 ? 8 : 11;
+        const size = isCompact
+          ? (pick < 0.5 ? 1.5 : 2.5)
+          : (pick < 0.46 ? 2 : pick < 0.7 ? 3 : pick < 0.84 ? 5 : pick < 0.94 ? 8 : 11);
         const large = size >= 8;
-        const out = (large ? 9 : 4) + Math.floor(noise(seed, k, cycle, 1) * 5) * grid;
+        const out = isCompact
+          ? (Math.floor(noise(seed, k, cycle, 1) * 3) + 2)
+          : ((large ? 9 : 4) + Math.floor(noise(seed, k, cycle, 1) * 5) * grid);
         const x = frame.x1 + Math.round((px + nx * out - frame.x1) / grid) * grid;
         const y = frame.y1 + Math.round((py + ny * out - frame.y1) / grid) * grid;
         const tone = noise(seed, k, cycle, 3);
@@ -397,7 +406,7 @@ const TechText = ({
         const head = (pulse * 0.42 * s.speed + j * 0.5) * perimeter;
         for (let i = 0; i < 4; i++) {
           const [x, y] = perimeterPoint(head - i * 6, w, h);
-          const size = i === 0 ? 3 : 2;
+          const size = isCompact ? (i === 0 ? 2 : 1.5) : (i === 0 ? 3 : 2);
           ctx.fillStyle = rgba(s.accentColor, a * [0.95, 0.55, 0.32, 0.16][i]);
           ctx.fillRect(Math.round(x - size / 2), Math.round(y - size / 2), size, size);
         }
@@ -413,6 +422,8 @@ const TechText = ({
       const x2 = crisp(frame.x2);
       const y2 = crisp(frame.y2);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const isCompact = s.fontSize < 30;
 
       const moved = Math.hypot(glyph.offset.x, glyph.offset.y);
       if (moved > 1) {
@@ -439,13 +450,15 @@ const TechText = ({
       ctx.stroke();
 
       ctx.beginPath();
+      const hSize = isCompact ? 3 : 5;
+      const hOffset = isCompact ? 1 : 2;
       for (const [cx, cy] of [
         [x1, y1],
         [x2, y1],
         [x2, y2],
         [x1, y2]
       ]) {
-        ctx.rect(Math.round(cx) - 2, Math.round(cy) - 2, 5, 5);
+        ctx.rect(Math.round(cx) - hOffset, Math.round(cy) - hOffset, hSize, hSize);
       }
       ctx.fillStyle = rgba(s.accentColor, 0.95 * a);
       ctx.fill();
@@ -456,7 +469,7 @@ const TechText = ({
       }
 
       if (!s.labels) return;
-      ctx.font = LABEL_FONT;
+      ctx.font = isCompact ? '8px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace' : LABEL_FONT;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'bottom';
       ctx.fillStyle = rgba(s.accentColor, 0.62 * a);
@@ -464,7 +477,7 @@ const TechText = ({
         moved > 1
           ? `${signed(Math.round(glyph.offset.x))}, ${signed(Math.round(-glyph.offset.y))}`
           : `${glyph.char}  ${Math.round(glyph.box.x2 - glyph.box.x1)} × ${Math.round(glyph.box.y2 - glyph.box.y1)}`;
-      ctx.fillText(label, Math.round(frame.x1), Math.round(frame.y1) - 7);
+      ctx.fillText(label, Math.round(frame.x1), Math.max(isCompact ? 8 : 10, Math.round(frame.y1) - (isCompact ? 3 : 7)));
     };
 
     const tick = now => {
@@ -475,22 +488,33 @@ const TechText = ({
       last = now;
       const view = ensureLayout(s);
 
-      const sweeping = s.sweep && !reducedMotion && !pointer.inside && dragging < 0;
-      if (sweeping) clock += dt * s.speed;
+      const looping = s.autoLoop && !reducedMotion && dragging < 0;
+      const sweeping = !looping && s.sweep && !reducedMotion && !pointer.inside && dragging < 0;
+      if (looping || sweeping) clock += dt * s.speed;
       pulse += dt;
       let targetX = pointer.x;
       let targetY = pointer.y;
-      if (sweeping) {
+
+      let loopGlyphIndex = -1;
+      if (looping && glyphs.length > 0) {
+        const step = s.loopDuration || 0.9;
+        loopGlyphIndex = Math.floor(clock / step) % glyphs.length;
+        const currentGlyph = glyphs[loopGlyphIndex];
+        if (currentGlyph) {
+          targetX = (currentGlyph.box.x1 + currentGlyph.box.x2) / 2;
+          targetY = (currentGlyph.box.y1 + currentGlyph.box.y2) / 2;
+        }
+      } else if (sweeping) {
         targetX = view.left + (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
         targetY = view.top + (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
       }
-      const active = pointer.inside || sweeping || dragging >= 0;
+      const active = pointer.inside || looping || sweeping || dragging >= 0;
       if (active && !placed) {
         lens.x = targetX;
         lens.y = targetY;
       }
       if (active) {
-        const lag = pointer.inside ? 0.05 : 0.22;
+        const lag = looping ? 0.08 : pointer.inside ? 0.05 : 0.22;
         lens.x = approach(lens.x, targetX, dt, lag);
         lens.y = approach(lens.y, targetY, dt, lag);
       }
@@ -522,13 +546,15 @@ const TechText = ({
         moving = true;
       });
 
-      const focus = dragging >= 0 ? dragging : active ? glyphAt(lens.x, lens.y) : -1;
+      const focus = dragging >= 0 ? dragging : looping ? loopGlyphIndex : active ? glyphAt(lens.x, lens.y) : -1;
       if (focus >= 0 && s.selection) {
         const glyph = glyphs[focus];
-        const bx1 = glyph.box.x1 + glyph.offset.x - 6;
-        const by1 = glyph.box.y1 + glyph.offset.y - 6;
-        const bx2 = glyph.box.x2 + glyph.offset.x + 6;
-        const by2 = glyph.box.y2 + glyph.offset.y + 6;
+        const isCompact = s.fontSize < 30;
+        const pad = isCompact ? 3 : 6;
+        const bx1 = glyph.box.x1 + glyph.offset.x - pad;
+        const by1 = glyph.box.y1 + glyph.offset.y - pad;
+        const bx2 = glyph.box.x2 + glyph.offset.x + pad;
+        const by2 = glyph.box.y2 + glyph.offset.y + pad;
         if (frame.index < 0 || frame.alpha < 0.02) {
           frame.x1 = bx1;
           frame.y1 = by1;

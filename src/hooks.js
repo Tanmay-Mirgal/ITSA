@@ -22,6 +22,16 @@ export function useScrolled(threshold = 40) {
 export function useReveal() {
   useEffect(() => {
     const targets = [...document.querySelectorAll('.reveal, .reveal-image')];
+    if (!targets.length) return undefined;
+
+    // Immediately reveal elements already near or above current viewport
+    const revealThreshold = window.innerHeight + 150;
+    targets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= revealThreshold) {
+        el.classList.add('is-visible');
+      }
+    });
 
     if (!('IntersectionObserver' in window)) {
       targets.forEach((el) => el.classList.add('is-visible'));
@@ -32,20 +42,28 @@ export function useReveal() {
       (entries) => {
         let furthest = -1;
         entries.forEach((entry) => {
-          if (entry.isIntersecting) furthest = Math.max(furthest, targets.indexOf(entry.target));
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            furthest = Math.max(furthest, targets.indexOf(entry.target));
+          }
         });
 
-        for (let index = 0; index <= furthest; index += 1) {
-          targets[index].classList.add('is-visible');
-          observer.unobserve(targets[index]);
+        if (furthest >= 0) {
+          for (let index = 0; index <= furthest; index += 1) {
+            targets[index].classList.add('is-visible');
+            observer.unobserve(targets[index]);
+          }
         }
       },
-      // threshold must stay 0: `.reveal-image` starts fully clipped, so its intersection ratio is 0
-      // and any higher threshold would never fire.
-      { threshold: 0, rootMargin: '0px 0px -8% 0px' },
+      { threshold: 0, rootMargin: '200px 0px 100px 0px' },
     );
 
-    targets.forEach((el) => observer.observe(el));
+    targets.forEach((el) => {
+      if (!el.classList.contains('is-visible')) {
+        observer.observe(el);
+      }
+    });
+
     return () => observer.disconnect();
   }, []);
 }

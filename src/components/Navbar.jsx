@@ -14,8 +14,10 @@ export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }
   return (
     <nav className={`navbar${scrolled ? ' is-scrolled' : ''}`} aria-label="Primary">
       <a className="brand" href="#home" aria-label="ITSA home">
-        <span aria-hidden="true">IT</span>
-        <b>ITSA</b>
+        <span className="brand-logo" aria-hidden="true">
+          <img src="/itsa-mark.png" alt="ITSA logo" className="brand-logo-img" />
+        </span>
+        <span className="brand-text">ITSA</span>
       </a>
 
       <div className="nav-links">

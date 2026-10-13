@@ -19,6 +19,16 @@ const sans = Manrope({
 export const metadata = {
   title: 'ITSA — Information Technology Student Association',
   description: 'ITSA — where VPPCOEVA technology students build, compete, create and connect.',
+  icons: {
+    icon: [
+      { url: '/itsa-mark.png', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    shortcut: '/itsa-mark.png',
+    apple: [
+      { url: '/itsa-mark.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'ITSA — Information Technology Student Association',
     description: 'A student-led community of technology students at VPPCOEVA, Sion, Mumbai.',

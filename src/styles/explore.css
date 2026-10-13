@@ -1,5 +1,7 @@
 /* 04 — Event archive */
 .events-archive {
+  padding-top: 4rem;
+  padding-bottom: 6rem;
   background: var(--surface);
 }
 
@@ -8,7 +10,7 @@
   grid-template-columns: 39% 1fr;
   align-items: start;
   gap: 8vw;
-  margin-top: 7rem;
+  margin-top: 3.5rem;
 }
 
 .event-preview {

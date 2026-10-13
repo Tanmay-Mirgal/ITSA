@@ -92,6 +92,31 @@
   outline-offset: -2px;
 }
 
+.team-stage .circular-carousel__card {
+  cursor: pointer;
+}
+
+.team-stage-hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.team-stage-hint span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--muted);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 /* Carousel captions use the site's type instead of the component's 15px sans */
 .circular-carousel__title,
 .flex-carousel__title {

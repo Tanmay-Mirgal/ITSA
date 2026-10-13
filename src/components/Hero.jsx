@@ -1,18 +1,17 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Button from './Button.jsx';
-import TechHost from './TechHost.jsx';
-import { CORE_LABELS, LOCATION } from '../data.js';
+import { LOCATION } from '../data.js';
 
-// Decorative WebGL: its own chunk, client-only, so it never blocks the headline.
+// Decorative WebGL: their own chunks, client-only.
 const Particles = dynamic(() => import('./reactbits/Particles.jsx'), { ssr: false });
+const Globe = dynamic(() => import('./reactbits/Globe.jsx'), { ssr: false });
 
 const PARTICLE_COLORS = ['#9b6cff', '#4cd8f8', '#f4f3f7'];
 
 export default function Hero() {
-  const stageRef = useRef(null);
   const [particleCount, setParticleCount] = useState(170);
 
   // Fewer particles (and fewer connecting lines) on phones.
@@ -20,19 +19,8 @@ export default function Hero() {
     if (window.matchMedia('(max-width: 720px)').matches) setParticleCount(80);
   }, []);
 
-  // Nudges the core orb a few pixels toward the pointer.
-  const onPointerMove = (event) => {
-    const stage = stageRef.current;
-    if (!stage) return;
-    const rect = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
-    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
-    stage.style.setProperty('--x', x.toFixed(3));
-    stage.style.setProperty('--y', y.toFixed(3));
-  };
-
   return (
-    <section className="hero" id="home" onMouseMove={onPointerMove}>
+    <section className="hero" id="home">
       <div className="hero-grid" />
       <div className="hero-wash" />
       <div className="hero-particles" aria-hidden="true">
@@ -54,27 +42,16 @@ export default function Hero() {
         />
       </div>
 
-      <div ref={stageRef} className="core-stage" aria-hidden="true">
-        <div className="core-aura" />
-        <div className="core-ring ring-a">
-          <i />
-          <i />
-        </div>
-        <div className="core-ring ring-b">
-          <i />
-          <i />
-          <i />
-        </div>
-        <div className="core-shell">
-          <div className="core-inner">I</div>
-        </div>
-        {CORE_LABELS.map((label, index) => (
-          <span key={label} className={`core-label core-label-${index + 1}`}>
-            {label}
-          </span>
-        ))}
-        <div className="core-coordinate">
-          CORE / ONLINE
+      <div className="hero-globe-wrap" aria-hidden="true">
+        <Globe
+          primaryColor="#9b6cff"
+          accentColor="#4cd8f8"
+          pinkColor="#f472b6"
+          atmosphereColor="#7144e8"
+          autoRotateSpeed={0.85}
+        />
+        <div className="globe-coordinate">
+          ITSA / GLOBAL NODE
           <br />
           {LOCATION.coordinates.join(' · ')}
         </div>
@@ -86,15 +63,16 @@ export default function Hero() {
           <span>ITSA DIGITAL UNIVERSE / 2026</span>
         </div>
 
-        {/* Real text stays in the h1; TechHost draws it again with React Bits TechText once the intro has played. */}
-        <TechHost as="h1" delay={1700} accent="#4cd8f8">
-          <span data-tech-line>Information</span>
-          <span data-tech-line>Technology</span>
-          <span data-tech-line data-tech-hollow data-tech-color="#f4f3f7">
-            Student
+        <h1>
+          <span className="hero-line hero-line-1">Information</span>
+          <span className="hero-line hero-line-2">
+            <span className="hero-spacer" aria-hidden="true">I</span>Technology
           </span>
-          <span data-tech-line>Association</span>
-        </TechHost>
+          <span className="hero-line hero-line-3">Student</span>
+          <span className="hero-line hero-line-4">
+            <span className="hero-spacer" aria-hidden="true">S</span>Association
+          </span>
+        </h1>
 
         <div className="hero-lower">
           <p>Where technology students collaborate, experiment, compete and create what&rsquo;s next.</p>

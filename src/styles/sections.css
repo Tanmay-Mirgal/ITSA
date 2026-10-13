@@ -230,9 +230,11 @@
 
 /* 03 — Featured event */
 .featured {
-  min-height: 110vh;
+  padding-top: 6rem;
+  padding-bottom: 3.5rem;
   background: var(--event-void);
   overflow: hidden;
+  position: relative;
 }
 
 .feature-top {
@@ -245,9 +247,9 @@
 .featured h2 {
   position: relative;
   z-index: 3;
-  margin: 10vh 0 0;
-  font: 600 clamp(6rem, 15vw, 14rem) / 0.67 var(--display);
-  letter-spacing: -0.1em;
+  margin: clamp(2.5rem, 5vh, 4rem) 0 0;
+  font: 600 clamp(5.5rem, 13vw, 12rem) / 0.72 var(--display);
+  letter-spacing: -0.09em;
 }
 
 .featured h2 span {
@@ -266,10 +268,10 @@
 
 .feature-object {
   position: absolute;
-  top: 18%;
+  top: 10%;
   right: 10%;
   z-index: 2;
-  width: 36rem;
+  width: 32rem;
   aspect-ratio: 1;
 }
 
@@ -309,18 +311,23 @@
   letter-spacing: 0.15em;
 }
 
+.feature-footer {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2.5rem;
+  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+  flex-wrap: wrap;
+}
+
 .feature-thesis {
-  position: absolute;
-  bottom: 3.5rem;
-  left: 6.5rem;
   font: 500 1.25rem / 1.25 var(--display);
+  max-width: 20rem;
 }
 
 .feature-facts {
-  position: absolute;
-  bottom: 3.5rem;
-  right: 16rem;
-  z-index: 4;
   display: flex;
   gap: 2.5rem;
 }
@@ -339,12 +346,6 @@
   color: var(--muted);
   font-size: var(--fs-nano);
   letter-spacing: 0.13em;
-}
-
-.featured > .button {
-  position: absolute;
-  bottom: 3.5rem;
-  right: 6.5rem;
 }
 
 /* Live now */
