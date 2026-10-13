@@ -19,29 +19,36 @@ const sans = Manrope({
 export const metadata = {
   metadataBase: new URL('https://itsa-xi.vercel.app'),
   title: {
-    default: 'ITSA — Information Technology Student Association | VPPCOE&VA Mumbai',
-    template: '%s | ITSA VPPCOE&VA',
+    default: 'ITSA — Information Technology Student Association | Official Website (VPPCOEVA Mumbai)',
+    template: '%s | ITSA VPPCOEVA',
   },
   description:
-    "Official website of the Information Technology Student Association (ITSA) at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts (VPPCOEVA), Sion, Mumbai. Discover Techgyanathon, workshops, coding challenges, hackathons, executive team roster, and tech initiatives.",
+    "Official portal of ITSA (Information Technology Student Association) at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts (VPPCOEVA), Sion, Mumbai. Home of Techgyanathon, national hackathons, coding workshops, student executive councils, and technical initiatives.",
   keywords: [
     'ITSA',
     'ITSA VPPCOE',
     'ITSA VPPCOEVA',
     'ITSA Mumbai',
+    'ITSA Official Website',
+    'ITSA Website',
+    'ITSA College',
     'Information Technology Student Association',
+    'VPPCOE ITSA',
     'Vasantdada Patil Pratishthan College of Engineering',
     'VPPCOEVA',
     'Techgyanathon',
     'Techgyanathon 2026',
+    'ITSA Techgyanathon',
+    'ITSA Events',
+    'ITSA Team',
     'Technical Festival Mumbai',
-    'Engineering Student Body',
+    'Engineering Student Body Mumbai',
     'IT Engineering Mumbai',
     'Student Council VPPCOE',
     'Coding Hackathon Mumbai',
     'Technical Workshops Mumbai',
     'Web Development Club',
-    'Artificial Intelligence Workshops',
+    'AI Workshops Mumbai',
     'Sion Engineering College',
   ],
   authors: [{ name: 'ITSA Technical Team', url: 'https://itsa-xi.vercel.app' }],
@@ -69,9 +76,9 @@ export const metadata = {
   },
   manifest: '/manifest.webmanifest',
   openGraph: {
-    title: 'ITSA — Information Technology Student Association | VPPCOE&VA Mumbai',
+    title: 'ITSA — Information Technology Student Association | Official Website (VPPCOEVA Mumbai)',
     description:
-      'Official student-led technology association of VPPCOEVA, Mumbai. Flagship events like Techgyanathon, hands-on workshops, student leadership roster, and innovation labs.',
+      'Official portal of ITSA at VPPCOEVA, Mumbai. Explore flagship events like Techgyanathon, hands-on workshops, student leadership roster, and technical innovation labs.',
     url: 'https://itsa-xi.vercel.app',
     siteName: 'ITSA — Information Technology Student Association',
     locale: 'en_IN',
@@ -95,7 +102,7 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ITSA — Information Technology Student Association | VPPCOE&VA Mumbai',
+    title: 'ITSA — Information Technology Student Association | Official Website (VPPCOEVA Mumbai)',
     description:
       'Official technology student association of VPPCOEVA, Mumbai. Explore Techgyanathon 2026, workshops, hackathons, and community.',
     images: ['/itsa-logo.png'],
@@ -130,15 +137,17 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'EducationalOrganization',
+      '@type': ['EducationalOrganization', 'Organization'],
       '@id': 'https://itsa-xi.vercel.app/#organization',
-      name: 'Information Technology Student Association',
-      alternateName: ['ITSA', 'ITSA VPPCOEVA', 'ITSA VPPCOE'],
+      name: 'ITSA — Information Technology Student Association',
+      legalName: 'Information Technology Student Association',
+      alternateName: ['ITSA', 'ITSA VPPCOEVA', 'ITSA VPPCOE', 'ITSA Mumbai', 'ITSA Official'],
       url: 'https://itsa-xi.vercel.app',
       logo: 'https://itsa-xi.vercel.app/itsa-logo.png',
       image: 'https://itsa-xi.vercel.app/itsa-mark.png',
       description:
-        "Official student association of the Department of Information Technology at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts, Sion, Mumbai.",
+        "Official student association of the Department of Information Technology at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts (VPPCOEVA), Sion, Mumbai.",
+      email: 'techgyanathon@pvppcoe.ac.in',
       parentOrganization: {
         '@type': 'CollegeOrUniversity',
         name: "Vasantdada Patil Pratishthan's College of Engineering and Visual Arts",
@@ -154,25 +163,119 @@ const jsonLd = {
       },
       address: {
         '@type': 'PostalAddress',
+        streetAddress: 'Eastern Express Highway, Near Everard Nagar, Chunabhatti',
         addressLocality: 'Sion, Mumbai',
         addressRegion: 'Maharashtra',
         postalCode: '400022',
         addressCountry: 'IN',
       },
       sameAs: [
-        'https://instagram.com/itsa_vppcoe',
+        'https://www.instagram.com/itsa_vppcoe/',
+        'https://www.linkedin.com/company/96393125/',
+        'https://pvppcoe.ac.in',
       ],
     },
     {
       '@type': 'WebSite',
       '@id': 'https://itsa-xi.vercel.app/#website',
       url: 'https://itsa-xi.vercel.app',
-      name: 'ITSA — Information Technology Student Association',
-      description: 'Official website of ITSA at VPPCOEVA, Mumbai. Explore tech fests, workshops, coding competitions, and team.',
+      name: 'ITSA',
+      alternateName: 'ITSA Official Website',
+      description: 'Official portal of ITSA at VPPCOEVA, Mumbai. Explore tech fests, workshops, coding competitions, and team.',
       publisher: {
         '@id': 'https://itsa-xi.vercel.app/#organization',
       },
-      inLanguage: 'en-US',
+      inLanguage: 'en-IN',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      '@id': 'https://itsa-xi.vercel.app/#breadcrumbs',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: 'https://itsa-xi.vercel.app',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: 'About ITSA',
+          item: 'https://itsa-xi.vercel.app/#about',
+        },
+        {
+          '@type': 'ListItem',
+          position: 3,
+          name: 'Techgyanathon 2026',
+          item: 'https://itsa-xi.vercel.app/#events',
+        },
+        {
+          '@type': 'ListItem',
+          position: 4,
+          name: 'Executive Team',
+          item: 'https://itsa-xi.vercel.app/#team',
+        },
+        {
+          '@type': 'ListItem',
+          position: 5,
+          name: 'ITSA FAQs',
+          item: 'https://itsa-xi.vercel.app/#faq',
+        },
+      ],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': 'https://itsa-xi.vercel.app/#faqpage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'What is ITSA?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: "ITSA stands for Information Technology Student Association. It is the official departmental student council representing Information Technology engineering students at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts (VPPCOEVA), Sion, Mumbai.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is Techgyanathon organized by ITSA?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Techgyanathon is the flagship annual national technical festival hosted by ITSA VPPCOEVA. It features 48-hour hackathons, competitive coding tournaments, tech project arenas, robotics showcases, and workshops with attractive prize pools.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What is the official website of ITSA VPPCOE?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'The official portal is https://itsa-xi.vercel.app/. Students and visitors can access event registrations, technical workshops, leadership councils, project showcases, and community contact info.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Where is ITSA located?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: "ITSA operates from the Department of Information Technology at VPPCOEVA Campus, Eastern Express Highway, Near Everard Nagar, Chunabhatti, Sion, Mumbai, Maharashtra 400022.",
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What initiatives and workshops does ITSA organize?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'ITSA regularly conducts practical bootcamps in Artificial Intelligence, Full-Stack Web Development, Cloud Computing, Cyber Security, Competitive Programming, and Industry Mentorship sessions.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How can students join or contact ITSA?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Students can reach out via email at techgyanathon@pvppcoe.ac.in, connect through Instagram @itsa_vppcoe, or visit the official web portal at https://itsa-xi.vercel.app/.',
+          },
+        },
+      ],
     },
     {
       '@type': 'Event',

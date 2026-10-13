@@ -31,13 +31,14 @@ export const NAV_LINKS = [
   { id: 'gallery', label: 'Gallery' },
 ];
 
-export const MENU_LINKS = [...NAV_LINKS, { id: 'connect', label: 'Connect' }];
+export const MENU_LINKS = [...NAV_LINKS, { id: 'faq', label: 'FAQ' }, { id: 'connect', label: 'Connect' }];
 
 export const COMMAND_LINKS = [
   { id: 'about', label: 'About' },
   { id: 'events', label: 'Events' },
   { id: 'team', label: 'Team' },
   { id: 'gallery', label: 'Gallery' },
+  { id: 'faq', label: 'FAQ' },
   { id: 'connect', label: 'Connect' },
 ];
 
@@ -306,4 +307,31 @@ export const GALLERY = [
   { tag: 'CODE / 03', caption: 'Deep in the build', image: IMAGES.code },
   { tag: 'EVENT / 04', caption: 'Competition energy', image: IMAGES.event },
   { tag: 'COMMUNITY / 05', caption: 'Together by design', image: IMAGES.community },
+];
+
+export const FAQS = [
+  {
+    q: 'What is ITSA?',
+    a: "ITSA stands for Information Technology Student Association. It is the official departmental student council representing Information Technology engineering students at Vasantdada Patil Pratishthan's College of Engineering and Visual Arts (VPPCOEVA), Sion, Mumbai.",
+  },
+  {
+    q: 'What is Techgyanathon organized by ITSA?',
+    a: 'Techgyanathon is the flagship annual national technical festival hosted by ITSA VPPCOEVA. It features 48-hour hackathons, competitive coding tournaments, tech project arenas, robotics showcases, and workshops with attractive prize pools.',
+  },
+  {
+    q: 'What is the official website of ITSA VPPCOE?',
+    a: 'The official portal is https://itsa-xi.vercel.app/. Students and visitors can access event registrations, technical workshops, leadership councils, project showcases, and community contact info.',
+  },
+  {
+    q: 'Where is ITSA located?',
+    a: "ITSA operates from the Department of Information Technology at VPPCOEVA Campus, Eastern Express Highway, Near Everard Nagar, Chunabhatti, Sion, Mumbai, Maharashtra 400022.",
+  },
+  {
+    q: 'What initiatives and workshops does ITSA organize?',
+    a: 'ITSA regularly conducts practical bootcamps in Artificial Intelligence, Full-Stack Web Development, Cloud Computing, Cyber Security, Competitive Programming, and Industry Mentorship sessions.',
+  },
+  {
+    q: 'How can students join or contact ITSA?',
+    a: 'Students can reach out via email at techgyanathon@pvppcoe.ac.in, connect through Instagram @itsa_vppcoe, or visit the official web portal at https://itsa-xi.vercel.app/.',
+  },
 ];

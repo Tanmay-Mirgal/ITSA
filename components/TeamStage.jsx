@@ -79,10 +79,6 @@ export default function TeamStage() {
         />
       </div>
 
-      <div className="team-stage-hint">
-        <span>Click any card to inspect Lanyard ID Badge &amp; Division Members</span>
-      </div>
-
       {/* Interactive Detail View with Lanyard and Division Members */}
       {selectedMember && (
         <div

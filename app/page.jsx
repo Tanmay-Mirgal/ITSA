@@ -10,6 +10,7 @@ import Team from '@/components/Team';
 import Bodies from '@/components/Bodies';
 import Gallery from '@/components/Gallery';
 import Vision from '@/components/Vision';
+import FAQ from '@/components/FAQ';
 import Connect from '@/components/Connect';
 import Footer from '@/components/Footer';
 
@@ -29,6 +30,7 @@ export default function HomePage() {
           <Bodies />
           <Gallery />
           <Vision />
+          <FAQ />
           <Connect />
         </main>
 

@@ -63,10 +63,10 @@ export default function Globe({
     // Style the base globe sphere
     const globeMat = globe.globeMaterial();
     globeMat.color = new THREE.Color(0x06070d);
-    globeMat.emissive = new THREE.Color(0x0d0b1a);
-    globeMat.emissiveIntensity = 0.5;
+    globeMat.emissive = new THREE.Color(0x0c0b1a);
+    globeMat.emissiveIntensity = 0.45;
     globeMat.transparent = true;
-    globeMat.opacity = 0.9;
+    globeMat.opacity = 0.95;
 
     // Atmospheric glow
     globe
@@ -124,7 +124,7 @@ export default function Globe({
           .hexPolygonResolution(3)
           .hexPolygonMargin(0.65)
           .hexPolygonUseDots(true)
-          .hexPolygonColor(() => 'rgba(244, 243, 247, 0.76)');
+          .hexPolygonColor(() => 'rgba(244, 243, 247, 0.88)');
       })
       .catch(err => {
         console.warn('Could not load countries.geojson:', err);
@@ -132,9 +132,9 @@ export default function Globe({
 
     // 7. Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.6);
+    const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.5);
     dirLight1.position.set(-200, 300, 200);
-    const dirLight2 = new THREE.DirectionalLight(0x7144e8, 1.2);
+    const dirLight2 = new THREE.DirectionalLight(0x7144e8, 1.1);
     dirLight2.position.set(200, -200, -100);
 
     scene.add(ambientLight);

@@ -63,7 +63,8 @@ export default function Hero() {
           <span>ITSA DIGITAL UNIVERSE / 2026</span>
         </div>
 
-        <h1>
+        <h1 aria-label="ITSA — Information Technology Student Association">
+          <span className="sr-only">ITSA — </span>
           <span className="hero-line hero-line-1">Information</span>
           <span className="hero-line hero-line-2">
             <span className="hero-spacer" aria-hidden="true">I</span>Technology
