@@ -9,7 +9,9 @@ React Bits is licensed under "MIT + Commons Clause License Condition v1.0", Copy
 | `Particles` | Hero background network | removed the forced `loseContext()` on cleanup (React StrictMode re-runs the effect on the same canvas, which then rendered nothing) |
 | `Aurora` | Connect section glow | same `loseContext()` change |
 | `ClickSpark` | Click sparks across the page | none |
-| `SpotlightCard` | Impact and live cards | added an `as` prop for the element tag |
+| `SpotlightCard` | Live cards | added an `as` prop for the element tag |
+| `ChromaGrid` | Impact cards | items can carry an `overlay` node drawn over the photo |
+| `MagicBento` | Technology bento | removed the demo dashboard visuals and their `@hugeicons` dependency (cards use the `content` slot) |
 | `FlexCarousel` | Gallery (liquid-glass image row) | added an `ariaLabel` prop |
 | `CircularCarousel` | ITSA Team (3D ring) | added an `ariaLabel` prop |
 | `TechText` | Hero headline and the big ITSA wordmarks | added a `hollow` prop (outline-only resting letters) |
@@ -17,4 +19,4 @@ React Bits is licensed under "MIT + Commons Clause License Condition v1.0", Copy
 | `DecryptedText` | Section labels, featured thesis | real text for screen readers, reduced-motion support, plain `<span>` wrapper instead of `motion.span` |
 | `ScrollReveal` | About lead paragraph | gsap imported lazily, scoped ScrollTrigger cleanup, reduced-motion support, valid `<p>` markup |
 
-Dependencies: `ogl` (FlexCarousel) and `gsap` (ScrollReveal). Particles, Aurora, SpotlightCard, ClickSpark, CircularCarousel, TechText, CountUp and DecryptedText need only React.
+Dependencies: `ogl` (FlexCarousel) and `gsap` (ScrollReveal). Particles, Aurora, SpotlightCard, ChromaGrid, MagicBento, ClickSpark, CircularCarousel, TechText, CountUp and DecryptedText need only React.

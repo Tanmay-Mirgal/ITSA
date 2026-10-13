@@ -16,7 +16,7 @@ function useCardWidth() {
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth;
-      setWidth(vw <= 520 ? 180 : vw <= 1050 ? 270 : 360);
+      setWidth(vw <= 520 ? 210 : vw <= 1050 ? 270 : 360);
     };
     update();
     window.addEventListener('resize', update);

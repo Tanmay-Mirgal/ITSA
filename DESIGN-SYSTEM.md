@@ -58,7 +58,9 @@ Labels use a four-step floor so nothing is smaller than 10px: `--fs-nano` .625re
 | Tech wordmark | `TechHost.jsx` + `reactbits/TechText` | resting / hovered letter | Real text stays in the DOM; a canvas copy sits on top. Hover turns a letter into a dashed outline with a measurement frame; letters can be dragged |
 | Team ring | `TeamStage.jsx` + `reactbits/CircularCarousel` | drift / paused / focused card | Drag, arrow keys or click; drifts slowly and pauses on hover |
 | Gallery row | `GalleryStage.jsx` + `reactbits/FlexCarousel` | resting / dragging / focused | Vertical wheel scrolls the page (`captureWheel` off); collage fallback without WebGL2 |
-| Spotlight card | `reactbits/SpotlightCard` via `spotlight.js` | idle / cursor near | Flat variant: no surface, radius or border of its own, because the hairline grid draws them |
+| Spotlight card | `reactbits/SpotlightCard` via `spotlight.js` | idle / cursor near | Flat variant (live cards): no surface, radius or border of its own, because the hairline grid draws them |
+| Impact photo card | `Impact.jsx` + `reactbits/ChromaGrid` | grey / colour near cursor | Square hairline cells; the figure sits over a dimmed photo with top and bottom scrims for contrast |
+| Technology tile | `TechBento.jsx` + `reactbits/MagicBento` | idle / border glow / tilt | Index, topic, tag chips. The ITSA core is a 2×2 tile with two orbiting satellites. 4 columns, 2 below 960px, 1 below 520px (set in `techbento.css`, not in JS, so there is no layout jump on phones) |
 | Decrypting label | `MetaLabel.jsx` + `reactbits/DecryptedText` | on first view | Scrambled characters read violet until resolved |
 
 ### Motion layer (React Bits)
@@ -94,3 +96,6 @@ Where each component is used is listed in `README.md`. Rules every use follows:
 | Mouse parallax on the hero orb is a little stronger | Original was barely visible |
 | Connect copy moved below the headline | In the export it overlapped the second headline line and was unreadable over the violet letters |
 | New "ITSA Team" section (07); later sections renumbered 08–11 | Requested after the Figma export |
+| About: photo left (4:5), lead paragraph in a wide right column, principles as a list | The export set the lead in a narrow column that broke into 11 lines and left a large empty area |
+| Technology: constellation of floating nodes replaced by a bento of tiles around the ITSA core | The nodes were sparse, their lines did not meet the nodes, and the selected topic hid the other seven topics' tags |
+| Impact cards carry photos and a colour reveal | The export had empty cells |

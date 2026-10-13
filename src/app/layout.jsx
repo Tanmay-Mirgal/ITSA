@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
       <body>
         {/* Without JavaScript nothing would ever reveal, so show everything. */}
         <noscript>
-          <style>{`.reveal,.reveal-image{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
+          <style>{`.reveal,.reveal-image,.magic-bento__cell{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
         </noscript>
         {children}
       </body>

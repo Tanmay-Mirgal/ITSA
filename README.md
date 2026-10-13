@@ -36,7 +36,9 @@ Server vs client: sections that only render content (About, Impact, Featured, Fo
 | Hero headline, the big ITSA wordmarks (system strip, identity, footer) | `TechText` via `TechHost` |
 | Hero background | `Particles` |
 | About lead paragraph | `ScrollReveal` |
-| Impact and live cards | `SpotlightCard` |
+| Impact cards (photo that turns to colour around the cursor) | `ChromaGrid` |
+| Technology (8 topics as a bento around the ITSA core) | `MagicBento` |
+| Live cards | `SpotlightCard` |
 | Techgyanathon facts, numeric impact stats | `CountUp` |
 | Section labels, featured thesis | `DecryptedText` |
 | ITSA Team | `CircularCarousel` |
@@ -50,7 +52,8 @@ All of them respect `prefers-reduced-motion`. The WebGL ones load in their own c
 
 Edit `src/data.js`:
 
-- **Impact numbers** are still the `XX+` placeholders from the design. Replace `value: 'XX+'` in `IMPACT_STATS` with `to: 40, suffix: '+'` and it counts up.
+- **Impact numbers** are still the `XX+` placeholders from the design. Replace `value: 'XX+'` in `IMPACT_STATS` with `to: 40, suffix: '+'` and it counts up. Each entry also holds the card photo (`image`) and glow colour (`accent`).
+- **Technology topics** are `TECH_NODES` (name plus tags). The bento layout (core tile in the middle) is set in `src/components/TechBento.jsx`.
 - **ITSA Team ring**: `TEAM_CARDS`. The cards are the five teams for now because no member photos were available. For people, use `{ title: 'Full Name', subtitle: 'Role', src: '<portrait url>', alt: 'Full Name' }`; 8 to 12 cards fill the ring best.
 - **Contact links** are in `CONTACT` (email, Instagram, LinkedIn).
 - **Photos** are Unsplash stand-ins from the design (`IMAGES`, `GALLERY`). The People, Events and About photos go through `next/image` (allowed host in `next.config.mjs`); the carousels load their images directly. Swap in real ITSA photos and update the credit line in `src/components/Gallery.jsx`.

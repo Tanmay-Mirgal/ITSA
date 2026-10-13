@@ -492,3 +492,10 @@
     display: none;
   }
 }
+
+/* Small phones: the orb's floating labels would sit on top of the headline */
+@media (max-width: 520px) {
+  .core-label {
+    display: none;
+  }
+}

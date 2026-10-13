@@ -3,6 +3,32 @@
   margin-top: 6rem;
 }
 
+/*
+ * MagicBento chooses its column count in JavaScript after mount, so the server HTML (and any phone before
+ * hydration) would show four cramped columns. These breakpoints fix the layout in CSS: 4 columns, then 2, then 1.
+ * !important is needed because the component writes the grid as inline styles.
+ */
+@media (max-width: 960px) {
+  .tech-bento .magic-bento {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .tech-bento {
+    margin-top: 3.5rem;
+  }
+
+  .tech-bento .magic-bento {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-rows: minmax(11.5rem, auto) !important;
+  }
+
+  .tech-bento .magic-bento__cell {
+    grid-column: auto !important;
+  }
+}
+
 .tb-tile {
   height: 100%;
   display: flex;
