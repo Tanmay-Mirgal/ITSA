@@ -34,10 +34,23 @@
     display: grid;
   }
 
+  .hero {
+    padding: calc(var(--nav-height) + 2rem) var(--gutter) 6rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.2rem, 8.5vw, 6.2rem);
+  }
+
+  .hero-globe-panel {
+    right: var(--gutter);
+    bottom: 4rem;
+  }
+
   .hero-globe-wrap {
-    width: min(44vw, 25rem);
+    width: min(44vw, 24rem);
     top: calc(var(--nav-height) + 1rem);
-    right: 0;
+    right: 1.5vw;
   }
 
   /* About tablet: keep 16:9 photo, adjust right overlay width and gradient */
@@ -114,11 +127,16 @@
 
   /* Full-Screen Hero on Phones */
   .hero {
-    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
     min-height: 100svh;
+    min-height: 100dvh;
     height: auto;
     padding: calc(var(--nav-height-scrolled) + 1.25rem) 1.25rem 2.25rem;
     overflow: hidden;
+    position: relative;
   }
 
   .hero-grid {
@@ -126,13 +144,21 @@
   }
 
   .hero-content {
+    position: relative;
+    z-index: 4;
     width: 100%;
     max-width: 100%;
+    margin-top: auto;
   }
 
   .hero-eyebrow {
     width: 100%;
-    margin-bottom: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1.15rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: var(--fs-micro);
+    letter-spacing: 0.16em;
   }
 
   .hero-eyebrow span:last-child {
@@ -140,14 +166,16 @@
   }
 
   .hero h1 {
-    font-size: clamp(2.35rem, 11.6vw, 4.2rem);
-    line-height: 0.84;
+    font-size: clamp(2.25rem, 10.8vw, 3.85rem);
+    line-height: 0.85;
     letter-spacing: -0.055em;
     width: 100%;
     max-width: 100%;
+    text-shadow: 0 4px 24px rgba(6, 7, 13, 0.95);
   }
 
   .hero h1 > .hero-line {
+    display: block;
     width: 100%;
     max-width: 100%;
     white-space: normal;
@@ -158,11 +186,15 @@
   }
 
   .hero-globe-wrap {
-    top: calc(var(--nav-height-scrolled) + 0.75rem);
-    right: -4vw;
-    width: min(62vw, 17rem);
-    opacity: 0.45;
+    position: absolute;
+    top: calc(var(--nav-height-scrolled) + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(76vw, 19.5rem);
+    aspect-ratio: 1;
+    opacity: 0.8;
     pointer-events: none;
+    z-index: 2;
   }
 
   .globe-coordinate {
@@ -170,10 +202,13 @@
   }
 
   .hero-globe-panel {
-    position: static;
+    position: relative;
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0;
     align-items: stretch;
+    z-index: 5;
+    opacity: 1;
   }
 
   .hero-globe-panel .globe-coordinate {
@@ -190,12 +225,20 @@
   .hero-btn-group .button {
     width: 100%;
     min-height: 3.25rem;
+    display: inline-flex;
     justify-content: space-between;
-    padding-inline: 1.15rem;
+    align-items: center;
+    padding-inline: 1.25rem;
+    font-family: var(--display);
+    font-size: var(--fs-label);
+    letter-spacing: 0.15em;
   }
 
   .hero-btn-group .button-line {
-    border-left: 1px solid var(--line);
+    border: 1px solid var(--line);
+    background: rgba(16, 20, 38, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .hero-lower {
@@ -745,8 +788,28 @@
 
 /* Extra Compact Phones (≤ 420px: iPhone SE, Galaxy S compact, etc.) */
 @media (max-width: 420px) {
+  .hero {
+    padding: calc(var(--nav-height-scrolled) + 0.75rem) 1rem 1.75rem;
+  }
+
   .hero h1 {
-    font-size: clamp(2.05rem, 10.5vw, 2.75rem);
+    font-size: clamp(1.95rem, 10vw, 2.55rem);
+    line-height: 0.88;
+  }
+
+  .hero-globe-wrap {
+    width: min(72vw, 16.5rem);
+    top: calc(var(--nav-height-scrolled) + 0.25rem);
+  }
+
+  .hero-globe-panel {
+    margin-top: 1.15rem;
+  }
+
+  .hero-btn-group .button {
+    min-height: 3rem;
+    padding-inline: 1rem;
+    font-size: 0.78rem;
   }
 
   .brand-logo {

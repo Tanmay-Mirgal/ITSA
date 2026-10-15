@@ -294,6 +294,16 @@ const jsonLd = {
           addressCountry: 'IN',
         },
       },
+      image: [
+        'https://itsa-xi.vercel.app/itsa-logo.png',
+        'https://itsa-xi.vercel.app/itsa-mark.png',
+      ],
+      performer: {
+        '@type': 'Organization',
+        '@id': 'https://itsa-xi.vercel.app/#organization',
+        name: 'ITSA — Information Technology Student Association',
+        url: 'https://itsa-xi.vercel.app',
+      },
       organizer: {
         '@id': 'https://itsa-xi.vercel.app/#organization',
       },
@@ -303,6 +313,7 @@ const jsonLd = {
         priceCurrency: 'INR',
         availability: 'https://schema.org/InStock',
         validFrom: '2026-01-01',
+        url: 'https://itsa-xi.vercel.app/#events',
       },
     },
   ],
