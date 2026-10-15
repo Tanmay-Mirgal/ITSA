@@ -15,11 +15,24 @@ export default function Bodies() {
       </div>
 
       <div className="body-row">
-        {BODIES.map((name, index) => (
-          <div key={name}>
-            <small>{String(index + 1).padStart(2, '0')}</small>
-            <strong>{name}</strong>
-            <span>ASSOCIATED NETWORK</span>
+        {BODIES.map((body, index) => (
+          <div key={body.name} className="body-card">
+            <div className="body-card-top">
+              <small>{String(index + 1).padStart(2, '0')}</small>
+              <div className="committee-logo-wrapper">
+                <img
+                  src={body.logo}
+                  alt={body.alt}
+                  className="committee-logo-img"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
+            <div className="body-card-bottom">
+              <strong>{body.name}</strong>
+              <span>ASSOCIATED NETWORK</span>
+            </div>
           </div>
         ))}
       </div>

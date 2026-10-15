@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { NAV_LINKS } from '../data.js';
+import ITSAHeaderWordmark from './ITSAHeaderWordmark.jsx';
 
 export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }) {
   // Server and first client render agree on "Ctrl K"; Apple devices switch to ⌘K after hydration.
@@ -14,10 +15,7 @@ export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }
   return (
     <nav className={`navbar${scrolled ? ' is-scrolled' : ''}`} aria-label="Primary">
       <a className="brand" href="#home" aria-label="ITSA home">
-        <span className="brand-logo" aria-hidden="true">
-          <img src="/itsa-mark.png" alt="ITSA logo" className="brand-logo-img" />
-        </span>
-        <span className="brand-text">ITSA</span>
+        <ITSAHeaderWordmark />
       </a>
 
       <div className="nav-links">

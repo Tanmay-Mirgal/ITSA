@@ -1,5 +1,6 @@
-import { Manrope, Space_Grotesk } from 'next/font/google';
+import { Manrope, Space_Grotesk, Geist } from 'next/font/google';
 import './globals.css';
+import { cn } from "@/lib/utils";
 
 // latin-ext carries the ₹ sign used in the Techgyanathon prize pool.
 const display = Space_Grotesk({
@@ -9,12 +10,7 @@ const display = Space_Grotesk({
   display: 'swap',
 });
 
-const sans = Manrope({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sans',
-  display: 'swap',
-});
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata = {
   metadataBase: new URL('https://itsa-xi.vercel.app'),
@@ -314,7 +310,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable}`}>
+    <html lang="en" className={cn(display.variable, "font-sans", geist.variable)}>
       <head>
         <script
           type="application/ld+json"

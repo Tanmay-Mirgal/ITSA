@@ -128,12 +128,12 @@ export const TEAM_CARDS = [
   {
     id: 'president',
     title: 'President',
-    subtitle: 'Aarav Mehta · Executive Council',
+    subtitle: 'Anurag Dharmadhikari',
     src: photo('1534528741775-53994a69daeb', 900),
-    alt: 'Aarav Mehta — President',
-    headName: 'Aarav Mehta',
+    alt: 'Anurag Dharmadhikari — President',
+    headName: 'Anurag Dharmadhikari',
     headRole: 'President',
-    handle: '@aarav.mehta',
+    handle: '@anurag.dharmadhikari',
     code: 'ITSA-2026-PRES',
     division: 'Executive Council',
     focus: 'Overall governance, strategic vision, university liaison, and student representation across all technical initiatives.',
@@ -299,7 +299,28 @@ export const TEAM_CARDS = [
   },
 ];
 
-export const BODIES = ['ITSA', 'CSI', 'ISTE', 'IACC'];
+export const BODIES = [
+  {
+    name: 'ITSA',
+    logo: 'https://res.cloudinary.com/dexndlfut/image/upload/v1792091134/2a56216f-fb41-479f-8b8c-1d900ebe7f60.jpg',
+    alt: 'ITSA logo',
+  },
+  {
+    name: 'CSI',
+    logo: '/csi-logo.jpg',
+    alt: 'CSI logo',
+  },
+  {
+    name: 'ISTE',
+    logo: 'https://res.cloudinary.com/dexndlfut/image/upload/v1792083326/OIP.webp',
+    alt: 'ISTE logo',
+  },
+  {
+    name: 'IEEE',
+    logo: 'https://res.cloudinary.com/dexndlfut/image/upload/v1792083882/IEEE-LOGO-300x250.png',
+    alt: 'IEEE logo',
+  },
+];
 
 export const GALLERY = [
   { tag: 'BUILD / 01', caption: 'Ideas become prototypes', image: IMAGES.collab },

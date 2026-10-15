@@ -25,6 +25,11 @@
     grid-template-columns: 1fr auto;
   }
 
+  .itsa-header-wordmark {
+    width: 112px;
+    height: 46px;
+  }
+
   .menu-trigger {
     display: grid;
   }
@@ -35,17 +40,20 @@
     right: 0;
   }
 
-  /* About stacks: copy first, then the photo */
-  .about-body {
-    grid-template-columns: minmax(0, 1fr);
+  /* About tablet: keep 16:9 photo, adjust right overlay width and gradient */
+  .about-overlay {
+    width: 48%;
+    right: 3.5%;
   }
 
-  .about-copy {
-    order: -1;
-  }
-
-  .about-frame {
-    aspect-ratio: 16 / 11;
+  .about-scrim {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(8, 10, 25, 0.2) 15%,
+      rgba(8, 10, 25, 0.75) 48%,
+      rgba(8, 10, 25, 0.96) 100%
+    );
   }
 
   .hero-lower {
@@ -93,6 +101,15 @@
 
   .brand-text {
     font-size: 1.65rem;
+  }
+
+  .itsa-header-wordmark {
+    width: 94px;
+    height: 38px;
+  }
+
+  .navbar.is-scrolled .itsa-header-wordmark {
+    transform: scale(0.94);
   }
 
   /* Full-Screen Hero on Phones */
@@ -251,27 +268,56 @@
     gap: 2rem;
   }
 
-  .about-lead {
-    font-size: clamp(1.35rem, 5.8vw, 2.1rem);
-    line-height: 1.35;
-    letter-spacing: -0.03em;
+  /* About mobile: Full 16:9 photo first, then text content cleanly below */
+  .about-media {
+    margin-top: 2.5rem;
+    border-radius: 14px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
   }
 
-  .about-support {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
+  .about-image-wrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    overflow: hidden;
+    background: #080a18;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .about-scrim {
+    display: none;
+  }
+
+  .about-overlay {
+    position: static;
+    transform: none;
+    width: 100%;
+    margin-top: 1.75rem;
+    padding: 0;
+  }
+
+  .about-content {
+    gap: 1.4rem;
+  }
+
+  .about-lead {
+    font-size: clamp(1.4rem, 6.5vw, 1.85rem);
+    line-height: 1.3;
+    text-shadow: none;
   }
 
   .about-support p {
-    max-width: 100%;
-    font-size: var(--fs-small);
+    font-size: 0.92rem;
+    line-height: 1.65;
+    text-shadow: none;
   }
 
-  .about-frame {
-    aspect-ratio: 16 / 11;
-    margin-inline: 0;
-    border-radius: 10px;
-    overflow: hidden;
+  .about-principles li {
+    padding: 0.75rem 0;
+    text-shadow: none;
   }
 
   /* Institutional System Strip */
@@ -500,10 +546,16 @@
     margin-top: 3.5rem;
   }
 
-  .body-row div {
-    min-height: 11rem;
+  .body-row > div,
+  .body-row .body-card {
+    min-height: 14rem;
     padding: 1rem;
     border-bottom: 1px solid var(--line-on-light);
+  }
+
+  .committee-logo-wrapper {
+    width: 68px;
+    height: 68px;
   }
 
   .body-row strong {
@@ -714,9 +766,15 @@
     grid-template-columns: 1fr;
   }
 
-  .body-row div {
-    min-height: 9rem;
+  .body-row > div,
+  .body-row .body-card {
+    min-height: 12rem;
     border-left: 1px solid var(--line-on-light);
+  }
+
+  .committee-logo-wrapper {
+    width: 64px;
+    height: 64px;
   }
 
   .impact-chroma .chroma-grid-inner {

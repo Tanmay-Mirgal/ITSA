@@ -1,6 +1,7 @@
 import SiteChrome from '@/components/SiteChrome';
 import RevealObserver from '@/components/RevealObserver';
 import ClickSpark from '@/components/reactbits/ClickSpark';
+import BlinkingDots from '@/components/ui/blinking-dots';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Featured from '@/components/Featured';
@@ -20,19 +21,30 @@ export default function HomePage() {
       <ClickSpark sparkColor="#9b6cff" sparkCount={8} sparkRadius={26} sparkSize={12} sparkWidth={2} duration={500} glow={0.4}>
         <SiteChrome />
 
-        <main id="main">
-          <Hero />
-          <About />
-          <Featured />
-          <EventsArchive />
-          <LiveNow />
-          <Team />
-          <Bodies />
-          <Gallery />
-          <Vision />
-          <FAQ />
-          <Connect />
-        </main>
+        <div className="relative min-h-[calc(100vh-var(--nav-height-scrolled))]">
+          <BlinkingDots
+            className="absolute inset-0 pointer-events-none"
+            dotCount={180}
+            dotSize={1.5}
+            blinkSpeed={2}
+            opacity={0.12}
+            color="#9b6cff"
+          />
+
+          <main id="main" className="relative z-10">
+            <Hero />
+            <About />
+            <Featured />
+            <EventsArchive />
+            <LiveNow />
+            <Team />
+            <Bodies />
+            <Gallery />
+            <Vision />
+            <FAQ />
+            <Connect />
+          </main>
+        </div>
 
         <Footer />
       </ClickSpark>

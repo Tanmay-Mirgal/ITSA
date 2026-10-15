@@ -1,7 +1,5 @@
-import Image from 'next/image';
 import SectionHeader from './SectionHeader.jsx';
 import ScrollReveal from './reactbits/ScrollReveal.jsx';
-import { IMAGES } from '../data.js';
 
 const PRINCIPLES = ['Student-led', 'Technology-driven', 'Built in Mumbai'];
 
@@ -23,36 +21,46 @@ export default function About() {
         }
       />
 
-      <div className="about-body">
-        <figure className="about-frame reveal-image">
-          <Image
-            src={IMAGES.collab}
-            alt="Students collaborating around a laptop"
-            fill
-            sizes="(max-width: 1050px) 100vw, 42vw"
+      <div className="about-media">
+        <div className="about-image-wrapper">
+          <img
+            src="https://res.cloudinary.com/dexndlfut/image/upload/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
+            alt=""
+            className="about-photo-ambient"
+            aria-hidden="true"
           />
-        </figure>
+          <img
+            src="https://res.cloudinary.com/dexndlfut/image/upload/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
+            alt="ITSA community, faculty, and student organizers at VPPCOEVA Ideathon"
+            className="about-photo"
+            loading="eager"
+            decoding="async"
+          />
+          <div className="about-scrim" aria-hidden="true" />
+        </div>
 
-        <div className="about-copy reveal">
-          <ScrollReveal className="about-lead">
-            ITSA is a student initiative of the Information Technology Department at VPPCOEVA—an active community
-            for collaboration, learning, innovation and professional growth.
-          </ScrollReveal>
+        <div className="about-overlay">
+          <div className="about-content">
+            <ScrollReveal className="about-lead">
+              ITSA is a student initiative of the Information Technology Department at VPPCOEVA—an active community
+              for collaboration, learning, innovation and professional growth.
+            </ScrollReveal>
 
-          <div className="about-support">
-            <p>
-              Through workshops, competitions, industry exposure and shared experimentation, students turn academic
-              curiosity into real-world capability.
-            </p>
+            <div className="about-support">
+              <p>
+                Through workshops, competitions, industry exposure and shared experimentation, students turn academic
+                curiosity into real-world capability.
+              </p>
 
-            <ul className="about-principles">
-              {PRINCIPLES.map((principle, index) => (
-                <li key={principle}>
-                  <small>{String(index + 1).padStart(2, '0')}</small>
-                  {principle}
-                </li>
-              ))}
-            </ul>
+              <ul className="about-principles">
+                {PRINCIPLES.map((principle, index) => (
+                  <li key={principle}>
+                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    {principle}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

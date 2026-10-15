@@ -260,7 +260,9 @@ const TechText = ({
           ...base,
           offset: kept?.char === char ? kept.offset : { x: 0, y: 0 },
           velocity: { x: 0, y: 0 },
-          outline: 0,
+          outline: kept?.char === char ? kept.outline : 0,
+          scale: kept?.char === char && kept.scale ? kept.scale : 1.0,
+          quiet: kept?.char === char && kept.quiet ? kept.quiet : 1.0,
           index: i,
           fill: sprite(s, next, base, false),
           dashes: sprite(s, next, base, true)
@@ -362,6 +364,7 @@ const TechText = ({
       const w = frame.x2 - frame.x1;
       const h = frame.y2 - frame.y1;
       if (w < 2 || h < 2) return;
+      const isCompact = s.fontSize < 30 || w < 42;
       const perimeter = 2 * (w + h);
       const seed = frame.index + 1;
       const grid = 3;
@@ -373,7 +376,6 @@ const TechText = ({
         const life = t - cycle;
         if (life > 0.7) continue;
         const [px, py, nx, ny] = perimeterPoint(noise(seed, k, cycle) * perimeter, w, h);
-        const isCompact = s.fontSize < 30;
         const pick = noise(seed, k, cycle, 2);
         const size = isCompact
           ? (pick < 0.5 ? 1.5 : 2.5)
@@ -423,7 +425,7 @@ const TechText = ({
       const y2 = crisp(frame.y2);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const isCompact = s.fontSize < 30;
+      const isCompact = s.fontSize < 30 || (frame.x2 - frame.x1) < 42;
 
       const moved = Math.hypot(glyph.offset.x, glyph.offset.y);
       if (moved > 1) {
@@ -450,8 +452,8 @@ const TechText = ({
       ctx.stroke();
 
       ctx.beginPath();
-      const hSize = isCompact ? 3 : 5;
-      const hOffset = isCompact ? 1 : 2;
+      const hSize = isCompact ? 3 : 4;
+      const hOffset = isCompact ? 1 : 1.5;
       for (const [cx, cy] of [
         [x1, y1],
         [x2, y1],
@@ -504,9 +506,25 @@ const TechText = ({
           targetX = (currentGlyph.box.x1 + currentGlyph.box.x2) / 2;
           targetY = (currentGlyph.box.y1 + currentGlyph.box.y2) / 2;
         }
-      } else if (sweeping) {
-        targetX = view.left + (view.right - view.left) * (0.5 - 0.5 * Math.cos(clock * 0.45));
-        targetY = view.top + (view.bottom - view.top) * (0.45 + 0.1 * Math.sin(clock * 0.8));
+      } else if (sweeping && glyphs.length > 0) {
+        // Continuous technical scanning lens travelling across the letters:
+        // I → T → S → A → I → T → S → A → ...
+        const cyclePeriod = 3.2 / Math.max(0.1, s.speed);
+        const t = (clock % cyclePeriod) / cyclePeriod;
+        const firstCenter = (glyphs[0].box.x1 + glyphs[0].box.x2) / 2;
+        const lastCenter = (glyphs[glyphs.length - 1].box.x1 + glyphs[glyphs.length - 1].box.x2) / 2;
+        const span = Math.max(1, lastCenter - firstCenter);
+
+        if (t < 0.82) {
+          const u = t / 0.82;
+          targetX = firstCenter + span * u;
+        } else {
+          targetX = lastCenter + 35;
+          if (t > 0.96) {
+            lens.x = firstCenter - 35;
+          }
+        }
+        targetY = (view.top + view.bottom) / 2;
       }
       const active = pointer.inside || looping || sweeping || dragging >= 0;
       if (active && !placed) {
@@ -546,22 +564,38 @@ const TechText = ({
         moving = true;
       });
 
-      const focus = dragging >= 0 ? dragging : looping ? loopGlyphIndex : active ? glyphAt(lens.x, lens.y) : -1;
+      const hoveredIndex = pointer.inside ? glyphAt(pointer.x, pointer.y) : -1;
+      const focus =
+        dragging >= 0
+          ? dragging
+          : looping
+            ? loopGlyphIndex
+            : pointer.inside
+              ? (hoveredIndex >= 0 ? hoveredIndex : glyphAt(lens.x, lens.y))
+              : active
+                ? glyphAt(lens.x, lens.y)
+                : -1;
+
       if (focus >= 0 && s.selection) {
         const glyph = glyphs[focus];
-        const isCompact = s.fontSize < 30;
-        const pad = isCompact ? 3 : 6;
-        const bx1 = glyph.box.x1 + glyph.offset.x - pad;
-        const by1 = glyph.box.y1 + glyph.offset.y - pad;
-        const bx2 = glyph.box.x2 + glyph.offset.x + pad;
-        const by2 = glyph.box.y2 + glyph.offset.y + pad;
+        const isCompact = s.fontSize < 30 || (frame.x2 - frame.x1) < 42;
+        const pad = isCompact ? 3 : 5;
+        const gScale = glyph.scale || 1.0;
+        const cx = (glyph.box.x1 + glyph.box.x2) / 2 + glyph.offset.x;
+        const cy = (glyph.box.y1 + glyph.box.y2) / 2 + glyph.offset.y;
+        const hw = ((glyph.box.x2 - glyph.box.x1) * gScale) / 2 + pad;
+        const hh = ((glyph.box.y2 - glyph.box.y1) * gScale) / 2 + pad;
+        const bx1 = cx - hw;
+        const by1 = cy - hh;
+        const bx2 = cx + hw;
+        const by2 = cy + hh;
         if (frame.index < 0 || frame.alpha < 0.02) {
           frame.x1 = bx1;
           frame.y1 = by1;
           frame.x2 = bx2;
           frame.y2 = by2;
         }
-        const glide = focus === dragging ? 0.02 : 0.08;
+        const glide = focus === dragging ? 0.02 : pointer.inside ? 0.06 : 0.08;
         frame.x1 = approach(frame.x1, bx1, dt, glide);
         frame.y1 = approach(frame.y1, by1, dt, glide);
         frame.x2 = approach(frame.x2, bx2, dt, glide);
@@ -571,10 +605,23 @@ const TechText = ({
       frame.alpha = approach(frame.alpha, focus >= 0 && s.selection ? 1 : 0, dt, 0.1);
 
       glyphs.forEach((glyph, i) => {
-        const target = s.reveal === 'letter' && i === focus && i !== dragging ? 1 : 0;
-        glyph.outline = approach(glyph.outline, target, dt, 0.09);
-        if (Math.abs(glyph.outline - target) > 0.002) moving = true;
-        else glyph.outline = target;
+        const targetOutline = s.reveal === 'letter' && i === focus && i !== dragging ? 1 : 0;
+        glyph.outline = approach(glyph.outline, targetOutline, dt, 0.09);
+        if (Math.abs(glyph.outline - targetOutline) > 0.002) moving = true;
+        else glyph.outline = targetOutline;
+
+        // Hover expansion: 1.08–1.15× (approx 1.12×) per hovered letter
+        const isHoveredLetter = pointer.inside && i === focus && dragging < 0;
+        const targetScale = isHoveredLetter ? 1.12 : 1.0;
+        glyph.scale = approach(glyph.scale || 1.0, targetScale, dt, 0.12);
+        if (Math.abs((glyph.scale || 1.0) - targetScale) > 0.002) moving = true;
+        else glyph.scale = targetScale;
+
+        // Make surrounding letters slightly quieter when a letter is actively hovered
+        const targetQuiet = pointer.inside && focus >= 0 && !isHoveredLetter ? 0.70 : 1.0;
+        glyph.quiet = approach(glyph.quiet || 1.0, targetQuiet, dt, 0.14);
+        if (Math.abs((glyph.quiet || 1.0) - targetQuiet) > 0.002) moving = true;
+        else glyph.quiet = targetQuiet;
       });
 
       if (s.draggable) container.style.cursor = dragging >= 0 ? 'grabbing' : focus >= 0 && pointer.inside ? 'grab' : '';
@@ -591,15 +638,32 @@ const TechText = ({
         }
       }
       for (const glyph of glyphs) {
+        const gScale = glyph.scale || 1.0;
+        const quiet = glyph.quiet || 1.0;
+        const cx = (glyph.box.x1 + glyph.box.x2) / 2 + glyph.offset.x;
+        const cy = (glyph.box.y1 + glyph.box.y2) / 2 + glyph.offset.y;
+
+        const needsTransform = Math.abs(gScale - 1.0) > 0.002;
+        if (needsTransform) {
+          ctx.save();
+          ctx.translate(cx * dpr, cy * dpr);
+          ctx.scale(gScale, gScale);
+          ctx.translate(-cx * dpr, -cy * dpr);
+        }
+
         if (glyph.outline < 0.999) {
-          ctx.globalAlpha = 1 - glyph.outline;
+          ctx.globalAlpha = (1 - glyph.outline) * quiet;
           blit(ctx, glyph.fill, glyph.offset.x, glyph.offset.y, 0, 0);
         }
         if (glyph.outline > 0.001) {
-          ctx.globalAlpha = glyph.outline;
+          ctx.globalAlpha = glyph.outline * quiet;
           blit(ctx, glyph.dashes, glyph.offset.x, glyph.offset.y, 0, 0);
         }
         ctx.globalAlpha = 1;
+
+        if (needsTransform) {
+          ctx.restore();
+        }
       }
       if (presence > 0.001) drawReveal(s);
       drawFrame(s);
