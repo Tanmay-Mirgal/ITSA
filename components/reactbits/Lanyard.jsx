@@ -37,7 +37,7 @@ export default function Lanyard({
     mouseVelocity: { x: 0, y: 0 },
   });
 
-  const restLength = 95;
+  const restLength = 55;
 
   useEffect(() => {
     let animId;
