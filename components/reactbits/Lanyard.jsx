@@ -37,7 +37,7 @@ export default function Lanyard({
     mouseVelocity: { x: 0, y: 0 },
   });
 
-  const restLength = 55;
+  const restLength = 42;
 
   useEffect(() => {
     let animId;
@@ -142,7 +142,7 @@ export default function Lanyard({
   }, []);
 
   // Hanging lanyard ribbon path
-  const anchorX = 145;
+  const anchorX = 160;
   const anchorY = 0;
   const badgeX = anchorX + position.x;
   const badgeY = anchorY + position.y;
@@ -153,7 +153,7 @@ export default function Lanyard({
   return (
     <div className="lanyard-container" ref={containerRef}>
       {/* Hanging Textured Lanyard Strap Ribbon */}
-      <svg className="lanyard-svg" viewBox="0 0 290 260" aria-hidden="true">
+      <svg className="lanyard-svg" viewBox="0 0 320 260" aria-hidden="true">
         <defs>
           <linearGradient id="lanyardStrapShade" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#1e2230" />
