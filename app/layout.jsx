@@ -1,4 +1,4 @@
-import { Manrope, Space_Grotesk, Geist } from 'next/font/google';
+import { Space_Grotesk, Geist } from 'next/font/google';
 import './globals.css';
 import { cn } from "@/lib/utils";
 

@@ -24,16 +24,16 @@ export default function About() {
       <div className="about-media">
         <div className="about-image-wrapper">
           <img
-            src="https://res.cloudinary.com/dexndlfut/image/upload/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
+            src="https://res.cloudinary.com/dexndlfut/image/upload/f_auto,q_auto,w_1200/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
             alt=""
             className="about-photo-ambient"
             aria-hidden="true"
           />
           <img
-            src="https://res.cloudinary.com/dexndlfut/image/upload/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
+            src="https://res.cloudinary.com/dexndlfut/image/upload/f_auto,q_auto,w_1200/v1792083126/7fb0a1e1-6313-41ca-8c30-fbfa63a48379.jpg"
             alt="ITSA community, faculty, and student organizers at VPPCOEVA Ideathon"
             className="about-photo"
-            loading="eager"
+            loading="lazy"
             decoding="async"
           />
           <div className="about-scrim" aria-hidden="true" />

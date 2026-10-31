@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { TEAM_CARDS } from '../data.js';
-import Lanyard from './reactbits/Lanyard.jsx';
+// Lanyard physics simulation is code-split so it is only loaded when modal opens
+const Lanyard = dynamic(() => import('./reactbits/Lanyard.jsx'), { ssr: false });
 import '../styles/team-modal.css';
 
 // CSS-3D ring: its own chunk, client-only; the stage below reserves its height so nothing shifts while it loads.
@@ -56,8 +57,7 @@ export default function TeamStage() {
     };
 
     updateHeaderHeight();
-    window.addEventListener('resize', updateHeaderHeight);
-    window.addEventListener('scroll', updateHeaderHeight, { passive: true });
+    window.addEventListener('resize', updateHeaderHeight, { passive: true });
 
     let ro;
     const navEl = document.querySelector('.navbar');
@@ -68,7 +68,6 @@ export default function TeamStage() {
 
     return () => {
       window.removeEventListener('resize', updateHeaderHeight);
-      window.removeEventListener('scroll', updateHeaderHeight);
       ro?.disconnect();
     };
   }, []);

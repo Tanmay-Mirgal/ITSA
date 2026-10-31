@@ -28,8 +28,9 @@ export default function GalleryStage() {
 
   const items = useMemo(
     () =>
-      GALLERY.map(({ tag, caption, image, src, alt, index }) => ({
+      GALLERY.map(({ tag, caption, image, src, alt, index, fullSrc }) => ({
         src: src || image,
+        fullSrc: fullSrc || src || image,
         alt: alt || caption,
         title: caption,
         subtitle: tag,
@@ -104,10 +105,11 @@ export default function GalleryStage() {
 
             <div className="gallery-lightbox-media">
               <img
-                src={activeImage.src || activeImage.image}
+                src={activeImage.fullSrc || activeImage.src || activeImage.image}
                 alt={activeImage.alt || activeImage.title || 'ITSA Gallery Preview'}
                 className="gallery-lightbox-image"
                 loading="eager"
+                decoding="async"
               />
             </div>
 

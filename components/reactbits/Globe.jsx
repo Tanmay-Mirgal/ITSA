@@ -146,16 +146,23 @@ export default function Globe({
     globe.rotation.x = 0.35;
     globe.rotation.y = -1.2;
 
-    // 8. Render loop
+    // 8. Render loop with IntersectionObserver & Page Visibility pause
+    let isVisible = true;
+
     const animate = () => {
-      if (!alive) return;
+      if (!alive || !isVisible || document.hidden) return;
       controls.update();
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(animate);
     };
-    animate();
 
-    // 9. Resize Handling
+    const wake = () => {
+      if (!alive || !isVisible || document.hidden) return;
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(animate);
+    };
+
+    // 9. Resize & Visibility Handling
     const handleResize = () => {
       if (!container || !alive) return;
       const w = container.clientWidth;
@@ -169,11 +176,38 @@ export default function Globe({
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
+    const intersection = new IntersectionObserver((entries) => {
+      const intersecting = entries.some((entry) => entry.isIntersecting);
+      if (intersecting !== isVisible) {
+        isVisible = intersecting;
+        if (isVisible && !document.hidden) {
+          wake();
+        } else {
+          cancelAnimationFrame(rafId);
+        }
+      }
+    });
+    intersection.observe(container);
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else if (isVisible) {
+        wake();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    // Start initial animation if visible
+    wake();
+
     // Cleanup
     return () => {
       alive = false;
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
+      intersection.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
       controls.dispose();
       renderer.dispose();
       if (container.contains(renderer.domElement)) {

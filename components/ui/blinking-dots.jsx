@@ -1,6 +1,24 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+
+// Pre-parse hex color once
+function parseHexToRgb(hex) {
+  const cleanHex = hex.replace('#', '');
+  if (cleanHex.length === 3) {
+    const r = parseInt(cleanHex[0] + cleanHex[0], 16);
+    const g = parseInt(cleanHex[1] + cleanHex[1], 16);
+    const b = parseInt(cleanHex[2] + cleanHex[2], 16);
+    return `${r}, ${g}, ${b}`;
+  }
+  if (cleanHex.length === 6) {
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    return `${r}, ${g}, ${b}`;
+  }
+  return '155, 108, 255';
+}
 
 const BlinkingDots = ({
   className = '',
@@ -12,94 +30,100 @@ const BlinkingDots = ({
 }) => {
   const canvasRef = useRef(null);
   const animationFrameRef = useRef(null);
-  const [dots, setDots] = useState([]);
+  const dotsRef = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    let alive = true;
+    const rgbPrefix = parseHexToRgb(color);
+
     const resizeCanvas = () => {
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const w = parent.clientWidth;
+      const h = parent.clientHeight;
+      if (canvas.width !== w || canvas.height !== h) {
+        canvas.width = w;
+        canvas.height = h;
+        // Re-scatter dots to fill parent dimensions
+        dotsRef.current = Array.from({ length: dotCount }, () => ({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          radius: dotSize + Math.random() * 2,
+          opacity: Math.random() * opacity,
+          direction: Math.random() > 0.5 ? 1 : -1,
+          blinkOffset: Math.random() * Math.PI * 2
+        }));
+      }
     };
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas, { passive: true });
 
-    // Initialize dots
-    const initializeDots = () => {
-      const newDots = Array.from({ length: dotCount }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: dotSize + Math.random() * 2,
-        opacity: Math.random() * opacity,
-        direction: Math.random() > 0.5 ? 1 : -1,
-        blinkOffset: Math.random() * Math.PI * 2
-      }));
-      setDots(newDots);
-    };
-
-    initializeDots();
+    const ctx = canvas.getContext('2d', { alpha: true });
 
     const animate = () => {
-      if (!canvas) return;
-
-      const ctx = canvas.getContext('2d');
+      if (!alive || document.hidden) return;
       if (!ctx) return;
 
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+      if (w === 0 || h === 0) {
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return;
+      }
 
-      // Update and draw dots
+      ctx.clearRect(0, 0, w, h);
+
       const time = Date.now() * 0.001;
-      dots.forEach(dot => {
-        // Calculate blinking effect
+      const dots = dotsRef.current;
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const viewTop = scrollY - 100;
+      const viewBottom = scrollY + window.innerHeight + 100;
+
+      for (let i = 0; i < dots.length; i++) {
+        const dot = dots[i];
+        // Skip drawing dots that are well outside the visible viewport
+        if (dot.y < viewTop || dot.y > viewBottom) continue;
+
         const blink = Math.sin(time * blinkSpeed + dot.blinkOffset) * 0.5 + 0.5;
         const currentOpacity = dot.opacity * blink;
 
-        // Convert hex color to rgb
-        const rgb = hexToRgb(color);
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, dot.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${currentOpacity})`;
+        ctx.fillStyle = `rgba(${rgbPrefix}, ${currentOpacity})`;
         ctx.fill();
-      });
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    const wake = () => {
+      if (!alive || document.hidden) return;
+      cancelAnimationFrame(animationFrameRef.current);
+      animationFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    const onVisibility = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationFrameRef.current);
+      } else {
+        wake();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibility);
+
+    wake();
 
     return () => {
+      alive = false;
       window.removeEventListener('resize', resizeCanvas);
+      document.removeEventListener('visibilitychange', onVisibility);
       cancelAnimationFrame(animationFrameRef.current);
     };
   }, [dotCount, dotSize, blinkSpeed, opacity, color]);
-
-  // Helper function to convert hex to rgb
-  const hexToRgb = (hex) => {
-    // Remove # if present
-    const cleanHex = hex.replace('#', '');
-
-    // Handle 3-digit hex codes
-    if (cleanHex.length === 3) {
-      const r = parseInt(cleanHex.substring(0, 1) + cleanHex.substring(0, 1), 16);
-      const g = parseInt(cleanHex.substring(1, 2) + cleanHex.substring(1, 2), 16);
-      const b = parseInt(cleanHex.substring(2, 3) + cleanHex.substring(2, 3), 16);
-      return { r, g, b };
-    }
-
-    // Handle 6-digit hex codes
-    if (cleanHex.length === 6) {
-      const r = parseInt(cleanHex.substring(0, 2), 16);
-      const g = parseInt(cleanHex.substring(2, 4), 16);
-      const b = parseInt(cleanHex.substring(4, 6), 16);
-      return { r, g, b };
-    }
-
-    // Default to fallback color if invalid
-    return { r: 155, g: 108, b: 255 };
-  };
 
   return (
     <div className={className}>
