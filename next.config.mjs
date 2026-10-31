@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    agentUpgrade: 'security',
+  },
   images: {
     // Community photography is hotlinked from Unsplash for now (see data.js).
     remotePatterns: [
