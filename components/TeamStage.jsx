@@ -9,6 +9,9 @@ import '../styles/team-modal.css';
 // CSS-3D ring: its own chunk, client-only; the stage below reserves its height so nothing shifts while it loads.
 const CircularCarousel = dynamic(() => import('./reactbits/CircularCarousel.jsx'), { ssr: false });
 
+// Primary Executive Leadership positions shown in expanded profile
+const EXECUTIVE_LEADERS = TEAM_CARDS.slice(0, 3);
+
 const FADE = '#0b0d18'; // --surface, so the far side of the ring dissolves into the section background
 
 /** Card width follows the viewport so the ring never overflows on phones. */
@@ -28,7 +31,7 @@ function useCardWidth() {
   return width;
 }
 
-/** 3D ring of team cards (React Bits CircularCarousel) + Interactive Lanyard & Division Members Detail View. */
+/** 3D ring of team cards (React Bits CircularCarousel) + Interactive Lanyard & Core Team Members Detail View. */
 export default function TeamStage() {
   const cardWidth = useCardWidth();
   const [selectedMember, setSelectedMember] = useState(null);
@@ -142,14 +145,14 @@ export default function TeamStage() {
         />
       </div>
 
-      {/* Interactive Detail View with Lanyard and Division Members */}
+      {/* Interactive Detail View with Lanyard and Core Team Members */}
       {selectedMember && (
         <div
           className="team-modal-backdrop"
           onClick={closeModal}
           role="dialog"
           aria-modal="true"
-          aria-label={`${selectedMember.title} details and division members`}
+          aria-label={`${selectedMember.name} — ${selectedMember.role} details`}
           style={{ '--header-height': `${headerHeight}px` }}
         >
           {/* Safe Viewport Container: positioned below navbar and centers the preview within safe area */}
@@ -164,8 +167,8 @@ export default function TeamStage() {
               {/* Modal Header with accessible sticky close button */}
               <div className="team-modal-header">
                 <div className="team-modal-meta">
-                  <span className="meta-tag">{selectedMember.division}</span>
-                  <h3>{selectedMember.title}</h3>
+                  <span className="meta-tag">{selectedMember.role.toUpperCase()}</span>
+                  <h3>{selectedMember.name}</h3>
                 </div>
                 <button
                   type="button"
@@ -178,7 +181,7 @@ export default function TeamStage() {
                 </button>
               </div>
 
-              {/* Quick-Switch Pills across all 9 Core Team Heads */}
+              {/* Quick-Switch Pills across all 11 Core Team Members */}
               <div className="team-modal-nav" ref={navRef} role="tablist" aria-label="Core team navigation">
                 {TEAM_CARDS.map((card) => {
                   const isActive = card.id === selectedMember.id;
@@ -191,7 +194,7 @@ export default function TeamStage() {
                       className={`team-nav-pill ${isActive ? 'is-active' : ''}`}
                       onClick={() => setSelectedMember(card)}
                     >
-                      {card.title}
+                      {card.name}
                     </button>
                   );
                 })}
@@ -202,52 +205,66 @@ export default function TeamStage() {
                 {/* Left Column: Interactive 3D Swinging Lanyard Badge */}
                 <div className="team-modal-lanyard">
                   <Lanyard
-                    headName={selectedMember.headName}
-                    headRole={selectedMember.headRole}
+                    headName={selectedMember.name}
+                    headRole={selectedMember.role}
                     handle={selectedMember.handle}
                     code={selectedMember.code}
-                    image={selectedMember.src}
-                    division={selectedMember.division}
+                    image={selectedMember.image || selectedMember.src}
+                    division={selectedMember.division || selectedMember.role.toUpperCase()}
                   />
                 </div>
 
-                {/* Right Column: Division Info and Members */}
+                {/* Right Column: Council Info and Core Members Preview */}
                 <div className="team-modal-details">
                   <div className="team-division-overview">
                     <h4>
-                      <span>{selectedMember.headName}</span>
-                      <small>— {selectedMember.headRole}</small>
+                      <span>{selectedMember.name}</span>
+                      <small>— {selectedMember.role}</small>
                     </h4>
                     <p>{selectedMember.focus}</p>
                   </div>
 
                   <div className="team-members-section">
                     <div className="team-members-header">
-                      <h5>Division Members</h5>
-                      <span>{selectedMember.members?.length || 0} MEMBERS ACTIVE</span>
+                      <h5>EXECUTIVE LEADERSHIP</h5>
+                      <span>03 LEADERS</span>
                     </div>
 
-                    <div className="team-members-grid">
-                      {selectedMember.members?.map((member) => (
-                        <div key={member.name} className="team-member-card">
-                          <div className="member-avatar">
-                            <img src={member.image} alt={member.name} loading="lazy" />
-                          </div>
-                          <div className="member-info">
-                            <strong>{member.name}</strong>
-                            <span>{member.role}</span>
-                            {member.tags && member.tags.length > 0 && (
-                              <div className="member-tags">
-                                {member.tags.map((tag) => (
-                                  <span key={tag} className="member-tag">
-                                    {tag}
-                                  </span>
-                                ))}
-                              </div>
+                    <div className="team-exec-grid">
+                      {EXECUTIVE_LEADERS.map((leader) => {
+                        const isCurrent = leader.id === selectedMember.id;
+                        return (
+                          <div
+                            key={leader.id}
+                            className={`team-member-card team-exec-card ${isCurrent ? 'is-active' : ''}`}
+                            onClick={() => setSelectedMember(leader)}
+                            style={{ cursor: 'pointer' }}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                setSelectedMember(leader);
+                              }
+                            }}
+                            aria-label={`View ${leader.name} — ${leader.role}`}
+                            aria-current={isCurrent ? 'true' : undefined}
+                          >
+                            <div className="member-avatar">
+                              <img src={leader.image || leader.src} alt={`${leader.name} — ${leader.role}`} loading="lazy" />
+                            </div>
+                            <div className="member-info">
+                              <strong>{leader.name}</strong>
+                              <span>{leader.role}</span>
+                            </div>
+                            {isCurrent && (
+                              <span className="exec-active-indicator" aria-hidden="true">
+                                SELECTED
+                              </span>
                             )}
                           </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

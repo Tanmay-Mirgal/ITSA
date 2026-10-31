@@ -1,12 +1,12 @@
 /* =========================================================================
    ITSA 3D Lanyard & Executive ID Badge Styles
+   Coaxial Physical Chain Architecture (X = 130px Centerline)
    ========================================================================= */
 
 .lanyard-container {
   position: relative;
-  width: 320px;
-  max-width: 100%;
-  height: 485px;
+  width: 260px;
+  height: 440px;
   margin: 0 auto;
   user-select: none;
   perspective: 1400px;
@@ -19,8 +19,8 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 260px;
+  width: 260px;
+  height: 440px;
   pointer-events: none;
   z-index: 1;
   overflow: visible;
@@ -28,15 +28,18 @@
 
 .lanyard-badge-wrap {
   position: absolute;
-  top: 10px;
-  left: 25px;
-  width: 270px;
+  top: 0;
+  left: 0;
+  width: 260px;
   cursor: grab;
   z-index: 3;
-  transform-origin: center -20px;
+  transform-origin: 130px 0px;
   will-change: transform;
   touch-action: none;
   outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lanyard-badge-wrap.is-dragging {
@@ -44,12 +47,12 @@
 }
 
 /* -------------------------------------------------------------------------
-   Metallic Hardware Clasp & Strap Ring
+   Metallic Hardware Clasp & Strap Ring (Centered at X = 130)
    ------------------------------------------------------------------------- */
 .lanyard-hardware {
   position: relative;
-  width: 34px;
-  height: 38px;
+  width: 32px;
+  height: 30px;
   margin: 0 auto -6px;
   z-index: 6;
   display: flex;
@@ -59,35 +62,39 @@
 
 .lanyard-strap-clip {
   width: 22px;
-  height: 12px;
+  height: 10px;
   background: linear-gradient(135deg, #2a2e3d, #14161f);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.45);
 }
 
 .strap-badge-emblem {
-  font-size: 0.65rem;
+  font-size: 0.52rem;
+  font-weight: 800;
   color: #4cd8f8;
   line-height: 1;
+  letter-spacing: 0.06em;
 }
 
 .lanyard-clamp {
-  width: 26px;
-  height: 14px;
+  width: 24px;
+  height: 12px;
   background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 50%, #475569 100%);
-  border-radius: 3px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-radius: 2.5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: -1px;
 }
 
 .clamp-bolt {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: radial-gradient(circle, #334155, #0f172a);
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.4);
@@ -95,27 +102,28 @@
 
 .lanyard-swivel-ring {
   width: 12px;
-  height: 14px;
+  height: 12px;
   border: 2px solid #cbd5e1;
   border-radius: 50%;
-  margin-top: -3px;
+  margin-top: -2px;
   background: transparent;
 }
 
 /* -------------------------------------------------------------------------
    3D Card Wrapper & Flip Physics
+   Scaled down 15–20% for compact elegance: 236px × 345px
    ------------------------------------------------------------------------- */
 .lanyard-card {
   position: relative;
-  width: 270px;
-  height: 395px;
+  width: 236px;
+  height: 345px;
   margin: 0 auto;
-  border-radius: 18px;
+  border-radius: 16px;
   transform-style: preserve-3d;
   transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1);
   box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.7),
-    0 0 28px rgba(155, 108, 255, 0.2);
+    0 16px 36px rgba(0, 0, 0, 0.7),
+    0 0 24px rgba(155, 108, 255, 0.18);
 }
 
 .lanyard-card.is-flipped {
@@ -125,7 +133,7 @@
 .lanyard-card-face {
   position: absolute;
   inset: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   overflow: hidden;
@@ -138,7 +146,7 @@
   background: linear-gradient(175deg, #ffffff 0%, #f6f8fb 60%, #eef2f7 100%);
   color: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.85);
-  padding: 15px 15px 12px;
+  padding: 10px 12px 8px;
   display: flex;
   flex-direction: column;
   box-shadow:
@@ -147,11 +155,11 @@
 }
 
 .lanyard-slot-hole {
-  width: 38px;
-  height: 6px;
+  width: 32px;
+  height: 5px;
   background: #090b14;
   border-radius: 3px;
-  margin: 0 auto 8px;
+  margin: 0 auto 6px;
   box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.9);
 }
 
@@ -159,248 +167,246 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 6px;
-  border-bottom: 1.5px solid #e2e8f0;
+  margin-bottom: 6px;
+  padding: 0 2px;
 }
 
 .card-watermark-logo {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
-.card-watermark-logo .watermark-img {
-  width: 20px;
-  height: 20px;
+.watermark-img {
+  width: 14px;
+  height: 14px;
   object-fit: contain;
-  filter: brightness(0.2);
+  opacity: 0.9;
 }
 
 .card-watermark-logo span {
-  font: 700 0.92rem / 1 var(--display, 'Space Grotesk', sans-serif);
-  letter-spacing: 0.06em;
+  font: 800 0.72rem / 1 var(--display, 'Space Grotesk', sans-serif);
   color: #0f172a;
+  letter-spacing: 0.06em;
 }
 
 .card-handle-tag {
-  font-size: 0.66rem;
+  font-size: 0.58rem;
   color: #64748b;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  max-width: 165px;
-  text-align: right;
-  line-height: 1.2;
+  font-family: monospace;
+  background: rgba(15, 23, 42, 0.05);
+  padding: 1.5px 5px;
+  border-radius: 3px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
-/* Portrait photo container */
 .card-portrait-wrapper {
   position: relative;
   width: 100%;
-  height: 198px;
-  margin: 8px 0 7px;
-  border-radius: 12px;
+  height: 162px;
+  border-radius: 10px;
   overflow: hidden;
-  background: #1e293b;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: #0b0d18;
+  box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .card-portrait-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%;
-  filter: contrast(1.04);
+  object-position: top center;
   display: block;
 }
 
 .portrait-gloss-sheen {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, transparent 50%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.05) 40%,
+    transparent 60%
+  );
   pointer-events: none;
 }
 
-/* Member Information */
 .card-identity {
+  margin-top: 7px;
   display: flex;
   flex-direction: column;
-  margin-top: 2px;
-  min-width: 0;
-  width: 100%;
+  gap: 2.5px;
 }
 
 .card-person-name {
-  font: 700 1.22rem / 1.15 var(--display, 'Space Grotesk', sans-serif);
+  font: 700 1.02rem / 1.15 var(--display, 'Space Grotesk', sans-serif);
+  color: #0b0d18;
+  margin: 0;
   letter-spacing: -0.02em;
-  color: #0f172a;
-  margin: 0 0 4px;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-role-pill {
-  display: inline-block;
   align-self: flex-start;
-  padding: 3px 8.5px;
-  background: #0f172a;
-  color: #f8fafc;
-  border-radius: 4px;
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  max-width: 100%;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  color: #6d28d9;
+  background: rgba(109, 40, 217, 0.1);
+  border: 1px solid rgba(109, 40, 217, 0.22);
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  margin-top: 1px;
 }
 
 .card-division-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-top: 7px;
-  gap: 8px;
-  width: 100%;
-  min-width: 0;
+  align-items: center;
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.12);
 }
 
 .division-name {
-  font-size: 0.66rem;
+  font-size: 0.6rem;
   font-weight: 600;
-  color: #64748b;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  color: #475569;
   text-transform: uppercase;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
 .division-code {
+  font-size: 0.58rem;
   font-family: monospace;
-  font-size: 0.66rem;
-  font-weight: 700;
-  color: #7c3aed;
+  color: #64748b;
   letter-spacing: 0.05em;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-align: right;
-  max-width: 60%;
-  flex: 0 1 auto;
 }
 
-/* Hologram foil */
 .card-security-foil {
   margin-top: auto;
-  padding: 3.5px 5px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #ff9ff3, #feca57, #ff6b6b, #48dbfb, #1dd1a1, #ff9ff3);
-  background-size: 300% 300%;
-  animation: foilShimmer 5s ease infinite;
-  text-align: center;
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #ec4899, #a855f7, #3b82f6, #06b6d4, #10b981, #ec4899);
+  background-size: 200% 100%;
+  animation: holoShift 4s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .card-security-foil span {
-  display: block;
-  font-size: 0.52rem;
+  font-size: 0.44rem;
   font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #0f172a;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-@keyframes foilShimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes holoShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* -------------------------------------------------------------------------
-   BACK FACE: High-Tech Midnight Badge with Large Official ITSA Logo
+   BACK FACE: Official ITSA Institutional Emblem & Authorization
    ------------------------------------------------------------------------- */
 .lanyard-card-back {
-  background: radial-gradient(circle at 50% 25%, #16172a 0%, #080912 100%);
+  background: linear-gradient(165deg, #131728 0%, #0a0d18 100%);
   color: #f8fafc;
-  transform: rotateY(180deg);
-  border: 1px solid rgba(155, 108, 255, 0.35);
-  padding: 16px 18px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px 12px;
   display: flex;
   flex-direction: column;
-  box-shadow: inset 0 0 35px rgba(155, 108, 255, 0.12);
+  transform: rotateY(180deg);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    inset 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
 .card-back-body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  height: 100%;
   justify-content: space-between;
+  height: 100%;
+  text-align: center;
+  padding: 4px 0 2px;
 }
 
-/* Large Centered ITSA Logo */
 .card-back-brand {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
+  gap: 3px;
 }
 
 .card-back-logo-img {
-  width: 78px;
-  height: 78px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
-  display: block;
-  filter: drop-shadow(0 0 14px rgba(155, 108, 255, 0.75)) drop-shadow(0 0 6px rgba(76, 216, 248, 0.5));
+  filter: drop-shadow(0 0 14px rgba(155, 108, 255, 0.45));
 }
 
 .card-back-title {
-  font: 700 1.35rem / 1 var(--display, 'Space Grotesk', sans-serif);
-  letter-spacing: 0.14em;
+  font: 800 1.25rem / 1 var(--display, 'Space Grotesk', sans-serif);
   color: #ffffff;
-  margin: 8px 0 3px;
+  letter-spacing: 0.08em;
+  margin: 2px 0 0;
+  background: linear-gradient(135deg, #ffffff 40%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .card-back-sub {
-  font-size: 0.66rem;
+  font-size: 0.58rem;
+  line-height: 1.25;
   color: #94a3b8;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  line-height: 1.35;
   margin: 0;
+  letter-spacing: 0.04em;
 }
 
-/* Security chip */
 .card-security-chip {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 5px 10px;
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.04);
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px 8px;
+  border-radius: 6px;
+  width: 88%;
+  justify-content: center;
 }
 
 .chip-gold-plate {
-  width: 26px;
-  height: 19px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #fcd34d, #b45309);
-  border: 1px solid #fde68a;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  width: 18px;
+  height: 14px;
+  background: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #b45309 100%);
+  border-radius: 2px;
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
 }
 
 .chip-label {
-  font-size: 0.56rem;
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
   font-weight: 700;
-  letter-spacing: 0.12em;
-  color: #a78bfa;
+  color: #fbbf24;
 }
 
-/* Barcode */
 .card-barcode-box {
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -408,74 +414,70 @@
 }
 
 .barcode-lines {
-  width: 160px;
-  height: 34px;
+  width: 100%;
+  height: 24px;
   background: repeating-linear-gradient(
     90deg,
-    #ffffff 0px,
-    #ffffff 2px,
-    transparent 2px,
-    transparent 4px,
-    #ffffff 4px,
-    #ffffff 6px,
-    transparent 6px,
-    transparent 9px
+    #ffffff,
+    #ffffff 1.5px,
+    transparent 1.5px,
+    transparent 3.5px,
+    #ffffff 3.5px,
+    #ffffff 5px,
+    transparent 5px,
+    transparent 6px
   );
+  opacity: 0.85;
 }
 
 .barcode-code {
-  font-family: monospace;
-  font-size: 0.66rem;
+  font-size: 0.54rem;
   letter-spacing: 0.18em;
   color: #94a3b8;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  max-width: 100%;
-  text-align: center;
-  box-sizing: border-box;
-  padding: 0 6px;
+  font-family: monospace;
 }
 
-/* Back footer */
 .card-back-footer {
+  font-size: 0.52rem;
+  color: #64748b;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 1px;
+  letter-spacing: 0.08em;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
-  width: 100%;
-  padding-top: 6px;
-}
-
-.card-back-footer span {
-  font-size: 0.62rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: #cbd5e1;
+  padding-top: 4px;
+  width: 95%;
 }
 
 .card-back-footer small {
-  font-size: 0.54rem;
-  color: #64748b;
-  letter-spacing: 0.06em;
+  font-size: 0.46rem;
+  color: #a78bfa;
 }
 
 /* -------------------------------------------------------------------------
-   Action Hint
+   Micro-Interaction Hint
    ------------------------------------------------------------------------- */
 .lanyard-action-hint {
+  margin-top: 8px;
   text-align: center;
-  margin-top: 12px;
+  z-index: 2;
 }
 
 .lanyard-action-hint span {
-  display: inline-block;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   color: #94a3b8;
-  padding: 3px 10px;
-  border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  text-transform: uppercase;
+  padding: 2.5px 9px;
+  border-radius: 999px;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.lanyard-badge-wrap:hover .lanyard-action-hint span {
+  background: rgba(155, 108, 255, 0.12);
+  border-color: rgba(155, 108, 255, 0.3);
+  color: #e2e8f0;
 }

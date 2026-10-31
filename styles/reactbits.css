@@ -67,11 +67,6 @@
   overflow: hidden;
 }
 
-/* Spotlight cards live inside hairline grids that draw their own borders */
-.live-modules .spotlight-card {
-  padding: 1.5rem;
-  border-radius: 0;
-}
 
 /* ITSA Team ring (CircularCarousel) */
 .team {

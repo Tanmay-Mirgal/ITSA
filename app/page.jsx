@@ -4,9 +4,9 @@ import ClickSpark from '@/components/reactbits/ClickSpark';
 import BlinkingDots from '@/components/ui/blinking-dots';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
+import FacultyLeadership from '@/components/FacultyLeadership';
 import Featured from '@/components/Featured';
 import EventsArchive from '@/components/EventsArchive';
-import LiveNow from '@/components/LiveNow';
 import Team from '@/components/Team';
 import Bodies from '@/components/Bodies';
 import Gallery from '@/components/Gallery';
@@ -34,9 +34,9 @@ export default function HomePage() {
           <main id="main" className="relative z-10">
             <Hero />
             <About />
+            <FacultyLeadership />
             <Featured />
             <EventsArchive />
-            <LiveNow />
             <Team />
             <Bodies />
             <Gallery />

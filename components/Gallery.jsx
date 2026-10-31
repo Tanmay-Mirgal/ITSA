@@ -18,7 +18,7 @@ export default function Gallery() {
       <GalleryStage />
 
       <div className="image-credit">
-        COMMUNITY IMAGERY SHOWN AS VISUAL DIRECTION · PHOTOGRAPHY VIA UNSPLASH · DRAG OR USE ARROW KEYS
+        OFFICIAL ITSA COMMUNITY ARCHIVE · DRAG OR USE ARROW KEYS TO EXPLORE
       </div>
     </section>
   );

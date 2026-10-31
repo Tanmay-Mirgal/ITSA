@@ -1,0 +1,668 @@
+/* =========================================================================
+   ITSA Faculty Leadership — Expanded Institutional Profile Modal
+   Academic Editorial Experience matching ITSA Visual Identity
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   Backdrop
+   ------------------------------------------------------------------------- */
+.faculty-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 75; /* Stacking: below fixed navbar (80), above page content */
+  background: rgba(5, 6, 12, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 0;
+  animation: facultyBackdropFadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.faculty-modal-backdrop.is-closing {
+  animation: facultyBackdropFadeOut 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes facultyBackdropFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes facultyBackdropFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Safe Viewport Container: Always begins strictly below the fixed navbar
+   ------------------------------------------------------------------------- */
+.faculty-modal-viewport {
+  position: absolute;
+  top: calc(var(--nav-height, 4.5rem) + env(safe-area-inset-top, 0px));
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: calc(100dvh - var(--nav-height, 4.5rem) - env(safe-area-inset-top, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px clamp(1rem, 2.5vw, 2.5rem);
+  padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* -------------------------------------------------------------------------
+   Modal Panel: Sized to fit comfortably within the safe viewport area
+   ------------------------------------------------------------------------- */
+.faculty-modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 1020px;
+  max-height: min(84vh, calc(100dvh - var(--nav-height, 4.5rem) - 28px - env(safe-area-inset-bottom, 0px)));
+  background: linear-gradient(165deg, #0e1120 0%, #070913 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.85),
+    0 0 50px rgba(155, 108, 255, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(16px) scale(0.99);
+  animation: facultyPanelRise 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.faculty-modal-panel.is-closing {
+  animation: facultyPanelDescend 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes facultyPanelRise {
+  to {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes facultyPanelDescend {
+  to {
+    transform: translateY(16px) scale(0.99);
+    opacity: 0;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Header Bar
+   ------------------------------------------------------------------------- */
+.faculty-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(11, 13, 24, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.faculty-modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.faculty-modal-tag {
+  color: #a78bfa;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(155, 108, 255, 0.12);
+  padding: 2.5px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(155, 108, 255, 0.25);
+}
+
+.faculty-modal-sep {
+  color: #475569;
+  font-size: 0.75rem;
+}
+
+.faculty-modal-subtag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.faculty-modal-close {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.faculty-modal-close:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* -------------------------------------------------------------------------
+   Quick-Switch Tabs (HOD & Coordinator)
+   ------------------------------------------------------------------------- */
+.faculty-modal-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  background: rgba(7, 9, 18, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.faculty-modal-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.faculty-tab-pill {
+  white-space: nowrap;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94a3b8;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tab-pill-num {
+  color: #a78bfa;
+  font-weight: 700;
+}
+
+.tab-pill-role {
+  color: #64748b;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.faculty-tab-pill:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.faculty-tab-pill.is-active {
+  background: rgba(155, 108, 255, 0.18);
+  border-color: rgba(155, 108, 255, 0.5);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(155, 108, 255, 0.25);
+}
+
+.faculty-tab-pill.is-active .tab-pill-role {
+  color: #cbd5e1;
+}
+
+/* -------------------------------------------------------------------------
+   Modal Body: Two-Column Layout (Left Portrait, Right Information)
+   ------------------------------------------------------------------------- */
+.faculty-modal-content {
+  display: grid;
+  grid-template-columns: minmax(280px, 320px) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(28px, 3.5vw, 44px);
+  padding: 1.5rem 2rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 108, 255, 0.25) transparent;
+}
+
+.faculty-modal-content::-webkit-scrollbar {
+  width: 5px;
+}
+
+.faculty-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.faculty-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(155, 108, 255, 0.3);
+  border-radius: 4px;
+}
+
+.faculty-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(155, 108, 255, 0.6);
+}
+
+/* -------------------------------------------------------------------------
+   Left Column: Institutional Portrait & Credentials
+   ------------------------------------------------------------------------- */
+.faculty-modal-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faculty-portrait-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.faculty-portrait-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.75;
+  max-height: 330px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #090b14;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faculty-portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
+}
+
+.faculty-portrait-img--hod {
+  object-position: center 20%;
+}
+
+.faculty-portrait-img--coordinator {
+  object-position: center 15%;
+}
+
+.faculty-portrait-sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.faculty-credentials-card {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.credentials-role-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.credentials-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.credentials-badge--hod {
+  color: #a78bfa;
+  background: rgba(155, 108, 255, 0.15);
+  border: 1px solid rgba(155, 108, 255, 0.3);
+}
+
+.credentials-badge--coordinator {
+  color: #4cd8f8;
+  background: rgba(76, 216, 248, 0.15);
+  border: 1px solid rgba(76, 216, 248, 0.3);
+}
+
+.credentials-exp-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.04em;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.credentials-name {
+  margin: 0.2rem 0 0;
+  font: 700 1.15rem / 1.2 var(--display, 'Space Grotesk', sans-serif);
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.credentials-academic-line {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.credentials-academic-line strong {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.credentials-academic-line span {
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.credentials-institution {
+  margin-top: 0.35rem;
+  padding-top: 0.45rem;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+}
+
+/* -------------------------------------------------------------------------
+   Right Column: Introduction, Specialisations & Accordions
+   ------------------------------------------------------------------------- */
+.faculty-modal-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  min-width: 0;
+}
+
+/* Introduction Callout */
+.faculty-intro-box {
+  background: linear-gradient(135deg, rgba(155, 108, 255, 0.08) 0%, rgba(17, 25, 54, 0.35) 100%);
+  border: 1px solid rgba(155, 108, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem 1.35rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+.intro-box-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.intro-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a78bfa;
+}
+
+.intro-department {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+.intro-text {
+  margin: 0;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: #e2e8f0;
+}
+
+/* Research Specialisation Pills */
+.faculty-specialisations-block {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.95rem 1.25rem;
+}
+
+.specialisation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.specialisation-header h4 {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.specialisation-header span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #a78bfa;
+  background: rgba(155, 108, 255, 0.12);
+  padding: 1.5px 6px;
+  border-radius: 3px;
+}
+
+.specialisation-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f1f5f9;
+  background: rgba(155, 108, 255, 0.1);
+  border: 1px solid rgba(155, 108, 255, 0.28);
+  padding: 3px 9px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.spec-pill:hover {
+  background: rgba(155, 108, 255, 0.2);
+  border-color: rgba(155, 108, 255, 0.5);
+  box-shadow: 0 0 10px rgba(155, 108, 255, 0.25);
+}
+
+.spec-bullet {
+  color: #a78bfa;
+  font-size: 0.65rem;
+}
+
+/* -------------------------------------------------------------------------
+   Expandable Accordion Rows
+   ------------------------------------------------------------------------- */
+.faculty-accordions-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.accordions-title-bar {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.accordions-title-bar h5 {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.faculty-accordion-item {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faculty-accordion-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.faculty-accordion-item.is-open {
+  border-color: rgba(155, 108, 255, 0.35);
+  background: rgba(155, 108, 255, 0.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.faculty-accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+}
+
+.accordion-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #f1f5f9;
+}
+
+.accordion-chevron {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.faculty-accordion-item.is-open .accordion-chevron {
+  transform: rotate(180deg);
+  color: #a78bfa;
+}
+
+.faculty-accordion-body {
+  overflow: hidden;
+  transition:
+    max-height 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.28s ease;
+}
+
+.faculty-accordion-inner {
+  padding: 0 1rem 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 0.15rem;
+  padding-top: 0.65rem;
+}
+
+.faculty-accordion-inner p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* -------------------------------------------------------------------------
+   Responsive Adaptations
+   ------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .faculty-modal-panel {
+    max-height: calc(100dvh - var(--nav-height, 4.5rem) - 20px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+
+  .faculty-modal-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem 1.25rem;
+  }
+
+  .faculty-portrait-card {
+    max-width: 320px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .faculty-modal-viewport {
+    padding: 8px 6px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .faculty-modal-panel {
+    border-radius: 14px;
+    max-height: calc(100dvh - var(--nav-height, 4.5rem) - 14px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  }
+
+  .faculty-modal-header {
+    padding: 0.65rem 0.95rem;
+  }
+
+  .faculty-modal-tabs {
+    padding: 0.4rem 0.85rem;
+  }
+
+  .faculty-modal-content {
+    padding: 1rem 0.85rem;
+  }
+
+  .credentials-name {
+    font-size: 1.05rem;
+  }
+
+  .intro-text {
+    font-size: 0.82rem;
+  }
+}
+

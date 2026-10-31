@@ -4,10 +4,11 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import './Lanyard.css';
 
 /**
- * Premium 3D Interactive Lanyard Component.
- * - Recreates the React Bits swinging ID badge with stretchy woven nylon strap, metal clasp, and clip.
- * - Draggable with spring-pendulum physics.
- * - Clicking the card flips it 180° in 3D to reveal the official ITSA logo on the back.
+ * Premium 3D Interactive Lanyard & Executive ID Badge Component.
+ * - Single, unified coaxial physical chain: [ Top Anchor ] -> [ Black Woven Strap ] -> [ Metal Connector Clip ] -> [ ID Card Badge ].
+ * - Perfectly straight at rest (0° plumb vertical center).
+ * - Interactive physics: smooth pendulum swing with spring restoring forces.
+ * - Flip interaction: Click to flip 180° in 3D to reveal official ITSA credentials.
  */
 export default function Lanyard({
   headName = 'Core Lead',
@@ -18,26 +19,26 @@ export default function Lanyard({
   division = 'DIVISION HEAD',
 }) {
   const containerRef = useRef(null);
-  const [position, setPosition] = useState({ x: 0, y: 0, rotZ: 0, rotY: 0, rotX: 0 });
+  const [position, setPosition] = useState({ x: 0, y: 46, rotZ: 0, rotY: 0, rotX: 0 });
   const [isFlipped, setIsFlipped] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   // Physics state
   const physicsRef = useRef({
     x: 0,
-    y: 0,
+    y: 46,
     vx: 0,
     vy: 0,
     angle: 0,
     targetX: 0,
-    targetY: 0,
+    targetY: 46,
     isDragging: false,
     dragStart: { x: 0, y: 0 },
     lastMouse: { x: 0, y: 0, time: 0 },
     mouseVelocity: { x: 0, y: 0 },
   });
 
-  const restLength = 42;
+  const restLength = 46;
 
   useEffect(() => {
     let animId;
@@ -50,8 +51,8 @@ export default function Lanyard({
         const dx = p.x;
         const dy = p.y - restLength;
 
-        const kSpring = 0.055;
-        const damping = 0.93;
+        const kSpring = 0.08;
+        const damping = 0.88;
 
         const fx = -kSpring * dx;
         const fy = -kSpring * dy;
@@ -62,17 +63,30 @@ export default function Lanyard({
         p.x += p.vx;
         p.y += p.vy;
 
-        const targetRotZ = (p.x / restLength) * 24 + p.vx * 1.6;
-        p.angle += (targetRotZ - p.angle) * 0.14;
+        // Subtle angle around center axis
+        const targetRotZ = (p.x / restLength) * 8;
+        p.angle += (targetRotZ - p.angle) * 0.18;
+
+        // Snap cleanly to 0 at rest so the resting position is always 100% plumb vertical
+        if (Math.abs(p.x) < 0.05 && Math.abs(p.vx) < 0.02) {
+          p.x = 0;
+          p.vx = 0;
+          p.angle = 0;
+        }
+        if (Math.abs(p.y - restLength) < 0.05 && Math.abs(p.vy) < 0.02) {
+          p.y = restLength;
+          p.vy = 0;
+        }
       } else {
-        p.x += (p.targetX - p.x) * 0.42;
-        p.y += (p.targetY - p.y) * 0.42;
-        const targetRotZ = (p.x / restLength) * 28 + p.mouseVelocity.x * 0.7;
-        p.angle += (targetRotZ - p.angle) * 0.22;
+        p.x += (p.targetX - p.x) * 0.38;
+        p.y += (p.targetY - p.y) * 0.38;
+        const targetRotZ = (p.x / restLength) * 10 + p.mouseVelocity.x * 0.25;
+        p.angle += (targetRotZ - p.angle) * 0.2;
       }
 
-      const rotY = Math.max(-25, Math.min(25, p.vx * 2.2));
-      const rotX = Math.max(-18, Math.min(18, -p.vy * 1.5));
+      // 3D tilt only active during dragging, perfectly flat at rest
+      const rotY = p.isDragging ? Math.max(-12, Math.min(12, p.vx * 1.2)) : 0;
+      const rotX = p.isDragging ? Math.max(-8, Math.min(8, -p.vy * 0.9)) : 0;
 
       setPosition({
         x: p.x,
@@ -115,8 +129,8 @@ export default function Lanyard({
       const deltaX = cx - p.dragStart.x;
       const deltaY = cy - p.dragStart.y;
 
-      p.targetX = Math.max(-130, Math.min(130, deltaX));
-      p.targetY = Math.max(restLength - 30, Math.min(restLength + 130, restLength + deltaY));
+      p.targetX = Math.max(-70, Math.min(70, deltaX));
+      p.targetY = Math.max(restLength - 15, Math.min(restLength + 50, restLength + deltaY));
     };
 
     const handlePointerUp = () => {
@@ -128,8 +142,8 @@ export default function Lanyard({
 
       p.isDragging = false;
       setIsDragging(false);
-      p.vx = p.mouseVelocity.x * 0.7;
-      p.vy = p.mouseVelocity.y * 0.7;
+      p.vx = p.mouseVelocity.x * 0.5;
+      p.vy = p.mouseVelocity.y * 0.5;
 
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
@@ -141,40 +155,55 @@ export default function Lanyard({
     window.addEventListener('pointercancel', handlePointerUp);
   }, []);
 
-  // Hanging lanyard ribbon path
-  const anchorX = 160;
+  // Hanging lanyard ribbon path — coaxially centered at X = 130
+  // Both container and SVG share the exact 260px coordinate space.
+  const anchorX = 130;
   const anchorY = 0;
   const badgeX = anchorX + position.x;
-  const badgeY = anchorY + position.y;
-  const ctrlX = anchorX + position.x * 0.28;
-  const ctrlY = (anchorY + badgeY) * 0.5;
+  // Terminate 4px inside the metal clip so there is never a hairline gap
+  const badgeY = position.y + 4;
+  const ctrlX = anchorX + position.x * 0.3;
+  const ctrlY = (anchorY + position.y) * 0.5;
   const strapPath = `M ${anchorX} ${anchorY} Q ${ctrlX} ${ctrlY} ${badgeX} ${badgeY}`;
 
   return (
     <div className="lanyard-container" ref={containerRef}>
       {/* Hanging Textured Lanyard Strap Ribbon */}
-      <svg className="lanyard-svg" viewBox="0 0 320 260" aria-hidden="true">
+      <svg
+        className="lanyard-svg"
+        viewBox="0 0 260 440"
+        width="260"
+        height="440"
+        aria-hidden="true"
+      >
         <defs>
           <linearGradient id="lanyardStrapShade" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#1e2230" />
-            <stop offset="50%" stopColor="#32384e" />
-            <stop offset="100%" stopColor="#1e2230" />
+            <stop offset="0%" stopColor="#121520" />
+            <stop offset="35%" stopColor="#252b3d" />
+            <stop offset="65%" stopColor="#2e354c" />
+            <stop offset="100%" stopColor="#121520" />
           </linearGradient>
           <pattern id="lanyardWeave" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-            <line x1="0" y1="0" x2="0" y2="6" stroke="#4cd8f8" strokeWidth="1" strokeOpacity="0.25" />
-            <line x1="0" y1="3" x2="6" y2="3" stroke="#9b6cff" strokeWidth="1" strokeOpacity="0.25" />
+            <line x1="0" y1="0" x2="0" y2="6" stroke="#4cd8f8" strokeWidth="1" strokeOpacity="0.3" />
+            <line x1="0" y1="3" x2="6" y2="3" stroke="#9b6cff" strokeWidth="1" strokeOpacity="0.3" />
           </pattern>
         </defs>
 
+        {/* Top Ceiling Anchor Mount */}
+        <rect x="114" y="0" width="32" height="5" rx="2.5" fill="#1e2230" stroke="#3e475f" strokeWidth="1" />
+        <circle cx="130" cy="2.5" r="2" fill="#64748b" />
+
         {/* Strap Drop Shadow */}
-        <path d={strapPath} fill="none" stroke="rgba(0,0,0,0.5)" strokeWidth="26" strokeLinecap="round" />
+        <path d={strapPath} fill="none" stroke="rgba(0,0,0,0.55)" strokeWidth="22" strokeLinecap="round" />
         {/* Main Woven Ribbon */}
-        <path d={strapPath} fill="none" stroke="url(#lanyardStrapShade)" strokeWidth="22" strokeLinecap="round" />
+        <path d={strapPath} fill="none" stroke="url(#lanyardStrapShade)" strokeWidth="18" strokeLinecap="round" />
         {/* Fabric Weave Texture */}
-        <path d={strapPath} fill="none" stroke="url(#lanyardWeave)" strokeWidth="20" strokeLinecap="round" />
+        <path d={strapPath} fill="none" stroke="url(#lanyardWeave)" strokeWidth="16" strokeLinecap="round" />
+        {/* Subtle Center Stitch Highlight */}
+        <path d={strapPath} fill="none" stroke="rgba(255,255,255,0.12)" strokeWidth="1.5" />
       </svg>
 
-      {/* Hanging Badge Physics Wrapper */}
+      {/* Hanging Badge Physics Wrapper: shared coaxial center at X = 130 */}
       <div
         className={`lanyard-badge-wrap ${isDragging ? 'is-dragging' : ''}`}
         style={{
@@ -185,10 +214,10 @@ export default function Lanyard({
         tabIndex={0}
         aria-label={`${headName} ID badge. Click to flip between front and back.`}
       >
-        {/* Metal Clasp Hardware */}
+        {/* Metal Clasp Hardware: Centered precisely at X = 130 */}
         <div className="lanyard-hardware" aria-hidden="true">
           <div className="lanyard-strap-clip">
-            <span className="strap-badge-emblem">⚛</span>
+            <span className="strap-badge-emblem">ITSA</span>
           </div>
           <div className="lanyard-clamp">
             <span className="clamp-bolt" />

@@ -1,11 +1,16 @@
 /* =========================================================================
-   ITSA Team Executive Leadership & Division Modal — Ultra-Premium UI/UX
+   ITSA Team Executive Leadership & Division Modal — Optimized UI/UX
+   Compact Desktop Composition (Coaxial Straight Lanyard & Top 3 Executives)
+   Strict Two-Column Grid: Zero Left/Right Overlap
    ========================================================================= */
 
 :root {
   --header-height: var(--nav-height, 4.5rem);
 }
 
+/* -------------------------------------------------------------------------
+   Modal Backdrop
+   ------------------------------------------------------------------------- */
 .team-modal-backdrop {
   position: fixed;
   inset: 0;
@@ -37,8 +42,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px clamp(1rem, 3vw, 2.5rem);
-  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  padding: 12px clamp(1rem, 2.5vw, 2rem);
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   box-sizing: border-box;
   overflow: hidden;
 }
@@ -49,19 +54,19 @@
 .team-modal-panel {
   position: relative;
   width: 100%;
-  max-width: 1140px;
-  max-height: calc(100dvh - var(--header-height, var(--nav-height, 4.5rem)) - 32px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  max-width: 1020px;
+  max-height: min(84vh, calc(100dvh - var(--header-height, var(--nav-height, 4.5rem)) - 24px - env(safe-area-inset-bottom, 0px)));
   background: linear-gradient(165deg, #0e1120 0%, #070913 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 20px;
+  border-radius: 18px;
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.85),
-    0 0 60px rgba(155, 108, 255, 0.15);
+    0 24px 70px rgba(0, 0, 0, 0.85),
+    0 0 50px rgba(155, 108, 255, 0.14);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform: translateY(16px) scale(0.985);
-  animation: modalPanelRise 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateY(12px) scale(0.99);
+  animation: modalPanelRise 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes modalPanelRise {
@@ -71,13 +76,13 @@
 }
 
 /* -------------------------------------------------------------------------
-   Header Bar (Sticky at top of panel so close button never scrolls away)
+   Header Bar (Compact sticky header with close button)
    ------------------------------------------------------------------------- */
 .team-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.15rem 1.75rem;
+  padding: 0.75rem 1.4rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(11, 13, 24, 0.95);
   backdrop-filter: blur(12px);
@@ -91,19 +96,23 @@
 .team-modal-meta {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .team-modal-meta .meta-tag {
   color: #a78bfa;
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
+  background: rgba(155, 108, 255, 0.12);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(155, 108, 255, 0.22);
 }
 
 .team-modal-meta h3 {
-  font: 600 1.35rem / 1.2 var(--display, 'Space Grotesk', sans-serif);
+  font: 700 1.15rem / 1.2 var(--display, 'Space Grotesk', sans-serif);
   color: #f8fafc;
   letter-spacing: -0.02em;
   margin: 0;
@@ -112,14 +121,14 @@
 .team-modal-close {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #94a3b8;
-  padding: 0.45rem 0.95rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 999px;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -133,18 +142,19 @@
 }
 
 /* -------------------------------------------------------------------------
-   Sub-Navigation Tabs (Clean, Scrollbar-Free)
+   Sub-Navigation Tabs (All 11 Core Team Members Strip)
    ------------------------------------------------------------------------- */
 .team-modal-nav {
   display: flex;
-  gap: 0.45rem;
-  padding: 0.65rem 1.75rem;
+  gap: 0.35rem;
+  padding: 0.4rem 1.4rem;
   background: rgba(7, 9, 18, 0.85);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
   flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .team-modal-nav::-webkit-scrollbar {
@@ -156,11 +166,11 @@
   background: transparent;
   border: 1px solid transparent;
   color: #94a3b8;
-  padding: 0.35rem 0.85rem;
+  padding: 0.25rem 0.75rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   cursor: pointer;
   transition: all 0.2s ease;
   user-select: none;
@@ -179,14 +189,17 @@
 }
 
 /* -------------------------------------------------------------------------
-   Modal Body: Scrollable Preview Container (Internal Scrolling)
+   Modal Body: Strict Two-Column Grid
+   LEFT COLUMN: Strictly Dedicated to Centered 3D ID Assembly (290px track)
+   RIGHT COLUMN: Executive Statement & Top 3 Leadership Stack (1fr track)
+   Never Overlap: True CSS Grid Separation with Generous Gutter
    ------------------------------------------------------------------------- */
 .team-modal-content {
   display: grid;
-  grid-template-columns: 345px 1fr;
-  align-items: start;
-  gap: 2rem;
-  padding: 1.5rem 1.75rem;
+  grid-template-columns: minmax(280px, 310px) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(36px, 4vw, 56px);
+  padding: 1.25rem 2rem;
   overflow-x: hidden;
   overflow-y: auto;
   flex: 1 1 auto;
@@ -198,7 +211,7 @@
 }
 
 .team-modal-content::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 
 .team-modal-content::-webkit-scrollbar-track {
@@ -214,23 +227,26 @@
   background: rgba(155, 108, 255, 0.6);
 }
 
-/* Left Column: Lanyard Stage */
+/* Left Column: ID Assembly Stage */
 .team-modal-lanyard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 0.25rem;
+  justify-content: center;
+  padding: 0;
   min-width: 0;
   width: 100%;
-  max-width: 345px;
+  max-width: 310px;
+  margin: 0 auto;
+  position: relative;
+  overflow: visible;
 }
 
-/* Right Column: Division Overview & Members Roster */
+/* Right Column: Division Overview & Executive Leadership */
 .team-modal-details {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.85rem;
   min-width: 0;
   padding-right: 0.25rem;
 }
@@ -241,47 +257,47 @@
 .team-division-overview {
   background: linear-gradient(135deg, rgba(155, 108, 255, 0.08) 0%, rgba(17, 25, 54, 0.4) 100%);
   border: 1px solid rgba(155, 108, 255, 0.2);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1.25rem;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
 .team-division-overview h4 {
-  font: 700 1.2rem / 1.2 var(--display, 'Space Grotesk', sans-serif);
+  font: 700 1.05rem / 1.2 var(--display, 'Space Grotesk', sans-serif);
   color: #ffffff;
-  margin: 0 0 0.5rem;
+  margin: 0 0 0.35rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.65rem;
   letter-spacing: -0.02em;
 }
 
 .team-division-overview h4 small {
   color: #a78bfa;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
   font-weight: 700;
   text-transform: uppercase;
   background: rgba(155, 108, 255, 0.15);
-  padding: 2px 8px;
+  padding: 1.5px 7px;
   border-radius: 4px;
   border: 1px solid rgba(155, 108, 255, 0.25);
 }
 
 .team-division-overview p {
   color: #cbd5e1;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.45;
   margin: 0;
 }
 
 /* -------------------------------------------------------------------------
-   Members Section Header & Grid
+   Executive Leadership Section (Top 3 Leaders Stack)
    ------------------------------------------------------------------------- */
 .team-members-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.65rem;
 }
 
 .team-members-header {
@@ -289,61 +305,77 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
 }
 
 .team-members-header h5 {
   color: #ffffff;
-  font-size: 0.8rem;
+  font-size: 0.74rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   margin: 0;
 }
 
 .team-members-header span {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: #94a3b8;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   font-weight: 600;
 }
 
-.team-members-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+.team-exec-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
 /* -------------------------------------------------------------------------
-   Member Card: Frosted Glass & Crisp Contrast
+   Executive Leader Card: Frosted Glass & Active Glow
    ------------------------------------------------------------------------- */
-.team-member-card {
+.team-exec-card {
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 0.85rem;
-  padding: 0.85rem 1rem;
+  padding: 0.65rem 1rem;
   background: rgba(255, 255, 255, 0.035);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  user-select: none;
 }
 
-.team-member-card:hover {
-  background: rgba(255, 255, 255, 0.06);
+.team-exec-card:hover {
+  background: rgba(255, 255, 255, 0.07);
   border-color: rgba(76, 216, 248, 0.45);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.team-exec-card.is-active {
+  background: rgba(155, 108, 255, 0.14);
+  border-color: rgba(155, 108, 255, 0.6);
+  box-shadow:
+    0 0 16px rgba(155, 108, 255, 0.25),
+    inset 0 0 12px rgba(155, 108, 255, 0.06);
+}
+
+.team-exec-card.is-active .member-avatar {
+  border-color: #a78bfa;
+  box-shadow: 0 0 10px rgba(155, 108, 255, 0.5);
 }
 
 .member-avatar {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid rgba(155, 108, 255, 0.5);
+  border: 1.5px solid rgba(155, 108, 255, 0.5);
   flex-shrink: 0;
-  box-shadow: 0 0 10px rgba(155, 108, 255, 0.25);
+  box-shadow: 0 0 8px rgba(155, 108, 255, 0.2);
 }
 
 .member-avatar img {
@@ -356,13 +388,13 @@
 .member-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   min-width: 0;
 }
 
 .member-info strong {
   color: #ffffff;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -372,121 +404,166 @@
 
 .member-info span {
   color: #94a3b8;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.member-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 4px;
-}
-
-.member-tag {
+.exec-active-indicator {
+  margin-left: auto;
   font-size: 0.62rem;
-  padding: 1.5px 6px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  background: rgba(155, 108, 255, 0.2);
+  border: 1px solid rgba(155, 108, 255, 0.35);
+  padding: 2px 7px;
   border-radius: 4px;
-  background: rgba(155, 108, 255, 0.15);
-  color: #d8b4fe;
-  border: 1px solid rgba(155, 108, 255, 0.28);
-  letter-spacing: 0.02em;
-  font-weight: 600;
 }
 
 /* -------------------------------------------------------------------------
-   Responsive Adaptations
+   Short Desktop / Compact Screen Adjustments (e.g. 1366x768 viewports)
+   ------------------------------------------------------------------------- */
+@media (max-height: 719px) and (min-width: 901px) {
+  .team-modal-viewport {
+    padding: 8px 16px;
+  }
+
+  .team-modal-header {
+    padding: 0.55rem 1.25rem;
+  }
+
+  .team-modal-nav {
+    padding: 0.3rem 1.25rem;
+  }
+
+  .team-modal-content {
+    grid-template-columns: 270px minmax(0, 1fr);
+    padding: 0.75rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .team-division-overview {
+    padding: 0.65rem 1rem;
+  }
+
+  .team-division-overview h4 {
+    font-size: 0.96rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .team-division-overview p {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .team-exec-card {
+    padding: 0.5rem 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .member-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .member-info strong {
+    font-size: 0.8rem;
+  }
+
+  .member-info span {
+    font-size: 0.68rem;
+  }
+}
+
+/* -------------------------------------------------------------------------
+   Responsive Adaptations (Tablet & Mobile)
    ------------------------------------------------------------------------- */
 @media (max-width: 900px) {
   .team-modal-viewport {
-    padding: 14px clamp(0.75rem, 2vw, 1.5rem);
-    padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+    padding: 12px clamp(0.75rem, 2vw, 1.5rem);
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
   }
 
   .team-modal-panel {
-    max-height: calc(100dvh - var(--header-height, var(--nav-height-scrolled, 3.875rem)) - 28px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    max-height: calc(100dvh - var(--header-height, var(--nav-height-scrolled, 3.875rem)) - 24px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     border-radius: 16px;
   }
 
   .team-modal-content {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    padding: 1.25rem 1rem;
+    padding: 1.1rem 1rem;
   }
 
-  .team-members-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .team-modal-lanyard {
+    max-width: 100%;
+  }
+
+  .team-exec-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
   }
 }
 
 @media (max-width: 600px) {
   .team-modal-viewport {
-    padding: 10px 8px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    padding: 8px 6px;
+    padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
   }
 
   .team-modal-panel {
-    width: min(94vw, 1060px);
-    max-height: calc(100dvh - var(--header-height, var(--nav-height-scrolled, 3.875rem)) - 20px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+    width: min(95vw, 980px);
+    max-height: calc(100dvh - var(--header-height, var(--nav-height-scrolled, 3.875rem)) - 16px - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
     border-radius: 14px;
   }
 
   .team-modal-header {
-    padding: 0.75rem 0.9rem;
+    padding: 0.65rem 0.85rem;
   }
 
   .team-modal-header h3 {
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .team-modal-nav {
-    padding: 0.4rem 0.85rem;
+    padding: 0.35rem 0.75rem;
   }
 
   .team-modal-content {
-    padding: 1rem 0.75rem;
-    gap: 1.25rem;
-  }
-
-  /* Keep lanyard readable and naturally proportioned - NO destructive scaling */
-  .lanyard-container {
-    transform: none;
-    margin: 0 auto;
+    padding: 0.85rem 0.75rem;
+    gap: 1.1rem;
   }
 
   .team-division-overview {
-    padding: 1rem 1.15rem;
+    padding: 0.75rem 0.95rem;
   }
 
   .team-division-overview h4 {
-    font-size: 1.05rem;
+    font-size: 0.95rem;
   }
 
-  .team-members-grid {
-    grid-template-columns: 1fr;
+  .team-exec-card {
+    padding: 0.55rem 0.8rem;
     gap: 0.75rem;
   }
 }
 
 @media (max-width: 380px) {
   .team-modal-header {
-    padding: 0.6rem 0.75rem;
+    padding: 0.55rem 0.7rem;
   }
 
   .team-modal-header h3 {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .team-modal-close {
-    padding: 0.35rem 0.7rem;
-    font-size: 0.7rem;
-  }
-
-  .lanyard-container {
-    transform: none;
-    margin: 0 auto;
+    padding: 0.3rem 0.65rem;
+    font-size: 0.68rem;
   }
 }

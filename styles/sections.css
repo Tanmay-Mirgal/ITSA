@@ -402,72 +402,475 @@
   letter-spacing: 0.13em;
 }
 
-/* Live now */
-.live-section {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: 8vw;
-  padding: 8rem var(--gutter);
-  background: var(--navy);
-}
-
-.live-title > span {
-  font-size: var(--fs-micro);
-  letter-spacing: 0.16em;
-}
-
-.live-title h2 {
-  margin: 4rem 0 0;
-  font: 550 clamp(4rem, 8vw, 8rem) / 0.82 var(--display);
-  letter-spacing: -0.07em;
-}
-
-.live-title h2 em {
-  color: var(--cyan);
-  font-style: normal;
-}
-
-.live-modules {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+/* 02 — Faculty Leadership: Compact, equal-sized institutional editorial feature */
+.faculty {
+  position: relative;
   border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+  background: transparent;
+  padding: clamp(4.5rem, 8vh, 6.5rem) var(--gutter);
 }
 
-.live-modules article {
-  min-height: 17rem;
+.faculty-container {
+  max-width: 1040px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* Staggered Reveal on Section Header */
+.faculty .section-header.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease);
+}
+
+.faculty .section-header.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faculty .section-header.reveal .section-meta {
+  transition: opacity 0.6s var(--ease);
+  transition-delay: 0ms;
+}
+
+.faculty .section-header.reveal h2 {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: 80ms;
+}
+
+.faculty .section-header.reveal > p {
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  transition-delay: 120ms;
+}
+
+/* ITSA Institutional Vision & Guidance Banner */
+.faculty-vision-banner {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 2.25rem;
+  padding: 0.85rem 1.35rem;
+  background: linear-gradient(135deg, rgba(155, 108, 255, 0.08) 0%, rgba(16, 20, 38, 0.55) 100%);
+  border: 1px solid rgba(155, 108, 255, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition-delay: 140ms;
+}
+
+.faculty-vision-banner.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.vision-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a78bfa;
+  background: rgba(155, 108, 255, 0.14);
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(155, 108, 255, 0.3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.vision-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4cd8f8;
+  box-shadow: 0 0 8px #4cd8f8;
+}
+
+.vision-text {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+
+/* 2-Column Balanced Grid: Equal dimensions and spacing */
+.faculty-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 4vw, 3.25rem);
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+/* Profile Card Reveal & Stagger */
+.faculty-card {
+  position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transform: translateY(0);
+  transition:
+    transform 0.45s var(--ease),
+    border-color 0.45s var(--ease),
+    box-shadow 0.45s var(--ease),
+    background 0.45s var(--ease);
+}
+
+.faculty-card.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease);
+}
+
+.faculty-card--hod.reveal {
+  transition-delay: 160ms;
+}
+
+.faculty-card--coordinator.reveal {
+  transition-delay: 280ms;
+}
+
+.faculty-card.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hairline index header */
+.faculty-card__index-bar {
+  display: flex;
   justify-content: space-between;
-  padding: 1.5rem;
-  border-right: 1px solid var(--line);
+  align-items: baseline;
+  padding-bottom: 0.65rem;
+  margin-bottom: 1rem;
   border-bottom: 1px solid var(--line);
-  transition: background 0.35s;
+  transition: border-color 0.4s var(--ease);
 }
 
-.live-modules .live-main {
-  min-height: 21rem;
-  grid-column: span 2;
+.faculty-card__num {
+  font: 700 0.95rem / 1 var(--display);
+  color: var(--violet);
+  letter-spacing: 0.08em;
+  transition: color 0.3s var(--ease);
 }
 
-.live-modules span {
+.faculty-card--coordinator .faculty-card__num {
+  color: var(--cyan);
+}
+
+.faculty-card__role-tag {
+  font: 600 var(--fs-nano) / 1 var(--sans);
   color: var(--muted);
-  font-size: var(--fs-nano);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease), letter-spacing 0.35s var(--ease);
+}
+
+/* Portrait Media Frame & Image Reveal */
+.faculty-card__media {
+  position: relative;
+  width: 100%;
+}
+
+.faculty-card__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.75;
+  max-height: 420px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  transition:
+    border-color 0.45s var(--ease),
+    box-shadow 0.45s var(--ease);
+}
+
+/* Image reveal animation: settles smoothly into position */
+.faculty-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateY(20px) scale(1.03);
+  filter: grayscale(10%) contrast(102%);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease),
+    filter 0.5s var(--ease);
+}
+
+.faculty-card--hod .faculty-card__image {
+  object-position: center 20%;
+  transition-delay: 160ms;
+}
+
+.faculty-card--coordinator .faculty-card__image {
+  object-position: center 15%;
+  transition-delay: 280ms;
+}
+
+.faculty-card.is-visible .faculty-card__image {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.faculty-card__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 65%, rgba(6, 7, 13, 0.4) 100%);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+
+.faculty-card__view-badge {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(11, 13, 24, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: all 0.28s var(--ease);
+  pointer-events: none;
+}
+
+/* Profile Information Stagger (Body) */
+.faculty-card__body {
+  padding-top: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+
+.faculty-card--hod .faculty-card__body {
+  transition-delay: 320ms;
+}
+
+.faculty-card--coordinator .faculty-card__body {
+  transition-delay: 420ms;
+}
+
+.faculty-card.is-visible .faculty-card__body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faculty-card__header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.faculty-card__role-badge {
+  font: 700 var(--fs-nano) / 1.2 var(--sans);
   letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 2.5px 7px;
+  border-radius: 4px;
+  transition: all 0.3s var(--ease);
 }
 
-.live-modules strong {
-  font: 500 1.8rem / 1.1 var(--display);
+.faculty-card__role-badge--hod {
+  color: var(--violet);
+  background: rgba(155, 108, 255, 0.12);
+  border: 1px solid rgba(155, 108, 255, 0.25);
 }
 
-.live-main strong {
-  font-size: clamp(2.8rem, 4vw, 4.5rem);
+.faculty-card__role-badge--coordinator {
+  color: var(--cyan);
+  background: rgba(76, 216, 248, 0.12);
+  border: 1px solid rgba(76, 216, 248, 0.25);
 }
 
-.live-modules p {
-  max-width: 28rem;
+.faculty-card__exp-badge {
+  font-size: 0.62rem;
+  font-weight: 600;
   color: var(--muted);
-  font-size: var(--fs-small);
-  line-height: 1.65;
+  letter-spacing: 0.06em;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.faculty-card__name {
+  margin: 0;
+  color: var(--white);
+  font: 600 clamp(1.28rem, 1.85vw, 1.65rem) / 1.2 var(--display);
+  letter-spacing: -0.02em;
+  transition: color 0.3s var(--ease);
+}
+
+.faculty-card__academic-info {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.35rem;
+  font: 500 var(--fs-nano) / 1.4 var(--sans);
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.faculty-card__academic-desig {
+  color: #cbd5e1;
+  font-weight: 600;
+}
+
+.faculty-card__dot-sep {
+  color: #475569;
+}
+
+.faculty-card__dept {
+  color: var(--muted);
+}
+
+/* Call to Action Row */
+.faculty-card__cta {
+  margin-top: auto;
+  padding-top: 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  transition: color 0.25s ease;
+}
+
+.faculty-card__arrow {
+  transition: transform 0.25s ease, color 0.25s ease;
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.faculty-card--hod .faculty-card__arrow {
+  color: var(--violet);
+}
+
+.faculty-card--coordinator .faculty-card__arrow {
+  color: var(--cyan);
+}
+
+/* =========================================================================
+   DESKTOP HOVER MICRO-INTERACTIONS (@media (hover: hover) and (pointer: fine))
+   ========================================================================= */
+@media (hover: hover) and (pointer: fine) {
+  /* Profile card upward lift: -5px */
+  .faculty-card.is-visible:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .faculty-card--hod.is-visible:hover {
+    border-color: rgba(155, 108, 255, 0.4);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 24px -6px rgba(155, 108, 255, 0.2);
+  }
+
+  .faculty-card--coordinator.is-visible:hover {
+    border-color: rgba(76, 216, 248, 0.4);
+    box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.65), 0 0 24px -6px rgba(76, 216, 248, 0.2);
+  }
+
+  /* Image gentle scale: 1 -> 1.02 (450ms) */
+  .faculty-card.is-visible:hover .faculty-card__image {
+    transform: translateY(0) scale(1.02);
+    filter: grayscale(0%) contrast(104%) brightness(1.02);
+    transition-delay: 0ms;
+  }
+
+  /* Frame border illumination */
+  .faculty-card--hod.is-visible:hover .faculty-card__frame {
+    border-color: rgba(155, 108, 255, 0.5);
+  }
+
+  .faculty-card--coordinator.is-visible:hover .faculty-card__frame {
+    border-color: rgba(76, 216, 248, 0.5);
+  }
+
+  /* View badge appears on hover */
+  .faculty-card.is-visible:hover .faculty-card__view-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Role label accent glow */
+  .faculty-card--hod.is-visible:hover .faculty-card__role-badge {
+    box-shadow: 0 0 12px rgba(155, 108, 255, 0.35);
+  }
+
+  .faculty-card--coordinator.is-visible:hover .faculty-card__role-badge {
+    box-shadow: 0 0 12px rgba(76, 216, 248, 0.35);
+  }
+
+  /* CTA text & arrow move */
+  .faculty-card.is-visible:hover .faculty-card__cta {
+    color: #ffffff;
+  }
+
+  .faculty-card.is-visible:hover .faculty-card__arrow {
+    transform: translateX(5px);
+  }
+
+  /* Hairlines & tags active response */
+  .faculty-card.is-visible:hover .faculty-card__index-bar {
+    border-bottom-color: var(--line-strong);
+  }
+
+  .faculty-card.is-visible:hover .faculty-card__role-tag {
+    color: var(--white);
+    letter-spacing: 0.18em;
+  }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .faculty .section-header.reveal,
+  .faculty .section-header.reveal h2,
+  .faculty .section-header.reveal > p,
+  .faculty-vision-banner,
+  .faculty-card.reveal,
+  .faculty-card__image,
+  .faculty-card__body,
+  .faculty-card:hover,
+  .faculty-card:hover .faculty-card__name,
+  .faculty-card:hover .faculty-card__image,
+  .faculty-card:hover .faculty-card__arrow {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    scale: 1 !important;
+  }
 }

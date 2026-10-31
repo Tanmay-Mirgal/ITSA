@@ -52,11 +52,135 @@
   font: 500 1.2rem var(--display);
 }
 
-.gallery-item-1 { grid-area: span 5 / 1 / auto / 8; }
-.gallery-item-2 { grid-area: 2 / 9 / span 3 / 13; }
-.gallery-item-3 { grid-area: 5 / 8 / span 4 / 13; }
-.gallery-item-4 { grid-area: 7 / 1 / span 3 / 5; }
-.gallery-item-5 { grid-area: 6 / 5 / span 4 / 8; }
+.gallery-item {
+  cursor: pointer;
+}
+
+.gallery-item-1 { grid-area: 1 / 1 / span 4 / 7; }
+.gallery-item-2 { grid-area: 1 / 7 / span 3 / 13; }
+.gallery-item-3 { grid-area: 4 / 7 / span 4 / 13; }
+.gallery-item-4 { grid-area: 5 / 1 / span 3 / 7; }
+.gallery-item-5 { grid-area: 8 / 1 / span 4 / 6; }
+.gallery-item-6 { grid-area: 8 / 6 / span 4 / 13; }
+.gallery-item-7 { grid-area: 12 / 1 / span 3 / 7; }
+.gallery-item-8 { grid-area: 12 / 7 / span 3 / 13; }
+
+/* Lightbox Modal */
+.gallery-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(6, 7, 13, 0.94);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  animation: lightboxFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.gallery-lightbox-container {
+  position: relative;
+  max-width: min(94vw, 1100px);
+  max-height: min(92vh, 880px);
+  display: flex;
+  flex-direction: column;
+  background: rgba(13, 16, 32, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 30px rgba(110, 86, 248, 0.15);
+  animation: lightboxScaleIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.gallery-lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(8, 10, 24, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--white);
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-family: var(--display);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.12em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.gallery-lightbox-close:hover {
+  background: rgba(110, 86, 248, 0.3);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: translateY(-1px);
+}
+
+.gallery-lightbox-media {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  max-height: calc(min(92vh, 880px) - 80px);
+  overflow: hidden;
+}
+
+.gallery-lightbox-image {
+  max-width: 100%;
+  max-height: calc(min(92vh, 880px) - 80px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.gallery-lightbox-footer {
+  padding: 1.1rem 1.5rem;
+  background: rgba(10, 13, 26, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.lightbox-tag {
+  color: var(--cyan);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.lightbox-caption {
+  margin: 0;
+  font: 500 1.15rem var(--display);
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
 
 .image-credit {
   margin-top: 1rem;
