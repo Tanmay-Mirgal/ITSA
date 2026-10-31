@@ -23,6 +23,11 @@ export default function Lanyard({
   const [isFlipped, setIsFlipped] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
+  // Reset flipped state when person changes so official front credential is always shown first
+  useEffect(() => {
+    setIsFlipped(false);
+  }, [code, headName]);
+
   // Physics state
   const physicsRef = useRef({
     x: 0,

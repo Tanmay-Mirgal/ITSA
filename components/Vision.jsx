@@ -6,7 +6,7 @@ export default function Vision() {
   return (
     <section className="vision section" aria-labelledby="vision-heading">
       <span className="vision-index">
-        <MetaLabel>10 / VISION & MISSION</MetaLabel>
+        <MetaLabel>09 / VISION & MISSION</MetaLabel>
       </span>
 
       <h2 id="vision-heading">

@@ -12,7 +12,7 @@ export default function EventsArchive() {
   return (
     <section className="events-archive section">
       <SectionHeader
-        meta="04 / EVENT ARCHIVE"
+        meta="05 / EVENT ARCHIVE"
         title={
           <>
             DESIGNED TO

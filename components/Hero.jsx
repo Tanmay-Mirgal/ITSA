@@ -13,10 +13,18 @@ const PARTICLE_COLORS = ['#9b6cff', '#4cd8f8', '#f4f3f7'];
 
 export default function Hero() {
   const [particleCount, setParticleCount] = useState(170);
+  const [globeAltitude, setGlobeAltitude] = useState(2.8);
 
-  // Fewer particles (and fewer connecting lines) on phones.
+  // Responsive particles and camera altitude calibration for phones
   useEffect(() => {
-    if (window.matchMedia('(max-width: 720px)').matches) setParticleCount(80);
+    const checkMobile = () => {
+      const isMobile = window.innerWidth <= 720;
+      setParticleCount(isMobile ? 40 : 170);
+      setGlobeAltitude(isMobile ? 2.95 : 2.8);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   return (
@@ -49,6 +57,7 @@ export default function Hero() {
           pinkColor="#f472b6"
           atmosphereColor="#7144e8"
           autoRotateSpeed={0.85}
+          cameraAltitude={globeAltitude}
         />
       </div>
 

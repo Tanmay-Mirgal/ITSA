@@ -5,6 +5,7 @@ import BlinkingDots from '@/components/ui/blinking-dots';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import FacultyLeadership from '@/components/FacultyLeadership';
+import IdeathonFeatured from '@/components/IdeathonFeatured';
 import Featured from '@/components/Featured';
 import EventsArchive from '@/components/EventsArchive';
 import Team from '@/components/Team';
@@ -35,6 +36,7 @@ export default function HomePage() {
             <Hero />
             <About />
             <FacultyLeadership />
+            <IdeathonFeatured />
             <Featured />
             <EventsArchive />
             <Team />

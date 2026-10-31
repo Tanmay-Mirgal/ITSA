@@ -15,7 +15,7 @@ export default function FAQ() {
     <section className="faq-section section" id="faq" aria-labelledby="faq-heading">
       <div className="section-header reveal">
         <div className="section-meta">
-          <MetaLabel>11 / INTELLIGENCE & FAQS</MetaLabel>
+          <MetaLabel>10 / INTELLIGENCE & FAQS</MetaLabel>
         </div>
         <h2 id="faq-heading">
           FREQUENTLY

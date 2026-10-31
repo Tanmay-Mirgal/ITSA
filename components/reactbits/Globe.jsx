@@ -9,6 +9,16 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
  * React Bits Pro Globe:
  * Dotted 3D globe with animated great-circle arcs, atmosphere glow, and interactive controls.
  */
+
+// Width-governed independent mobile globe scaling
+function getMobileGlobeSize(vw) {
+  // 320px -> 163px (target: 155-165px)
+  // 360px -> 184px (target: 170-185px)
+  // 375px -> 191px, 390px -> 199px (target: 180-205px)
+  // 412px -> 210px, 430px -> 215px (target: 195-215px)
+  return Math.max(160, Math.min(Math.round(vw * 0.51), 215));
+}
+
 export default function Globe({
   className = '',
   primaryColor = '#9b6cff',
@@ -16,7 +26,7 @@ export default function Globe({
   pinkColor = '#f472b6',
   atmosphereColor = '#7144e8',
   autoRotateSpeed = 0.85,
-  cameraAltitude = 2.8,
+  cameraAltitude,
   arcs,
   rings,
   style
@@ -30,13 +40,28 @@ export default function Globe({
     let alive = true;
     let rafId = 0;
 
-    const width = container.clientWidth || 400;
-    const height = container.clientHeight || 400;
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 390;
+    const isMobile = typeof window !== 'undefined' && vw <= 720;
+
+    let width = container.clientWidth || 400;
+    let height = container.clientHeight || 400;
+
+    if (isMobile) {
+      const mobileSize = getMobileGlobeSize(vw);
+      width = mobileSize;
+      height = mobileSize;
+    }
+
+    // Resolve camera distance and elevation to prevent clipping on mobile
+    const resolvedAltitude = cameraAltitude !== undefined
+      ? cameraAltitude
+      : (isMobile ? 2.95 : 2.8);
+    const cameraY = isMobile ? 18 : 50;
 
     // 1. Scene, Camera, Renderer
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.set(0, 50, cameraAltitude * 100);
+    camera.position.set(0, cameraY, resolvedAltitude * 100);
 
     const renderer = new THREE.WebGLRenderer({
       alpha: true,
@@ -46,6 +71,15 @@ export default function Globe({
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
+
+    if (isMobile) {
+      renderer.domElement.style.width = `${width}px`;
+      renderer.domElement.style.height = `${height}px`;
+      renderer.domElement.style.borderRadius = '50%';
+      renderer.domElement.style.display = 'block';
+      renderer.domElement.style.margin = '0 auto';
+    }
+
     container.appendChild(renderer.domElement);
 
     // 2. Controls
@@ -165,16 +199,47 @@ export default function Globe({
     // 9. Resize & Visibility Handling
     const handleResize = () => {
       if (!container || !alive) return;
-      const w = container.clientWidth;
-      const h = container.clientHeight;
+      const currentVw = typeof window !== 'undefined' ? window.innerWidth : container.clientWidth;
+      const isPhone = currentVw <= 720;
+
+      let w = container.clientWidth;
+      let h = container.clientHeight;
+
+      if (isPhone) {
+        const mobileSize = getMobileGlobeSize(currentVw);
+        w = mobileSize;
+        h = mobileSize;
+      }
+
       if (w === 0 || h === 0) return;
       camera.aspect = w / h;
+
+      const currentAltitude = cameraAltitude !== undefined
+        ? cameraAltitude
+        : (isPhone ? 2.95 : 2.8);
+      const currentY = isPhone ? 18 : 50;
+      camera.position.set(0, currentY, currentAltitude * 100);
+
       camera.updateProjectionMatrix();
       renderer.setSize(w, h);
+
+      if (isPhone) {
+        renderer.domElement.style.width = `${w}px`;
+        renderer.domElement.style.height = `${h}px`;
+        renderer.domElement.style.borderRadius = '50%';
+        renderer.domElement.style.display = 'block';
+        renderer.domElement.style.margin = '0 auto';
+      } else {
+        renderer.domElement.style.width = '100%';
+        renderer.domElement.style.height = '100%';
+        renderer.domElement.style.borderRadius = '';
+        renderer.domElement.style.margin = '';
+      }
     };
 
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
+    window.addEventListener('resize', handleResize);
 
     const intersection = new IntersectionObserver((entries) => {
       const intersecting = entries.some((entry) => entry.isIntersecting);
@@ -206,6 +271,7 @@ export default function Globe({
       alive = false;
       cancelAnimationFrame(rafId);
       resizeObserver.disconnect();
+      window.removeEventListener('resize', handleResize);
       intersection.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       controls.dispose();

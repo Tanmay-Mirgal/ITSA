@@ -5,7 +5,7 @@ export default function Team() {
   return (
     <section className="team section" id="team">
       <SectionHeader
-        meta="05 / ITSA TEAM"
+        meta="06 / ITSA TEAM"
         title={
           <>
             ITSA <em>TEAM.</em>

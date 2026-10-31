@@ -1,0 +1,437 @@
+/* 03 — Featured Event: IDEATHON */
+.ideathon-section {
+  padding-top: 6rem;
+  padding-bottom: 3.5rem;
+  background: #070814;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Ambient glow & cybernetic grid lines */
+.ideathon-ambient-glow {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 45rem;
+  height: 45rem;
+  background: radial-gradient(circle, rgba(76, 216, 248, 0.16) 0%, rgba(113, 68, 232, 0.12) 40%, transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ideathon-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at 65% 40%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 65% 40%, black 20%, transparent 80%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Metadata Strip */
+.ideathon-top {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--fs-nano, 0.72rem);
+  letter-spacing: 0.18em;
+  color: var(--muted, #94a3b8);
+}
+
+.ideathon-phase-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4cd8f8;
+  font-weight: 500;
+}
+
+.ideathon-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4cd8f8;
+  box-shadow: 0 0 8px #4cd8f8;
+  animation: ideathonPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes ideathonPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Centerpiece 3D Idea Matrix / Constellation */
+.ideathon-matrix-object {
+  position: absolute;
+  top: 8%;
+  right: 9%;
+  z-index: 2;
+  width: 32rem;
+  aspect-ratio: 1;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+.ideathon-core-beacon {
+  position: absolute;
+  inset: 34%;
+  background: radial-gradient(circle at 35% 30%, #ffffff 0%, #7ce5fc 12%, #2288ba 35%, #0d2c4e 65%, #050d18 90%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 6rem rgba(76, 216, 248, 0.4),
+    0 0 2rem rgba(155, 108, 255, 0.25),
+    inset -1.5rem -1.5rem 3rem #030810;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beacon-inner-glow {
+  width: 25%;
+  height: 25%;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #ffffff, 0 0 40px #4cd8f8;
+}
+
+.beacon-radar {
+  position: absolute;
+  inset: -15%;
+  border: 1px solid rgba(76, 216, 248, 0.45);
+  border-radius: 50%;
+  animation: radarExpand 4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.radar-2 {
+  animation-delay: 1.3s;
+}
+
+.radar-3 {
+  animation-delay: 2.6s;
+}
+
+@keyframes radarExpand {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+/* Orbiting Satellites */
+.ideathon-satellites {
+  position: absolute;
+  inset: 0;
+}
+
+.ideathon-sat {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(6, 12, 24, 0.7);
+  border: 1px solid rgba(76, 216, 248, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-family: var(--display, 'Space Grotesk', sans-serif);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  color: #e2e8f0;
+}
+
+.sat-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4cd8f8;
+  box-shadow: 0 0 6px #4cd8f8;
+}
+
+.sat-1 { top: 11%; left: 50%; transform: translateX(-50%); }
+.sat-2 { top: 50%; right: 4%; transform: translateY(-50%); }
+.sat-3 { bottom: 11%; left: 50%; transform: translateX(-50%); }
+.sat-4 { top: 50%; left: 4%; transform: translateY(-50%); }
+
+/* SVG Constellation Lattice */
+.ideathon-svg-lattice {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.lattice-line {
+  stroke: rgba(76, 216, 248, 0.35);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  animation: lineDash 20s linear infinite;
+}
+
+.line-pulse-2 { stroke-dashoffset: 4; }
+.line-pulse-3 { stroke-dashoffset: 8; }
+.line-pulse-4 { stroke-dashoffset: 12; }
+
+@keyframes lineDash {
+  to { stroke-dashoffset: -100; }
+}
+
+.lattice-polygon {
+  stroke: rgba(155, 108, 255, 0.3);
+  stroke-width: 1;
+  fill: rgba(76, 216, 248, 0.02);
+}
+
+.lattice-ring {
+  stroke: rgba(76, 216, 248, 0.2);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+.lattice-ring-outer {
+  stroke: rgba(155, 108, 255, 0.18);
+  stroke-width: 1;
+  stroke-dasharray: 6 8;
+}
+
+/* Floating Telemetry Badge */
+.ideathon-badge {
+  position: absolute;
+  top: 48%;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(76, 216, 248, 0.35);
+  background: rgba(7, 14, 28, 0.85);
+  backdrop-filter: blur(12px);
+  font-size: var(--fs-nano, 0.7rem);
+  letter-spacing: 0.16em;
+  color: #4cd8f8;
+  font-weight: 600;
+}
+
+/* Oversized Editorial Typography */
+.ideathon-headline {
+  position: relative;
+  z-index: 3;
+  margin: clamp(2.5rem, 5vh, 4rem) 0 0;
+  font: 600 clamp(5.5rem, 13vw, 12rem) / 0.72 var(--display, 'Space Grotesk', sans-serif);
+  letter-spacing: -0.09em;
+  user-select: none;
+}
+
+.ideathon-line {
+  display: block;
+}
+
+.line-idea {
+  color: #ffffff;
+}
+
+.line-thon {
+  margin-left: 24%;
+  display: flex;
+  align-items: baseline;
+}
+
+.stroke-char {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(76, 216, 248, 0.85);
+  text-shadow: 0 0 35px rgba(76, 216, 248, 0.35);
+}
+
+.solid-char {
+  color: #ffffff;
+}
+
+/* Footer Section */
+.ideathon-footer {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2.5rem;
+  margin-top: clamp(2.5rem, 6vh, 4.5rem);
+  flex-wrap: wrap;
+}
+
+.ideathon-thesis {
+  max-width: 22rem;
+}
+
+.ideathon-kicker-tag {
+  font-size: var(--fs-nano, 0.7rem);
+  letter-spacing: 0.16em;
+  color: #4cd8f8;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+}
+
+.ideathon-thesis p {
+  font: 500 1.25rem / 1.3 var(--display, 'Space Grotesk', sans-serif);
+  color: var(--text, #f4f3f7);
+}
+
+.ideathon-facts {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.ideathon-facts strong,
+.ideathon-facts > div > span {
+  display: block;
+}
+
+.ideathon-facts strong {
+  font: 600 1.8rem var(--display, 'Space Grotesk', sans-serif);
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.ideathon-facts strong small {
+  font-size: 0.65em;
+  color: #4cd8f8;
+  margin-left: 2px;
+}
+
+.ideathon-facts > div > span {
+  margin-top: 0.35rem;
+  color: var(--muted, #94a3b8);
+  font-size: var(--fs-nano, 0.7rem);
+  letter-spacing: 0.13em;
+}
+
+.ideathon-cta-wrap {
+  display: inline-flex;
+}
+
+/* Cinematic Transition Seam into Tech Gyanathon */
+.ideathon-seam-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(7, 3, 8, 0.95) 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1050px) {
+  .ideathon-matrix-object {
+    width: 24rem;
+    right: 5%;
+    top: 10%;
+  }
+
+  .line-thon {
+    margin-left: 18%;
+  }
+
+  .ideathon-facts {
+    gap: 1.8rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .ideathon-section {
+    padding-top: 4.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .ideathon-top {
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .ideathon-headline {
+    margin-top: 1.75rem;
+    font-size: clamp(3rem, 14vw, 5.5rem);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+  }
+
+  .line-thon {
+    margin-left: 10%;
+  }
+
+  .ideathon-matrix-object {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    max-width: 17rem;
+    margin: 1.75rem auto 1rem;
+  }
+
+  .ideathon-badge {
+    position: static;
+    margin: 0.75rem auto 0;
+    display: inline-block;
+  }
+
+  .ideathon-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-top: 2.25rem;
+  }
+
+  .ideathon-facts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .ideathon-cta-wrap {
+    width: 100%;
+  }
+
+  .ideathon-cta-wrap .button {
+    width: 100%;
+    min-height: 3.15rem;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .ideathon-headline {
+    font-size: clamp(2.4rem, 12.5vw, 3.4rem);
+  }
+
+  .line-thon {
+    margin-left: 5%;
+  }
+
+  .ideathon-matrix-object {
+    max-width: 14.5rem;
+  }
+
+  .ideathon-sat {
+    font-size: 0.58rem;
+    padding: 0.2rem 0.4rem;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .beacon-radar,
+  .lattice-line,
+  .ideathon-live-dot {
+    animation: none;
+  }
+}
+

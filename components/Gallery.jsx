@@ -5,7 +5,7 @@ export default function Gallery() {
   return (
     <section className="gallery section" id="gallery">
       <SectionHeader
-        meta="09 / GALLERY"
+        meta="08 / GALLERY"
         title={
           <>
             THE MEMORY

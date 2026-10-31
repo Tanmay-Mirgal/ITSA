@@ -1,0 +1,474 @@
+/* =========================================================================
+   Tech Gyanathon — Living Atmospheric Motion System
+   Enhances the existing featured event section into a breathing digital exhibition.
+   Strictly preserves typography, composition, colors, and layout.
+   ========================================================================= */
+
+/* Ambient Atmospheric Violet Aura behind the core */
+.gyanathon-ambient-aura {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  width: 44rem;
+  height: 44rem;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(154, 63, 190, 0.22) 0%,
+    rgba(74, 25, 92, 0.14) 42%,
+    rgba(16, 9, 18, 0.04) 68%,
+    transparent 75%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 1;
+  animation: auraBreathing 9s ease-in-out infinite alternate;
+}
+
+@keyframes auraBreathing {
+  0% {
+    transform: scale(0.92) translate(0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08) translate(-12px, 8px);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(0.96) translate(8px, -10px);
+    opacity: 0.65;
+  }
+}
+
+/* Atmospheric Drifting Micro-Particles */
+.feature-particles-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.gyanathon-drift-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #e2aeff;
+  box-shadow: 0 0 6px #e2aeff, 0 0 12px rgba(154, 63, 190, 0.45);
+  pointer-events: none;
+  opacity: 0;
+  animation: gyanathonParticleDrift var(--p-duration, 16s) ease-in-out var(--p-delay, 0s) infinite;
+}
+
+@keyframes gyanathonParticleDrift {
+  0% {
+    transform: translate(0, 0) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(14px, -24px) scale(1.2);
+    opacity: 0.9;
+  }
+  80% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translate(28px, -48px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+/* Top Metadata with Live System Indicator */
+.feature-top-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.live-signal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.2rem 0.55rem;
+  background: rgba(154, 63, 190, 0.12);
+  border: 1px solid rgba(226, 174, 255, 0.28);
+  border-radius: 9999px;
+  font-family: var(--display, monospace);
+  font-size: var(--fs-nano, 0.68rem);
+  letter-spacing: 0.14em;
+  color: #f3d4ff;
+  user-select: none;
+}
+
+.signal-dot-wrap {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signal-core-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e2aeff;
+  box-shadow: 0 0 8px #e2aeff;
+}
+
+.signal-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid #e2aeff;
+  animation: signalPulseRing 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes signalPulseRing {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+/* Central 3D Visual — Living Float & Atmosphere */
+.feature-object-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  animation: objectLivingFloat 9s ease-in-out infinite alternate;
+}
+
+@keyframes objectLivingFloat {
+  0% {
+    transform: translateY(0px) rotate(0deg) scale(0.985);
+  }
+  50% {
+    transform: translateY(-7px) rotate(1.2deg) scale(1.015);
+  }
+  100% {
+    transform: translateY(3px) rotate(-1deg) scale(0.995);
+  }
+}
+
+/* Glowing Core Sphere with Living Breathing Light */
+.feature-object .event-sphere {
+  animation: sphereBreathingGlow 8s ease-in-out infinite alternate;
+  overflow: hidden;
+}
+
+@keyframes sphereBreathingGlow {
+  0% {
+    box-shadow: 0 0 6rem rgba(124, 40, 130, 0.42), inset -2rem -2rem 4rem #070308;
+  }
+  50% {
+    box-shadow: 0 0 8.5rem rgba(154, 63, 190, 0.65), 0 0 3.5rem rgba(226, 174, 255, 0.28), inset -1.8rem -1.8rem 3.8rem #070308;
+  }
+  100% {
+    box-shadow: 0 0 6.5rem rgba(124, 40, 130, 0.45), inset -2rem -2rem 4rem #070308;
+  }
+}
+
+/* Sphere Dynamic Light Sheen */
+.sphere-light-sheen {
+  position: absolute;
+  inset: -15%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 210, 240, 0.35) 0%, rgba(154, 63, 190, 0.15) 35%, transparent 65%);
+  animation: sphereSheenShift 13s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes sphereSheenShift {
+  0% {
+    transform: translate(-3%, -2%) scale(0.96);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(2.5%, 3%) scale(1.04);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(4%, -1.5%) scale(1.01);
+    opacity: 0.65;
+  }
+}
+
+/* Specular Light Point */
+.sphere-specular-dot {
+  position: absolute;
+  top: 26%;
+  left: 32%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px #ffffff, 0 0 24px #ffd2f0;
+  animation: specularPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes specularPulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Expanding Soft Core Energy Pulse */
+.event-pulse-aura {
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px solid rgba(226, 174, 255, 0.42);
+  box-shadow: 0 0 24px rgba(154, 63, 190, 0.32);
+  pointer-events: none;
+  animation: corePulseRing 5.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.pulse-2 {
+  animation-delay: 2.75s;
+}
+
+@keyframes corePulseRing {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.65;
+  }
+  60% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+/* Living Orbital System */
+.feature-object .event-disc {
+  position: absolute;
+  border: 1px solid #e2aeff59;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.feature-object .disc-a {
+  inset: 5%;
+  animation: discAOrbit 34s linear infinite;
+}
+
+@keyframes discAOrbit {
+  0% {
+    transform: rotateX(65deg) rotateZ(20deg) rotate(0deg);
+    opacity: 0.45;
+  }
+  50% {
+    transform: rotateX(62deg) rotateZ(22deg) rotate(180deg);
+    opacity: 0.68;
+  }
+  100% {
+    transform: rotateX(65deg) rotateZ(20deg) rotate(360deg);
+    opacity: 0.45;
+  }
+}
+
+.feature-object .disc-b {
+  inset: 12%;
+  animation: discBOrbit 46s linear infinite reverse;
+}
+
+@keyframes discBOrbit {
+  0% {
+    transform: rotateY(62deg) rotateZ(-25deg) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: rotateY(65deg) rotateZ(-23deg) rotate(180deg);
+    opacity: 0.62;
+  }
+  100% {
+    transform: rotateY(62deg) rotateZ(-25deg) rotate(360deg);
+    opacity: 0.4;
+  }
+}
+
+/* Third Harmonic Orbital Disc */
+.feature-object .disc-c {
+  position: absolute;
+  inset: 18%;
+  border: 1px dashed rgba(255, 210, 240, 0.28);
+  border-radius: 50%;
+  animation: discCOrbit 58s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes discCOrbit {
+  0% {
+    transform: rotateX(48deg) rotateY(32deg) rotateZ(-18deg) rotate(0deg);
+    opacity: 0.22;
+  }
+  50% {
+    transform: rotateX(46deg) rotateY(34deg) rotateZ(-15deg) rotate(180deg);
+    opacity: 0.42;
+  }
+  100% {
+    transform: rotateX(48deg) rotateY(32deg) rotateZ(-18deg) rotate(360deg);
+    opacity: 0.22;
+  }
+}
+
+/* Orbital System Luminous Nodes */
+.orbital-node {
+  position: absolute;
+  top: -2.5px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: #ffd2f0;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffd2f0, 0 0 16px #e2aeff;
+}
+
+.node-b {
+  top: auto;
+  bottom: -2.5px;
+  background: #c084fc;
+  box-shadow: 0 0 8px #c084fc, 0 0 14px #7c2882;
+}
+
+/* Telemetry Tag "03 DAYS" */
+.event-tag-badge {
+  position: absolute;
+  top: 49%;
+  right: 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--line);
+  background: rgba(7, 3, 8, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: var(--fs-nano);
+  letter-spacing: 0.15em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  user-select: none;
+  z-index: 5;
+}
+
+.tag-pulse {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e2aeff;
+  box-shadow: 0 0 6px #e2aeff;
+  animation: tagBeaconPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes tagBeaconPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+/* Interactive CTA Hover */
+.featured .button {
+  transition:
+    border-color 0.35s ease,
+    background-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.25s ease;
+}
+
+.featured .button span:first-child {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.featured .button span[aria-hidden="true"] {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-block;
+}
+
+.featured .button:hover {
+  border-color: rgba(226, 174, 255, 0.6);
+  background: rgba(74, 25, 92, 0.35);
+  box-shadow:
+    0 0 24px rgba(154, 63, 190, 0.28),
+    inset 0 0 16px rgba(154, 63, 190, 0.15);
+}
+
+.featured .button:hover span:first-child {
+  transform: translateX(2px);
+}
+
+.featured .button:hover span[aria-hidden="true"] {
+  transform: translateX(4px);
+}
+
+.featured .button:active {
+  transform: scale(0.985);
+}
+
+/* Responsive Adaptations */
+@media (max-width: 720px) {
+  .gyanathon-ambient-aura {
+    width: 24rem;
+    height: 24rem;
+    right: -4rem;
+  }
+
+  .feature-top-meta {
+    gap: 0.5rem;
+  }
+
+  .live-signal-badge {
+    padding: 0.15rem 0.45rem;
+    font-size: 0.62rem;
+  }
+
+  .event-tag-badge {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .live-signal-badge .signal-text {
+    display: none;
+  }
+}
+
+/* Accessibility & Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .feature-object-inner,
+  .feature-object .event-sphere,
+  .sphere-light-sheen,
+  .sphere-specular-dot,
+  .event-pulse-aura,
+  .feature-object .disc-a,
+  .feature-object .disc-b,
+  .feature-object .disc-c,
+  .gyanathon-ambient-aura,
+  .gyanathon-drift-particle,
+  .signal-ring,
+  .tag-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+}
