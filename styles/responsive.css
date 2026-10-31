@@ -25,6 +25,15 @@
     grid-template-columns: 1fr auto;
   }
 
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-logo-img {
+    height: 30px;
+    width: 30px;
+  }
+
   .itsa-header-wordmark {
     width: 112px;
     height: 46px;
@@ -107,13 +116,13 @@
     padding-inline: 1.25rem;
   }
 
-  .brand-logo {
-    width: 2.15rem;
-    height: 2.15rem;
+  .brand {
+    gap: 8px;
   }
 
-  .brand-text {
-    font-size: 1.65rem;
+  .brand-logo-img {
+    height: 26px;
+    width: 26px;
   }
 
   .itsa-header-wordmark {
@@ -840,13 +849,13 @@
     font-size: 0.78rem;
   }
 
-  .brand-logo {
-    width: 1.95rem;
-    height: 1.95rem;
+  .brand {
+    gap: 6px;
   }
 
-  .brand-text {
-    font-size: 1.5rem;
+  .brand-logo-img {
+    height: 24px;
+    width: 24px;
   }
 
   .section-header h2 {

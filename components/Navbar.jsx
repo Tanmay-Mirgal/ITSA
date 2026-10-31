@@ -15,6 +15,15 @@ export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }
   return (
     <nav className={`navbar${scrolled ? ' is-scrolled' : ''}`} aria-label="Primary">
       <a className="brand" href="#home" aria-label="ITSA home">
+        <img
+          src="https://res.cloudinary.com/dexndlfut/image/upload/v1793464261/2a56216f-fb41-479f-8b8c-1d900ebe7f.jpg"
+          alt="ITSA emblem"
+          className="brand-logo-img"
+          width={34}
+          height={34}
+          loading="eager"
+          decoding="async"
+        />
         <ITSAHeaderWordmark />
       </a>
 
@@ -27,7 +36,7 @@ export default function Navbar({ scrolled, menuOpen, onOpenMenu, onOpenCommand }
       </div>
 
       <div className="nav-actions">
-     
+
         <a className="button button-line" href="#connect" data-cursor="GO">
           <span>CONNECT</span>
           <span aria-hidden="true">→</span>
